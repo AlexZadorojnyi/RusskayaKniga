@@ -1,0 +1,47 @@
+#center {
+	width: 100%;
+	margin: 0 auto;
+	padding: 0px;
+}
+
+#banner {
+	background-color: yellow;
+	margin: 0 auto;
+	padding: 0px;
+}
+
+#banner img {
+	width: 100%;
+	display: block;
+}
+
+#sidebar {
+	background-color: red;
+	padding: 0px;
+	margin: 0 auto;
+}
+
+#map {
+	width: 50%;
+	margin: 0 auto;
+	padding: 10px;
+	max-height: 260px;
+	max-width: 305px;
+}
+
+#main {
+	background-color: lime;
+	padding: 0px;
+	margin: 0 auto;
+}
+
+@media (min-width:992px) {
+	#center {
+		width: 992px;
+	}
+	
+	#map {
+		width: 100%;
+		display: block;
+	}
+}
