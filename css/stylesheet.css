@@ -35,6 +35,10 @@
 	margin: 0 auto;
 }
 
+.promoSlides {
+	width: 100%;
+}
+
 @media (min-width:992px) {
 	#center {
 		width: 992px;
