@@ -16,11 +16,13 @@ function changeLang() {
 }
 
 var slides = document.getElementsByClassName("promoSlides");
-var slideIndex = 1;
+var slideIndex = 0;
 var slideDuration = 5000;
-var myVar = setInterval(cycleSlides, slideDuration);
+var myVar;
 
-function cycleSlides() {	
+function cycleSlides() {
+	//console.log(slideIndex);
+	
 	if (slideIndex > slides.length - 1) {
 		slideIndex = 0;
 	} else if (slideIndex < 0) {
@@ -36,4 +38,23 @@ function cycleSlides() {
 	}
 	
 	slideIndex++;
+	myVar = setTimeout(cycleSlides, slideDuration);
+}
+
+function nextSlide() {
+	clearTimeout(myVar);
+	//slideIndex++;
+	cycleSlides();
+}
+
+function prevSlide() {
+	clearTimeout(myVar);
+	slideIndex -= 2;
+	cycleSlides();
+}
+
+function displayButtons() {
+	for (var i = 0; i < slides.length; i++) {
+		document.getElementById("numberButtons").innerHTML += "\<button type=\"button\">" + (i+1) + "\<\/button>";;
+	}
 }

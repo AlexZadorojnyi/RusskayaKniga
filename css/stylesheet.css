@@ -35,8 +35,32 @@
 	margin: 0 auto;
 }
 
+.slides {
+	background-color: blue;
+	position: relative;
+}
+
 .promoSlides {
 	width: 100%;
+	/*position: relative;*/
+}
+
+#slidesButtons {
+	width: 100%;
+	height: 100%;
+	background-color: red;
+}
+
+#prevButton {
+	float: left;
+}
+
+#nextButton {
+	float: right;
+}
+
+#numberButtons {
+	bottom: 0px;
 }
 
 @media (min-width:992px) {

@@ -10,22 +10,28 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
-<body>
+<body onload="setTimeout(cycleSlides(), 5000); displayButtons();">
 	<div id="center" class="container">
 		<!-- BANNER -->
 		<div class="col-md-12" id="banner">
 			<img src="../../images/banner.jpg" alt="Banner">
 		</div>
 		<!-- MAIN -->
-		<div class="col-md-9 col-md-push-3"  id="main">
+		<div class="col-md-9 col-md-push-3" id="main">
 			<!-- PROMO SLIDES -->
 			<div id="slides">
 				<img class="promoSlides" src="../../images/promoEng1.jpg" alt="Promo 1" style="display:block;">
 				<img class="promoSlides" src="../../images/promoEng2.jpg" alt="Promo 2" style="display:none;">
 				<img class="promoSlides" src="../../images/promoEng3.jpg" alt="Promo 3" style="display:none;">
 				<img class="promoSlides" src="../../images/promoEng4.jpg" alt="Promo 4" style="display:none;">
+				<!-- BUTTONS -->
+				<div id="slidesButtons">
+					<button id="prevButton" type="button" onclick="prevSlide()">Previous</button>
+					<button id="nextButton" type="button" onclick="nextSlide()">Next</button>
+					<div id="numberButtons"></div>
+				</div>
 			</div>
-			IMPORTANT<br>STUFF<br>GOES<br>HERE
+			<br>IMPORTANT<br>STUFF<br>GOES<br>HERE
 		</div>
 		<!-- CONTACT -->
 		<div class="col-md-3 col-md-pull-9"  id="sidebar">
