@@ -15,7 +15,7 @@ function changeLang() {
 	}
 }
 
-var slides = document.getElementsByClassName("promoSlides");
+var slides = document.getElementsByClassName("slides");
 var slideIndex = 0;
 var slideDuration = 5000;
 var myVar;
@@ -55,6 +55,6 @@ function prevSlide() {
 
 function displayButtons() {
 	for (var i = 0; i < slides.length; i++) {
-		document.getElementById("numberButtons").innerHTML += "\<button type=\"button\">" + (i+1) + "\<\/button>";;
+		document.getElementById("slidesButtonNums").innerHTML += "\<button type=\"button\">" + (i+1) + "\<\/button>";;
 	}
 }

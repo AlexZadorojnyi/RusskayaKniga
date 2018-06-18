@@ -13,7 +13,7 @@
 </head>
 
 <body onload="setTimeout(cycleSlides(), 5000); displayButtons();">
-	<div id="center" class="container">
+	<div id="center">
 		<!-- BANNER -->
 		<div class="col-md-12" id="banner">
 			<img src="../../images/banner.jpg" alt="Banner">
@@ -21,28 +21,39 @@
 		<!-- MAIN -->
 		<div class="col-md-9 col-md-push-3" id="main">
 			<!-- PROMO SLIDES -->
-			<div id="slides">
-				<img class="promoSlides" src="../../images/promoEng1.jpg" alt="Promo 1" style="display:block;">
-				<img class="promoSlides" src="../../images/promoEng2.jpg" alt="Promo 2" style="display:none;">
-				<img class="promoSlides" src="../../images/promoEng3.jpg" alt="Promo 3" style="display:none;">
-				<img class="promoSlides" src="../../images/promoEng4.jpg" alt="Promo 4" style="display:none;">
-				<img id="prevArrow" src="../../images/slideArrowPrev.png" alt="Prev Arrow">
-				<img id="nextArrow" src="../../images/slideArrowNext.png" alt="Next Arrow">
+			<div id="slidesContainer">
 				<!-- BUTTONS -->
-				<!-- <div id="slidesButtons">
-					<button id="prevButton" type="button" onclick="prevSlide()">Previous</button>
-					<button id="nextButton" type="button" onclick="nextSlide()">Next</button>
-					<div id="numberButtons"></div>
-				</div> -->
+				<div id="slidesButtons">
+					<button id="slidesButtonNext" type="button" onclick="prevSlide()">Previous</button>
+					<button id="slidesButtonNext" type="button" onclick="nextSlide()">Next</button>
+					<div id="slidesButtonNums"></div>
+				</div>
+				<img class="slides" src="../../images/promoEng1.jpg" alt="Promo 1" style="display:block;">
+				<img class="slides" src="../../images/promoEng2.jpg" alt="Promo 2" style="display:none;">
+				<img class="slides" src="../../images/promoEng3.jpg" alt="Promo 3" style="display:none;">
+				<img class="slides" src="../../images/promoEng4.jpg" alt="Promo 4" style="display:none;">
+				<!-- <img id="prevArrow" src="../../images/slideArrowPrev.png" alt="Prev Arrow">
+				<img id="nextArrow" src="../../images/slideArrowNext.png" alt="Next Arrow"> -->
 			</div>
-			<br>IMPORTANT<br>STUFF<br>GOES<br>HERE
+			IMPORTANT<br>STUFF<br>GOES<br>HERE
 		</div>
-		<!-- CONTACT -->
-		<div class="col-md-3 col-md-pull-9"  id="sidebar">
+		<!-- CONTACTS -->
+		<div class="col-md-3 col-md-pull-9"  id="info">
 			<img id="map" src="../../images/map.png" alt="Map">
-			CONTACT<br>INFO<br>GOES<br>HERE
+			<strong><p>INFORMATION</p></strong>
+			<p><a href="https://goo.gl/maps/P9gdSUCahW22">9631 Yonge St, Richmond Hill, ON L4C 0M5</a></p>
+			<p>(905) 780-8376</p>
+			<p>ruskniga@hotmail.com</p>
+			<strong><p>OPEN HOURS</p></strong>
+			<p>Mon 11am-8pm</p>
+			<p>Tue 11am-8pm</p>
+			<p>Wed 11am-8pm</p>
+			<p>Thur 11am-8pm</p>
+			<p>Fri 11am-8pm</p>
+			<p>Sat 10am-8pm</p>
+			<p>Sun 10am-8pm</p>
+			<button type="button" onclick="changeLang()">Русский</button>
 		</div>
 	</div>
-	<button type="button" onclick="changeLang()">Russian</button>
 </body>
 </html>

@@ -1,56 +1,52 @@
 #center {
 	width: 100%;
 	margin: 0 auto;
-	padding: 0px;
 }
 
 #banner {
-	background-color: yellow;
-	margin: 0 auto;
 	padding: 0px;
 }
 
 #banner img {
 	width: 100%;
-	display: block;
 }
 
-#sidebar {
-	background-color: red;
+#info {
+	background-color: gold;
 	padding: 0px;
-	margin: 0 auto;
+}
+
+#info p {
+	margin: 10px;
+}
+
+#info a {
+	color: inherit;
+	text-decoration: none;
 }
 
 #map {
 	width: 50%;
-	margin: 0 auto;
 	padding: 10px;
 	max-height: 260px;
 	max-width: 305px;
 }
 
 #main {
-	background-color: lime;
+	border-color: gray;
 	padding: 0px;
-	margin: 0 auto;
+}
+
+.slidesContainer {
+	width: 100%;
 }
 
 .slides {
-	background-color: blue;
-	position: relative;
-}
-
-.promoSlides {
 	width: 100%;
-	position: relative;
 }
 
 #slidesButtons {
 	width: 100%;
-	/*height: 100%;*/
-	background-color: red;
-	position: relative;
-	top: -50%;
 }
 
 #prevArrow {
@@ -65,16 +61,16 @@
 	float: right;
 }
 
-#prevButton {
+#slidesButtonNext {
 	float: left;
 }
 
-#nextButton {
+#slidesButtonNext {
 	float: right;
 }
 
-#numberButtons {
-	bottom: 0px;
+#slidesButtonNums {
+	
 }
 
 @media (min-width:992px) {
