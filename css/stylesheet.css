@@ -25,14 +25,18 @@
 	text-decoration: none;
 }
 
+#infoText {
+	padding-top: 5px;
+}
+
 #openTimes {
 	width: 200px;
 	font-size: 14px;
+	margin: 10px;
 }
 
 .openDays {
 	text-align: left;
-	padding-left: 10px;
 	padding-bottom: 3px;
 }
 
@@ -43,10 +47,10 @@
 }
 
 #map {
-	width: 50%;
+	width: 40%;
+	height: auto;
 	padding: 10px;
-	max-height: 260px;
-	max-width: 305px;
+	float: left;
 }
 
 #main {
@@ -56,26 +60,28 @@
 
 .slidesContainer {
 	width: 100%;
+	height: auto;
 }
 
 .slides {
 	width: 100%;
+	height: auto;
 }
 
 #slidesButtons {
 	width: 100%;
+	position: relative;
+	bottom: 50px;
+	
+	font-size: 30px;
 }
 
 #prevArrow {
-	position: absolute;
-	float: left;
-	top: 0px;
-	height: 100%;
+	
 }
 
 #nextArrow {
-	position: absolute;
-	float: right;
+	
 }
 
 #slidesButtonPrev {
@@ -90,6 +96,7 @@
 	
 }
 
+/* Screen is 992px or wider */
 @media (min-width:992px) {
 	#center {
 		width: 992px;
@@ -97,6 +104,7 @@
 	
 	#map {
 		width: 100%;
+		height: auto;
 		display: block;
 	}
 }

@@ -22,65 +22,69 @@
 		<div class="col-md-9 col-md-push-3" id="main">
 			<!-- PROMO SLIDES -->
 			<div id="slidesContainer">
-				<!-- BUTTONS -->
-				<div id="slidesButtons">
-					<button id="slidesButtonNext" type="button" onclick="prevSlide()">Previous</button>
-					<button id="slidesButtonNext" type="button" onclick="nextSlide()">Next</button>
-					<div id="slidesButtonNums"></div>
-				</div>
 				<img class="slides" src="../../images/promoEng1.jpg" alt="Promo 1" style="display:block;">
 				<img class="slides" src="../../images/promoEng2.jpg" alt="Promo 2" style="display:block;">
 				<img class="slides" src="../../images/promoEng3.jpg" alt="Promo 3" style="display:block;">
 				<img class="slides" src="../../images/promoEng4.jpg" alt="Promo 4" style="display:block;">
+				<!-- BUTTONS -->
+				<div id="slidesButtons">
+					<div id="slidesButtonPrev" onclick="prevSlide()">&#10094;</div>
+					<div id="slidesButtonNext" onclick="nextSlide()">&#10095;</div>
+					<!-- <button id="slidesButtonNext" type="button" onclick="prevSlide()">Previous</button> -->
+					<!-- <button id="slidesButtonNext" type="button" onclick="nextSlide()">Next</button> -->
+					<!-- <div id="slidesButtonNums"></div> -->
+				</div>
 				<!-- <img id="prevArrow" src="../../images/slideArrowPrev.png" alt="Prev Arrow">
 				<img id="nextArrow" src="../../images/slideArrowNext.png" alt="Next Arrow"> -->
 			</div>
-			IMPORTANT<br>STUFF<br>GOES<br>HERE
+			<br>IMPORTANT<br>STUFF<br>GOES<br>HERE
 		</div>
 		<!-- CONTACTS -->
 		<div class="col-md-3 col-md-pull-9"  id="info">
 			<!-- MAP -->
 			<a href="https://goo.gl/maps/P9gdSUCahW22" target="_blank"><img id="map" src="../../images/map.png" alt="Map"></a>
-			<strong><p>INFORMATION</p></strong>
-			<!-- ADDRESS -->
-			<p><a href="https://goo.gl/maps/P9gdSUCahW22" target="_blank">9631 Yonge St, Richmond Hill,<br>ON L4C 0M5</a></p>
-			<!-- PHONE -->
-			<p>(905) 780-8376</p>
-			<!-- EMAIL -->
-			<p><a href="mailto:ruskniga@hotmail.com">ruskniga@hotmail.com</a></p>
-			<!-- OPEN HOURS -->
-			<strong><p>OPEN HOURS</p></strong>
-			<table id="openTimes">
-				<tr>
-					<td class="openDays">Mon</td>
-					<td class="openHours">11am-8pm</td>
-				</tr>
-				<tr>
-					<td class="openDays">Tue</td>
-					<td class="openHours">11am-8pm</td>
-				</tr>
-				<tr>
-					<td class="openDays">Wed</td>
-					<td class="openHours">11am-8pm</td>
-				</tr>
-				<tr>
-					<td class="openDays">Thur</td>
-					<td class="openHours">11am-8pm</td>
-				</tr>
-				<tr>
-					<td class="openDays">Fri</td>
-					<td class="openHours">11am-8pm</td>
-				</tr>
-				<tr>
-					<td class="openDays">Sat</td>
-					<td class="openHours">11am-6pm</td>
-				</tr>
-				<tr>
-					<td class="openDays">Sun</td>
-					<td class="openHours">11am-6pm</td>
-				</tr>
-			</table>
-			<button type="button" onclick="changeLang()">Русский</button>
+			<div id="infoText">
+				<strong><p>INFORMATION<br></p></strong>
+				<!-- ADDRESS -->
+				<p><a href="https://goo.gl/maps/P9gdSUCahW22" target="_blank">9631 Yonge St, Richmond Hill,<br>ON L4C 0M5</a></p>
+				<!-- PHONE -->
+				<p>(905) 780-8376<br></p>
+				<!-- EMAIL -->
+				<p><a href="mailto:ruskniga@hotmail.com">ruskniga@hotmail.com</a><br></p>
+				<!-- OPEN HOURS -->
+				<strong><p>OPEN HOURS<br></p></strong>
+				<table id="openTimes">
+					<tr>
+						<td class="openDays">Mon</td>
+						<td class="openHours">11am-8pm</td>
+					</tr>
+					<tr>
+						<td class="openDays">Tue</td>
+						<td class="openHours">11am-8pm</td>
+					</tr>
+					<tr>
+						<td class="openDays">Wed</td>
+						<td class="openHours">11am-8pm</td>
+					</tr>
+					<tr>
+						<td class="openDays">Thur</td>
+						<td class="openHours">11am-8pm</td>
+					</tr>
+					<tr>
+						<td class="openDays">Fri</td>
+						<td class="openHours">11am-8pm</td>
+					</tr>
+					<tr>
+						<td class="openDays">Sat</td>
+						<td class="openHours">11am-6pm</td>
+					</tr>
+					<tr>
+						<td class="openDays">Sun</td>
+						<td class="openHours">11am-6pm</td>
+					</tr>
+				</table>
+				<button type="button" onclick="changeLang()">Русский</button>
+			</div>
 		</div>
 	</div>
 </body>
