@@ -12,7 +12,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
-<body onload="setTimeout(cycleSlides(), 5000); displayButtons();">
+<body onload="setTimeout(cycleSlides(), 5000);">
 	<div id="center">
 		<!-- BANNER -->
 		<div class="col-md-12" id="banner">
@@ -30,14 +30,12 @@
 				<div id="slidesButtons">
 					<div id="slidesButtonPrev" onclick="prevSlide()">&#10094;</div>
 					<div id="slidesButtonNext" onclick="nextSlide()">&#10095;</div>
-					<!-- <button id="slidesButtonNext" type="button" onclick="prevSlide()">Previous</button> -->
-					<!-- <button id="slidesButtonNext" type="button" onclick="nextSlide()">Next</button> -->
-					<!-- <div id="slidesButtonNums"></div> -->
+					<div id="slidesButtonNums"></div>
 				</div>
-				<!-- <img id="prevArrow" src="../../images/slideArrowPrev.png" alt="Prev Arrow">
-				<img id="nextArrow" src="../../images/slideArrowNext.png" alt="Next Arrow"> -->
 			</div>
-			<br>IMPORTANT<br>STUFF<br>GOES<br>HERE
+			<div style="position: relative; bottom: 43px;">
+				<br>IMPORTANT<br>STUFF<br>GOES<br>HERE
+			</div>
 		</div>
 		<!-- CONTACTS -->
 		<div class="col-md-3 col-md-pull-9"  id="info">

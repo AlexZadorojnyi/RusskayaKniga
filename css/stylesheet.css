@@ -5,6 +5,12 @@
 
 #banner {
 	padding: 0px;
+	
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 #banner img {
@@ -51,6 +57,12 @@
 	height: auto;
 	padding: 10px;
 	float: left;
+	
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 #main {
@@ -66,34 +78,58 @@
 .slides {
 	width: 100%;
 	height: auto;
+	
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 #slidesButtons {
 	width: 100%;
 	position: relative;
 	bottom: 50px;
-	
 	font-size: 30px;
-}
-
-#prevArrow {
-	
-}
-
-#nextArrow {
-	
 }
 
 #slidesButtonPrev {
 	float: left;
+	cursor: pointer;
+	padding-left: 10px;
+	
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 #slidesButtonNext {
 	float: right;
+	cursor: pointer;
+	padding-right: 10px;
+	
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 #slidesButtonNums {
+	text-align: center;
+	cursor: pointer;
 	
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+#slidesButtonNums div {
+	display: table-cell;
 }
 
 /* Screen is 992px or wider */

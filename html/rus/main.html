@@ -12,7 +12,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
-<body onload="setTimeout(cycleSlides(), 5000); displayButtons();">
+<body onload="setTimeout(cycleSlides(), 5000);">
 	<div id="center">
 		<!-- BANNER -->
 		<div class="col-md-12" id="banner">
@@ -22,20 +22,20 @@
 		<div class="col-md-9 col-md-push-3" id="main">
 			<!-- PROMO SLIDES -->
 			<div id="slidesContainer">
-				<!-- BUTTONS -->
-				<div id="slidesButtons">
-					<button id="slidesButtonNext" type="button" onclick="prevSlide()">Previous</button>
-					<button id="slidesButtonNext" type="button" onclick="nextSlide()">Next</button>
-					<div id="slidesButtonNums"></div>
-				</div>
 				<img class="slides" src="../../images/promoRus1.jpg" alt="Promo 1" style="display:block;">
 				<img class="slides" src="../../images/promoRus2.jpg" alt="Promo 2" style="display:block;">
 				<img class="slides" src="../../images/promoRus3.jpg" alt="Promo 3" style="display:block;">
 				<img class="slides" src="../../images/promoRus4.jpg" alt="Promo 4" style="display:block;">
-				<!-- <img id="prevArrow" src="../../images/slideArrowPrev.png" alt="Prev Arrow">
-				<img id="nextArrow" src="../../images/slideArrowNext.png" alt="Next Arrow"> -->
+				<!-- BUTTONS -->
+				<div id="slidesButtons">
+					<div id="slidesButtonPrev" onclick="prevSlide()">&#10094;</div>
+					<div id="slidesButtonNext" onclick="nextSlide()">&#10095;</div>
+					<div id="slidesButtonNums"></div>
+				</div>
 			</div>
-			ЗДЕСЬ<br>БУДУТ<br>ВАЖНЫЕ<br>ВЕЩИ
+			<div style="position: relative; bottom: 43px;">
+				<br>ЗДЕСЬ<br>БУДУТ<br>ВАЖНЫЕ<br>ВЕЩИ
+			</div>
 		</div>
 		<!-- CONTACTS -->
 		<div class="col-md-3 col-md-pull-9"  id="info">

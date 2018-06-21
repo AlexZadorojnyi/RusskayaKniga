@@ -27,11 +27,15 @@ function cycleSlides() {
 		slideIndex = slides.length - 1;
 	}
 	
+	document.getElementById("slidesButtonNums").innerHTML = "";
+	
 	for (var i = 0; i < slides.length; i++){
 		if (i == slideIndex) {
 			slides[i].style.display = "block";
+			document.getElementById("slidesButtonNums").innerHTML += "\<span onclick=\"goToSlide("  + (i+1) +" )\">&#9899;</span>";
 		} else {
 			slides[i].style.display = "none";
+			document.getElementById("slidesButtonNums").innerHTML += "\<span onclick=\"goToSlide("  + (i+1) +" )\">&#9898;</span>";
 		}
 	}
 	
@@ -54,10 +58,4 @@ function goToSlide(n) {
 	clearTimeout(myVar);
 	slideIndex = n - 1;
 	cycleSlides();
-}
-
-function displayButtons() {
-	for (var i = 0; i < slides.length; i++) {
-		document.getElementById("slidesButtonNums").innerHTML += "\<button type=\"button\" onclick=\"goToSlide(" + (i+1) +" )\">" + (i+1) + "\<\/button>";;
-	}
 }
