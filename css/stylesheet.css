@@ -5,6 +5,8 @@
 
 #banner {
 	padding: 0px;
+	psotion: relative;
+	width: 100%;
 	
 	-moz-user-select: -moz-none;
 	-khtml-user-select: none;
@@ -79,6 +81,9 @@
 	width: 100%;
 	height: auto;
 	
+	-webkit-transition: display 2s; /* For Safari 3.1 to 6.0 */
+    transition: display 2s;
+	
 	-moz-user-select: -moz-none;
 	-khtml-user-select: none;
 	-webkit-user-select: none;
@@ -130,6 +135,21 @@
 
 #slidesButtonNums div {
 	display: table-cell;
+}
+
+#langButton {
+	/* width: 100%;
+	height: 30px;
+	border-top: 2px solid white;
+	text-align: center;
+	cursor: pointer;
+	*/
+	
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	cursor: pointer;
+	color: gray;
 }
 
 /* Screen is 992px or wider */
