@@ -15,7 +15,7 @@ function changeLang() {
 	}
 }
 
-var slides = document.getElementsByClassName("slides");
+var slides = document.getElementsByClassName("slide");
 var slideIndex = 0;
 var slideDuration = 5000;
 var myVar;
