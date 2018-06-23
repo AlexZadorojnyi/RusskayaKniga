@@ -1,3 +1,5 @@
+//var app = angular.module("myApp", []);
+
 var eng = "\/eng\/";
 var rus = "\/rus\/";
 
@@ -32,10 +34,12 @@ function cycleSlides() {
 	for (var i = 0; i < slides.length; i++){
 		if (i == slideIndex) {
 			slides[i].style.display = "block";
-			document.getElementById("slidesButtonNums").innerHTML += "\<span onclick=\"goToSlide("  + (i+1) +" )\">&#9899;</span>";
+			document.getElementById("slidesButtonNums").innerHTML += "\<span onclick=\"goToSlide("  + (i+1) +" )\"> &#9679; </span>";
+			//document.getElementById("slidesButtonNums").innerHTML += "\<span onclick=\"goToSlide("  + (i+1) +" )\">&#9899;</span>";
 		} else {
 			slides[i].style.display = "none";
-			document.getElementById("slidesButtonNums").innerHTML += "\<span onclick=\"goToSlide("  + (i+1) +" )\">&#9898;</span>";
+			document.getElementById("slidesButtonNums").innerHTML += "\<span onclick=\"goToSlide("  + (i+1) +" )\"> &#9900; </span>";
+			//document.getElementById("slidesButtonNums").innerHTML += "\<span onclick=\"goToSlide("  + (i+1) +" )\">&#9898;</span>";
 		}
 	}
 	
