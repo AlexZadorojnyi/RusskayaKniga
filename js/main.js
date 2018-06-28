@@ -63,3 +63,7 @@ function goToSlide(n) {
 	slideIndex = n - 1;
 	cycleSlides();
 }
+
+function scrollH(n) {
+	document.getElementById("topSellers").scrollBy(n, 0);
+}

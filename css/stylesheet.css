@@ -150,14 +150,14 @@
 
 .bookContainer {
 	width: 100%;
-	height: 220px;
+	height: 175px;
 	overflow-x: hidden;
 	overflow-y: hidden;
 	white-space: nowrap;
-	box-shadow: inset  0px  100px 50px -40px #ffffff, 
+	/*box-shadow: inset  0px  100px 50px -40px #ffffff, 
 				inset  0px -100px 50px -40px #ffffff, 
 				inset -5px    0px 10px  -5px rgba(0,0,0,0.5), 
-				inset  5px    0px 10px  -5px rgba(0,0,0,0.5);
+				inset  5px    0px 10px  -5px rgba(0,0,0,0.5);*/
 				
 	/*box-shadow: inset  100px  0px 50px -40px #ffffff, 
 				inset -100px  0px 50px -40px #ffffff, 
@@ -168,13 +168,14 @@
 }
 
 .book {
-	width: 150px;
-	height: 200px;
+	width: 125px;
+	height: 150px;
 	display: inline-block;
 	background-color: white;
 	border: 1px solid gray;
 	border-radius: 10px;
 	margin: 10px;
+	position: relative;
 }
 
 .book img {

@@ -3,13 +3,29 @@
 	<title>Russkaya Kniga</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="../../images/icon.ico">
 	<!-- CSS STYLESHEET -->
 	<link type="text/css" rel="stylesheet" href="../../css/stylesheet.css"/>
 	<!-- JS SCRIPT -->
 	<script src="../../js/main.js"></script>
+	<!-- BOOTSTRAP -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<!-- JQUERY -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script>
+	$(document).ready(function(){
+		$("#scrollRight").click(function(){
+			if($(".book").css("right") == "0px"){
+				$(".book").animate({right: "-=150px"});
+				console.log($(".book").css("right"));
+			}
+		});
+		$("#scrollLeft").click(function(){
+			$(".book").animate({right: "+=150px"});
+			console.log($(".book").css("right"));
+		});
+	});
+	</script>
 </head>
 
 <body onload="setTimeout(cycleSlides(), 5000);">
@@ -34,7 +50,7 @@
 				</div>
 			</div>
 			<div style="position: relative; bottom: 52px;">
-				<div class="bookContainer">
+				<div class="bookContainer" id="topSellers">
 					<div class="book"><img src="../../images/books/book.jpg" alt="Book"></div>
 					<div class="book"><img src="../../images/books/book.jpg" alt="Book"></div>
 					<div class="book"><img src="../../images/books/book.jpg" alt="Book"></div>
@@ -42,6 +58,8 @@
 					<div class="book"><img src="../../images/books/book.jpg" alt="Book"></div>
 					<div class="book"><img src="../../images/books/book.jpg" alt="Book"></div>
 				</div>
+				<button id="scrollLeft"  type="button">Left</button>
+				<button id="scrollRight" type="button">Right</button>
 			</div>
 		</div>
 		<!-- CONTACTS -->
