@@ -12,20 +12,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<!-- JQUERY -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script>
-	$(document).ready(function(){
-		$("#scrollRight").click(function(){
-			if($(".book").css("right") == "0px"){
-				$(".book").animate({right: "-=150px"});
-				console.log($(".book").css("right"));
-			}
-		});
-		$("#scrollLeft").click(function(){
-			$(".book").animate({right: "+=150px"});
-			console.log($(".book").css("right"));
-		});
-	});
-	</script>
+	<script src="../../js/jquery.js"></script>
 </head>
 
 <body onload="setTimeout(cycleSlides(), 5000);">
@@ -51,12 +38,13 @@
 			</div>
 			<div style="position: relative; bottom: 52px;">
 				<div class="bookContainer" id="topSellers">
-					<div class="book"><img src="../../images/books/book.jpg" alt="Book"></div>
-					<div class="book"><img src="../../images/books/book.jpg" alt="Book"></div>
-					<div class="book"><img src="../../images/books/book.jpg" alt="Book"></div>
-					<div class="book"><img src="../../images/books/book.jpg" alt="Book"></div>
-					<div class="book"><img src="../../images/books/book.jpg" alt="Book"></div>
-					<div class="book"><img src="../../images/books/book.jpg" alt="Book"></div>
+					 <div class="book" style="right: 0px"><img src="../../images/books/book.jpg" alt="Book"></div
+					><div class="book" style="right: 0px"><img src="../../images/books/book.jpg" alt="Book"></div
+					><div class="book" style="right: 0px"><img src="../../images/books/book.jpg" alt="Book"></div
+					><div class="book" style="right: 0px"><img src="../../images/books/book.jpg" alt="Book"></div
+					><div class="book" style="right: 0px"><img src="../../images/books/book.jpg" alt="Book"></div
+					><div class="book" style="right: 0px"><img src="../../images/books/book.jpg" alt="Book"></div
+					><div class="book" style="right: 0px"><img src="../../images/books/book.jpg" alt="Book"></div>
 				</div>
 				<button id="scrollLeft"  type="button">Left</button>
 				<button id="scrollRight" type="button">Right</button>
