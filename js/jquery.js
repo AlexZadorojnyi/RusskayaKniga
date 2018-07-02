@@ -2,48 +2,55 @@ $(document).ready(function(){
 	
 	//Width of one book element without padding
 	var bookInnerWidth = $(".book").outerWidth();
-	//Width of the book container element
-	var containerWidth = $(".bookContainer").innerWidth();
-		
-	var i = 0;
-	var r = 0;
-	
-	do {
-		i++;
-		r = containerWidth - (bookInnerWidth * i);
-	} while (r > bookInnerWidth);
-	
-	$(".book").css("margin-left", (r / i / 2) + "px");
-	$(".book").css("margin-right", (r / i / 2) + "px");
-	
-	console.log("This container is " + containerWidth + "px wide and can fit " + i + " " + bookInnerWidth + "px wide books with the remainder of " + r + "px. The margin of each book will be " + (r / i / 2) + "px.");
-	
-	//Width of one book element with padding
-	var bookOuterWidth = $(".book").outerWidth(true);
 	//Number of book elements
 	var bookNum = $(".book").length;
+	//Width of the book container element
+	var containerWidth;
+	//Width of one book element with padding
+	var bookOuterWidth;
 	//Total width of all book elements with padding
-	var totalWidth = bookOuterWidth * bookNum;
+	var totalWidth;
+	//Sets margin width based on container parameters
+	setMargins();
 	
 	//Scroll books <<LEFT<<
 	$("#scrollLeft").click(function(){
-		if((totalWidth - containerWidth) + ($(".book:first").position().left - 1 - bookOuterWidth) > 0){
-			$(".book").animate({right: "+=" + bookOuterWidth + "px"}, "slow", function(){
-				//console.log($(".book:first").position().left - 1);
-			});
+		if(Math.round((totalWidth - containerWidth) + $(".book:first").position().left - 1 - bookOuterWidth) >= 0){
+			$(".book").animate({right: "+=" + bookOuterWidth + "px"}, "slow");
 		} else {
 			console.log("Reached end of list");
 		}
 	});
 	
-	//Scroll books <<RIGHT<<
+	//Scroll books >>RIGHT>>
 	$("#scrollRight").click(function(){
-		if($(".book").css("right") != "0px"){
-			$(".book").animate({right: "-=" + bookOuterWidth + "px"}, "slow", function(){
-				//console.log($(".book:first").position().left - 1);
-			});
+		if(Math.round($(".book:first").position().left - 1 + bookOuterWidth) <= 0){
+			$(".book").animate({right: "-=" + bookOuterWidth + "px"}, "slow");
 		} else {
 			console.log("Reached start of list");
 		}
 	});
+	
+	//Sets margin width based on container parameters
+	function setMargins() {
+		var i = 0;
+		var r = 0;
+		
+		containerWidth = $(".bookContainer").innerWidth();
+		
+		do {
+			i++;
+			r = containerWidth - (bookInnerWidth * i);
+		} while (r > bookInnerWidth && i <= bookNum);
+		
+		$(".book").css("margin-left", (r / i / 2) + "px");
+		$(".book").css("margin-right", (r / i / 2) + "px");
+		
+		bookOuterWidth = $(".book").outerWidth(true);
+		totalWidth = bookOuterWidth * bookNum;
+		
+		console.log("Container width: " + containerWidth + "px\nBook width: " + bookInnerWidth + "px\nFits: " + i + "/" + bookNum + " books at once\nRemainder: " + r + "px\nMargins: " + r + "/" + i + "=" + (r / i / 2) + "px");
+	}
+	
+	window.onresize = setMargins;
 });
