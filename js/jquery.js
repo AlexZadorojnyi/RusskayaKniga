@@ -9,9 +9,10 @@ $(document).ready(function(){
 	//Scroll books <<LEFT<<
 	$(".scrollLeft").click(function(){
 		var thisClass = this.classList[1];
-		//console.log(thisClass);
-		if(Math.round(($("." + thisClass + ".book").outerWidth(true) * $("." + thisClass + ".book").length - $("." + thisClass + ".bookContainer").innerWidth()) + $("." + thisClass + ".book:first").position().left - 1 - $("." + thisClass + ".book").outerWidth(true)) >= 0){
-			$("." + thisClass + ".book").animate({right: "+=" + $("." + thisClass + ".book").outerWidth(true) + "px"}, "slow");
+		if(!reachedEnd(thisClass)){
+			$("." + thisClass + ".book").animate({right: "+=" + $("." + thisClass + ".book").outerWidth(true) + "px"}, "slow", function(){
+				console.log(Math.round($("." + thisClass + ".book:first").position().left - 1));
+			});
 		} else {
 			console.log(thisClass + " reached end of list");
 		}
@@ -20,9 +21,10 @@ $(document).ready(function(){
 	//Scroll books >>RIGHT>>
 	$(".scrollRight").click(function(){
 		var thisClass = this.classList[1];
-		//console.log(thisClass);
-		if(Math.round($("." + thisClass + ".book:first").position().left - 1 + $("." + thisClass + ".book").outerWidth(true)) <= 0){
-			$("." + thisClass + ".book").animate({right: "-=" + $("." + thisClass + ".book").outerWidth(true) + "px"}, "slow");
+		if(!reachedStart(thisClass)){
+			$("." + thisClass + ".book").animate({right: "-=" + $("." + thisClass + ".book").outerWidth(true) + "px"}, "slow", function(){
+				console.log(Math.round($("." + thisClass + ".book:first").position().left - 1));
+			});
 		} else {
 			console.log(thisClass + " reached start of list");
 		}
@@ -31,6 +33,10 @@ $(document).ready(function(){
 	//Sets margin width based on container parameters
 	function setMargins() {
 		$(".bookContainer").each(function(){
+			if($("." + thisClass + ".book:first").position().left - 1) != 0){
+				
+			}
+			
 			//Number of book elements
 			var bookNum = $(this).children(".book").length;
 			//Width of the book container element
@@ -52,8 +58,38 @@ $(document).ready(function(){
 			//Total width of all book elements with padding
 			var totalWidth = bookOuterWidth * bookNum;
 			
-			console.log(this.classList[1] + " container\nContainer width: " + containerWidth + "px\nBook width: " + bookInnerWidth + "px\nFits: " + i + "/" + bookNum + " books at once\nRemainder: " + r + "px\nMargins: " + r + "/" + i + "=" + (r / i / 2) + "px");
+			//console.log(this.classList[1] + " container\nContainer width: " + containerWidth + "px\nBook width: " + bookInnerWidth + "px\nFits: " + i + "/" + bookNum + " books at once\nRemainder: " + r + "px\nMargins: " + r + "/" + i + "=" + (r / i / 2) + "px");
 		})
+	}
+	
+	/*Replaces long if statement
+	Math.round(($("." + thisClass + ".book").outerWidth(true) * $("." + thisClass + ".book").length - $("." + thisClass + ".bookContainer").innerWidth()) + $("." + thisClass + ".book:first").position().left - 1 - $("." + thisClass + ".book").outerWidth(true)) >= 0
+	*/
+	function reachedEnd(thisClass) {
+		var bookOuterWidth = $("." + thisClass + ".book").outerWidth(true);
+		var bookNum = $("." + thisClass + ".book").length;
+		var containerWidth = $("." + thisClass + ".bookContainer").innerWidth();
+		var bookPos = $("." + thisClass + ".book:first").position().left - 1;
+		
+		if(Math.round(bookOuterWidth * bookNum - containerWidth + bookPos - bookOuterWidth) >= 0){
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	/*Replaces long if statement
+	Math.round($("." + thisClass + ".book:first").position().left - 1 + $("." + thisClass + ".book").outerWidth(true)) <= 0
+	*/
+	function reachedStart(thisClass) {
+		var bookOuterWidth = $("." + thisClass + ".book").outerWidth(true);
+		var bookPos = $("." + thisClass + ".book:first").position().left - 1;
+		
+		if(Math.round(bookPos + bookOuterWidth) <= 0){
+			return false;
+		} else {
+			return true;
+		}
 	}
 	
 	window.onresize = setMargins;
