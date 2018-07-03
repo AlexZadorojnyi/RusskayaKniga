@@ -14,18 +14,22 @@ $(document).ready(function(){
 	setMargins();
 	
 	//Scroll books <<LEFT<<
-	$("#scrollLeft").click(function(){
-		if(Math.round((totalWidth - containerWidth) + $(".book:first").position().left - 1 - bookOuterWidth) >= 0){
-			$(".book").animate({right: "+=" + bookOuterWidth + "px"}, "slow");
+	$(".scrollLeft").click(function(){
+		var thisClass = this.classList[0];
+		//console.log(thisClass);
+		if(Math.round((bookOuterWidth * $("." + thisClass + ".book").length - containerWidth) + $("." + thisClass + ".book:first").position().left - 1 - bookOuterWidth) >= 0){
+			$("." + thisClass + ".book").animate({right: "+=" + bookOuterWidth + "px"}, "slow");
 		} else {
 			console.log("Reached end of list");
 		}
 	});
 	
 	//Scroll books >>RIGHT>>
-	$("#scrollRight").click(function(){
-		if(Math.round($(".book:first").position().left - 1 + bookOuterWidth) <= 0){
-			$(".book").animate({right: "-=" + bookOuterWidth + "px"}, "slow");
+	$(".scrollRight").click(function(){
+		var thisClass = this.classList[0];
+		//console.log(thisClass);
+		if(Math.round($("." + thisClass + ".book:first").position().left - 1 + bookOuterWidth) <= 0){
+			$("." + thisClass + ".book").animate({right: "-=" + bookOuterWidth + "px"}, "slow");
 		} else {
 			console.log("Reached start of list");
 		}
