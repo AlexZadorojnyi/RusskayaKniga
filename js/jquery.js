@@ -33,9 +33,9 @@ $(document).ready(function(){
 	//Sets margin width based on container parameters
 	function setMargins() {
 		$(".bookContainer").each(function(){
-			if($("." + thisClass + ".book:first").position().left - 1) != 0){
-				
-			}
+			//console.log($("." + this.classList[1] + ".book:first").position().left - 1);
+			//
+			var bookIndex = Math.round(($("." + this.classList[1] + ".book:first").position().left - 1) / $(this).children(".book").outerWidth(true));
 			
 			//Number of book elements
 			var bookNum = $(this).children(".book").length;
@@ -59,6 +59,11 @@ $(document).ready(function(){
 			var totalWidth = bookOuterWidth * bookNum;
 			
 			//console.log(this.classList[1] + " container\nContainer width: " + containerWidth + "px\nBook width: " + bookInnerWidth + "px\nFits: " + i + "/" + bookNum + " books at once\nRemainder: " + r + "px\nMargins: " + r + "/" + i + "=" + (r / i / 2) + "px");
+			
+			
+			//if(bookOuterWidth * bookNum - containerWidth - Math.abs(bookIndex * bookOuterWidth) < 0) {
+				$(this).children(".book").css("right", Math.abs(bookIndex * bookOuterWidth));
+			//}
 		})
 	}
 	
