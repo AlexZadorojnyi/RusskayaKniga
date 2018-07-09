@@ -98,4 +98,16 @@ $(document).ready(function(){
 	}
 	
 	window.onresize = setMargins;
+	
+	//Fades book slider buttons in and out
+	$(".bookContainer").mouseenter(function(e){
+		var thisClass = this.classList[1];
+		$(".scrollLeft."  + this.classList[1]).animate({opacity: "1"});
+		$(".scrollRight." + this.classList[1]).animate({opacity: "1"});
+	}).mouseleave(function(e) {
+		if(e.relatedTarget.classList[1] != this.classList[1]) {
+			$(".scrollLeft."  + this.classList[1]).animate({opacity: "0"});
+			$(".scrollRight." + this.classList[1]).animate({opacity: "0"});
+		}
+	});
 });

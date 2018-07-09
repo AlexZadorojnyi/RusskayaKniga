@@ -43,10 +43,11 @@
 
 #infoText {
 	padding-top: 5px;
+	padding-bottom: 5px;
+	color: black;
 }
 
 #openTimes {
-	width: 200px;
 	font-size: 14px;
 	margin: 10px;
 }
@@ -54,17 +55,18 @@
 .openDays {
 	text-align: left;
 	padding-bottom: 3px;
+	padding-right: 10px;
 }
 
 .openHours {
 	text-align: right;
-	padding-right: 50px;
 	padding-bottom: 3px;
 }
 
 #map {
-	width: 40%;
+	width: auto;
 	height: auto;
+	max-height: 340px;
 	padding: 10px;
 	float: left;
 	
@@ -134,7 +136,6 @@
 
 #slidesButtonNums {
 	text-align: center;
-	cursor: pointer;
 	font-size: 36px;
 	
 	-moz-user-select: -moz-none;
@@ -144,8 +145,8 @@
 	user-select: none;
 }
 
-#slidesButtonNums div {
-	display: table-cell;
+#slidesButtonNums span {
+	cursor: pointer;
 }
 
 .bookContainer {
@@ -154,17 +155,28 @@
 	overflow-x: hidden;
 	overflow-y: hidden;
 	white-space: nowrap;
-	/*box-shadow: inset  0px  100px 50px -40px #ffffff, 
-				inset  0px -100px 50px -40px #ffffff, 
-				inset -5px    0px 10px  -5px rgba(0,0,0,0.5), 
-				inset  5px    0px 10px  -5px rgba(0,0,0,0.5);*/
-				
-	/*box-shadow: inset  100px  0px 50px -40px #ffffff, 
-				inset -100px  0px 50px -40px #ffffff, 
-				inset    0px -5px 10px  -5px rgba(0,0,0,0.5), 
-				inset    0px  5px 10px  -5px rgba(0,0,0,0.5);*/
-	
-	border: 1px solid rgba(200, 200, 200, 0.5);
+}
+
+.bookContainer * {
+	pointer-events: none;
+}
+
+.bookContainerTitle {
+	border-bottom: 1px solid black;
+	text-align: center;
+	width: 100% - 10px; 
+	height: 15px;
+	margin-bottom: 15px;
+	margin-left: 5px;
+	margin-right: 5px;
+	color: black;
+}
+
+.bookContainerTitle span {
+	font-size: 20px;
+	background-color: white;
+	padding-left: 5px;
+	padding-right: 5px;
 }
 
 .book {
@@ -173,7 +185,7 @@
 	display: inline-block;
 	background-color: white;
 	border: 1px solid gray;
-	border-radius: 10px;
+	border-radius: 5px;
 	margin-top: 10px;
 	margin-bottom: 10px;
 	position: relative;
@@ -184,6 +196,51 @@
 	margin: auto;
 	height: 100%;
 	width: auto;
+	
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.bookContainerButtons {
+	position: absolute;
+	width: 100%;
+	color: white;
+	text-shadow: 2px 2px 4px #000000;
+}
+
+.scrollLeft {
+	float: right;
+	cursor: pointer;
+	font-size: 30px;
+	padding-right: 10px;
+	opacity: 0;
+	position: relative;
+	bottom: 110px;
+	
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.scrollRight {
+	float: left;
+	cursor: pointer;
+	font-size: 30px;
+	padding-left: 10px;
+	opacity: 0;
+	position: relative; 
+	bottom: 110px;
+	
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 /* Screen is 992px or wider */

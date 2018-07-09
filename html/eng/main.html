@@ -13,9 +13,13 @@
 	<!-- JQUERY -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="../../js/jquery.js"></script>
+	<!-- ANGULAR JS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	<script src="../../js/myApp.js"></script>
+	<script src="../../js/myCtrl.js"></script>
 </head>
 
-<body onload="setTimeout(cycleSlides(), 5000);">
+<body onload="setTimeout(cycleSlides(), 5000);" ng-app="myApp" ng-controller="myCtrl">
 	<div id="center">
 		<!-- BANNER -->
 		<div class="col-md-12" id="banner">
@@ -23,12 +27,10 @@
 			<span id="langButton" onclick="changeLang()">Русский</span>
 		</div>
 		<!-- MAIN -->
-		<div class="col-md-9 col-md-push-3" id="main">
+		<div class="col-md-10 col-md-push-2" id="main">
 			<!-- PROMO SLIDES -->
 			<div id="slidesContainer">
-				<img class="slide" src="../../images/promo/eng/promoEng5.jpg" alt="Promo 1" style="display:block;">
-				<img class="slide" src="../../images/promo/eng/promoEng6.jpg" alt="Promo 2" style="display:block;">
-				<img class="slide" src="../../images/promo/eng/promoEng7.jpg" alt="Promo 3" style="display:block;">
+				<img class="slide" style="display: none;" ng-repeat="promo in promos" ng-src="{{ promo.address }}">
 				<!-- BUTTONS -->
 				<div id="slidesButtons">
 					<div id="slidesButtonPrev" onclick="prevSlide()">&#10094;</div>
@@ -36,7 +38,11 @@
 					<div id="slidesButtonNums"></div>
 				</div>
 			</div>
-			<div style="position: relative; bottom: 52px;">
+			<div style="position: relative; bottom: 45px;">
+				<!-- TOP SELLERS TITLE -->
+				<div class="bookContainerTitle topSellers">
+					<span><strong>TOP SELLERS</strong></span>
+				</div>
 				<!-- TOP SELLERS CONTAINER -->
 				<div class="bookContainer topSellers">
 					 <div class="book topSellers" style="right: 0px"><img src="../../images/books/book1.jpg" alt="Book"></div
@@ -48,29 +54,31 @@
 					><div class="book topSellers" style="right: 0px"><img src="../../images/books/book1.jpg" alt="Book"></div>
 				</div>
 				<!-- TOP SELLERS BUTTONS -->
-				<button class="scrollLeft  topSellers" type="button">Left</button>
-				<button class="scrollRight topSellers" type="button">Right</button>
+				<div class="bookContainerButtons topSellers">
+					<div class="scrollRight topSellers">&#10094;</div>
+					<div class="scrollLeft  topSellers">&#10095;</div>
+				</div>
+				<!-- NEW ARRIVALS TITLE -->
+				<div class="bookContainerTitle newArrivals">
+					<span><strong>NEW ARRIVALS</strong></span>
+				</div>
 				<!-- NEW ARRIVALS CONTAINER -->
 				<div class="bookContainer newArrivals">
-					 <div class="book newArrivals" style="right: 0px"><img src="../../images/books/book1.jpg" alt="Book"></div
-					><div class="book newArrivals" style="right: 0px"><img src="../../images/books/book2.jpg" alt="Book"></div
-					><div class="book newArrivals" style="right: 0px"><img src="../../images/books/book1.jpg" alt="Book"></div
-					><div class="book newArrivals" style="right: 0px"><img src="../../images/books/book2.jpg" alt="Book"></div
-					><!-- <div class="book newArrivals" style="right: 0px"><img src="../../images/books/book1.jpg" alt="Book"></div
-					><div class="book newArrivals" style="right: 0px"><img src="../../images/books/book2.jpg" alt="Book"></div
-					><div class="book newArrivals" style="right: 0px"><img src="../../images/books/book1.jpg" alt="Book"></div> -->
+					<div class="book newArrivals" style="right: 0px" ng-repeat="book in books"><img ng-src="{{ book.address }}" alt="{{ book.title }}"></div>
 				</div>
 				<!-- NEW ARRIVALS BUTTONS -->
-				<button class="scrollLeft  newArrivals" type="button">Left</button>
-				<button class="scrollRight newArrivals" type="button">Right</button>
+				<div class="bookContainerButtons newArrivals">
+					<div class="scrollRight newArrivals">&#10094;</div>
+					<div class="scrollLeft  newArrivals">&#10095;</div>
+				</div>
 			</div>
 		</div>
 		<!-- CONTACTS -->
-		<div class="col-md-3 col-md-pull-9"  id="info">
+		<div class="col-md-2 col-md-pull-10"  id="info">
 			<!-- MAP -->
 			<a href="https://goo.gl/maps/P9gdSUCahW22" target="_blank"><img id="map" src="../../images/map.png" alt="Map"></a>
 			<div id="infoText">
-				<strong><p>INFORMATION<br></p></strong>
+				<p><strong>INFORMATION</strong></p>
 				<!-- ADDRESS -->
 				<p><a href="https://goo.gl/maps/P9gdSUCahW22" target="_blank">9631 Yonge St, Richmond Hill,<br>ON L4C 0M5</a></p>
 				<!-- PHONE -->
@@ -78,7 +86,7 @@
 				<!-- EMAIL -->
 				<p><a href="mailto:ruskniga@hotmail.com">ruskniga@hotmail.com</a><br></p>
 				<!-- OPEN HOURS -->
-				<strong><p>OPEN HOURS<br></p></strong>
+				<p><strong>OPEN HOURS</strong></p>
 				<table id="openTimes">
 					<tr>
 						<td class="openDays">Mon</td>

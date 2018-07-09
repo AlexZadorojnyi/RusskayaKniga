@@ -1,5 +1,3 @@
-//var app = angular.module("myApp", []);
-
 var eng = "\/eng\/";
 var rus = "\/rus\/";
 
