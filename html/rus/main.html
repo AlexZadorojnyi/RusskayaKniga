@@ -12,10 +12,12 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<!-- JQUERY -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="../../js/jquery.js"></script>
+	<!-- ANGULAR JS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	<script src="../../js/myApp.js"></script>
 </head>
 
-<body onload="setTimeout(cycleSlides(), 5000);">
+<body ng-app="myApp" ng-controller="myCtrl">
 	<div id="center">
 		<!-- BANNER -->
 		<div class="col-md-12" id="banner">
@@ -26,10 +28,8 @@
 		<div class="col-md-10 col-md-push-2" id="main">
 		<!-- <div class="col-md-9 col-md-push-3" id="main"> -->
 			<!-- PROMO SLIDES -->
-			<div id="slidesContainer">
-				<img class="slide" src="../../images/promo/rus/promoRus5.jpg" alt="Promo 1" style="display:block;">
-				<img class="slide" src="../../images/promo/rus/promoRus6.jpg" alt="Promo 2" style="display:block;">
-				<img class="slide" src="../../images/promo/rus/promoRus7.jpg" alt="Promo 3" style="display:block;">
+			<div id="slidesContainer" ng-view>
+				<img class="slide" style="display: none;" ng-repeat="promo in promos | filter:{lang:'ru'}" ng-src="{{ promo.address }}" cycle-Slides>
 				<!-- BUTTONS -->
 				<div id="slidesButtons">
 					<div id="slidesButtonPrev" onclick="prevSlide()">&#10094;</div>
@@ -54,8 +54,8 @@
 				</div>
 				<!-- TOP SELLERS BUTTONS -->
 				<div class="bookContainerButtons topSellers">
-					<div class="scrollRight topSellers">&#10094;</div>
-					<div class="scrollLeft  topSellers">&#10095;</div>
+					<div class="scrollRight topSellers">&#10095;</div>
+					<div class="scrollLeft  topSellers">&#10094;</div>
 				</div>
 				<!-- NEW ARRIVALS TITLE -->
 				<div class="bookContainerTitle newArrivals">
@@ -63,42 +63,12 @@
 				</div>
 				<!-- NEW ARRIVALS CONTAINER -->
 				<div class="bookContainer newArrivals">
-					 <div class="book newArrivals" style="right: 0px"><img src="../../images/books/01.jpg" alt="Book"></div
-					><div class="book newArrivals" style="right: 0px"><img src="../../images/books/02.jpg" alt="Book"></div
-					><div class="book newArrivals" style="right: 0px"><img src="../../images/books/03.jpg" alt="Book"></div
-					><div class="book newArrivals" style="right: 0px"><img src="../../images/books/04.jpg" alt="Book"></div
-					><div class="book newArrivals" style="right: 0px"><img src="../../images/books/05.jpg" alt="Book"></div
-					><div class="book newArrivals" style="right: 0px"><img src="../../images/books/06.jpg" alt="Book"></div
-					><div class="book newArrivals" style="right: 0px"><img src="../../images/books/07.jpg" alt="Book"></div
-					><div class="book newArrivals" style="right: 0px"><img src="../../images/books/08.jpg" alt="Book"></div
-					><div class="book newArrivals" style="right: 0px"><img src="../../images/books/09.jpg" alt="Book"></div
-					><div class="book newArrivals" style="right: 0px"><img src="../../images/books/10.jpg" alt="Book"></div
-					><div class="book newArrivals" style="right: 0px"><img src="../../images/books/11.jpg" alt="Book"></div
-					><div class="book newArrivals" style="right: 0px"><img src="../../images/books/12.jpg" alt="Book"></div
-					><div class="book newArrivals" style="right: 0px"><img src="../../images/books/13.jpg" alt="Book"></div
-					><div class="book newArrivals" style="right: 0px"><img src="../../images/books/14.jpg" alt="Book"></div
-					><div class="book newArrivals" style="right: 0px"><img src="../../images/books/15.jpg" alt="Book"></div
-					><div class="book newArrivals" style="right: 0px"><img src="../../images/books/16.jpg" alt="Book"></div
-					><div class="book newArrivals" style="right: 0px"><img src="../../images/books/17.jpg" alt="Book"></div
-					><div class="book newArrivals" style="right: 0px"><img src="../../images/books/18.jpg" alt="Book"></div
-					><div class="book newArrivals" style="right: 0px"><img src="../../images/books/19.png" alt="Book"></div
-					><div class="book newArrivals" style="right: 0px"><img src="../../images/books/20.jpg" alt="Book"></div
-					><div class="book newArrivals" style="right: 0px"><img src="../../images/books/21.jpg" alt="Book"></div
-					><div class="book newArrivals" style="right: 0px"><img src="../../images/books/22.jpg" alt="Book"></div
-					><div class="book newArrivals" style="right: 0px"><img src="../../images/books/23.jpg" alt="Book"></div
-					><div class="book newArrivals" style="right: 0px"><img src="../../images/books/24.jpg" alt="Book"></div
-					><div class="book newArrivals" style="right: 0px"><img src="../../images/books/25.jpg" alt="Book"></div
-					><div class="book newArrivals" style="right: 0px"><img src="../../images/books/26.jpg" alt="Book"></div
-					><div class="book newArrivals" style="right: 0px"><img src="../../images/books/27.jpg" alt="Book"></div
-					><div class="book newArrivals" style="right: 0px"><img src="../../images/books/28.jpg" alt="Book"></div
-					><div class="book newArrivals" style="right: 0px"><img src="../../images/books/29.jpg" alt="Book"></div
-					><div class="book newArrivals" style="right: 0px"><img src="../../images/books/30.jpg" alt="Book"></div
-					>
+					<div class="book newArrivals" style="right: 0px" ng-repeat="book in books"><img ng-src="{{ book.address }}" alt="{{ book.title }}"></div>
 				</div>
 				<!-- NEW ARRIVALS BUTTONS -->
 				<div class="bookContainerButtons newArrivals">
-					<div class="scrollRight newArrivals">&#10094;</div>
-					<div class="scrollLeft  newArrivals">&#10095;</div>
+					<div class="scrollRight newArrivals">&#10095;</div>
+					<div class="scrollLeft  newArrivals">&#10094;</div>
 				</div>
 			</div>
 		</div>
