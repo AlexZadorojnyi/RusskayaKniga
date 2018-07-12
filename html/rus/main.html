@@ -26,10 +26,9 @@
 		</div>
 		<!-- MAIN -->
 		<div class="col-md-10 col-md-push-2" id="main">
-		<!-- <div class="col-md-9 col-md-push-3" id="main"> -->
 			<!-- PROMO SLIDES -->
 			<div id="slidesContainer" ng-view>
-				<img class="slide" style="display: none;" ng-repeat="promo in promos | filter:{lang:'ru'}" ng-src="{{ promo.address }}" cycle-Slides>
+				<img class="slide" style="display: none;" ng-repeat="promo in promos | filter:{lang:'ru'} | promoFilter | orderBy:'-importance'" ng-src="{{ promo.address }}" cycle-Slides>
 				<!-- BUTTONS -->
 				<div id="slidesButtons">
 					<div id="slidesButtonPrev" onclick="prevSlide()">&#10094;</div>
@@ -44,13 +43,8 @@
 				</div>
 				<!-- TOP SELLERS CONTAINER -->
 				<div class="bookContainer topSellers">
-					 <div class="book topSellers" style="right: 0px"><img src="../../images/books/book1.jpg" alt="Book"></div
-					><div class="book topSellers" style="right: 0px"><img src="../../images/books/book2.jpg" alt="Book"></div
-					><div class="book topSellers" style="right: 0px"><img src="../../images/books/book1.jpg" alt="Book"></div
-					><div class="book topSellers" style="right: 0px"><img src="../../images/books/book2.jpg" alt="Book"></div
-					><div class="book topSellers" style="right: 0px"><img src="../../images/books/book1.jpg" alt="Book"></div
-					><div class="book topSellers" style="right: 0px"><img src="../../images/books/book2.jpg" alt="Book"></div
-					><div class="book topSellers" style="right: 0px"><img src="../../images/books/book1.jpg" alt="Book"></div>
+					<!-- "filter:{category:'Top Sellers'} | orderBy:random" works but prints errors in console -->
+					<div class="book topSellers" style="right: 0px" ng-repeat="book in books | filter:{category:'Top Sellers'}"><img ng-src="{{ book.address }}" alt="{{ book.title }}"></div>
 				</div>
 				<!-- TOP SELLERS BUTTONS -->
 				<div class="bookContainerButtons topSellers">
