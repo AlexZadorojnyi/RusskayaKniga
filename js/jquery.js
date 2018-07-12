@@ -32,9 +32,12 @@ $(document).ready(function(){
 	
 	//Sets margin width based on container parameters
 	function setMargins() {
+		//Width of one book element without padding
+		//var bookInnerWidth = $(".book").outerWidth
+		
 		$(".bookContainer").each(function(){
 			//console.log($("." + this.classList[1] + ".book:first").position().left - 1);
-			//
+			
 			var bookIndex = Math.round(($("." + this.classList[1] + ".book:first").position().left - 1) / $(this).children(".book").outerWidth(true));
 			
 			//Number of book elements

@@ -12,14 +12,14 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<!-- JQUERY -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="../../js/jquery.js"></script>
+	<!-- <script src="../../js/jquery.js"></script> -->
 	<!-- ANGULAR JS -->
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 	<script src="../../js/myApp.js"></script>
 	<script src="../../js/myCtrl.js"></script>
 </head>
 
-<body onload="setTimeout(cycleSlides(), 5000);" ng-app="myApp" ng-controller="myCtrl">
+<body ng-app="myApp" ng-controller="myCtrl">
 	<div id="center">
 		<!-- BANNER -->
 		<div class="col-md-12" id="banner">
@@ -29,8 +29,8 @@
 		<!-- MAIN -->
 		<div class="col-md-10 col-md-push-2" id="main">
 			<!-- PROMO SLIDES -->
-			<div id="slidesContainer">
-				<img class="slide" style="display: none;" ng-repeat="promo in promos" ng-src="{{ promo.address }}">
+			<div id="slidesContainer" ng-view>
+				<img class="slide" style="display: none;" ng-repeat="promo in promos | filter:{lang:'en'}" ng-src="{{ promo.address }}" cycle-Slides>
 				<!-- BUTTONS -->
 				<div id="slidesButtons">
 					<div id="slidesButtonPrev" onclick="prevSlide()">&#10094;</div>

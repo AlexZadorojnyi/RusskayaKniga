@@ -3,32 +3,32 @@ app.controller('myCtrl', ['$scope', function($scope) {
   	{ 
 		address: "../../images/promo/eng/promoEng5.jpg", 
 		date: new Date('2018', '06', '19'),
-		lang: "eng"
+		lang: "en"
   	},
 	{ 
 		address: "../../images/promo/eng/promoEng6.jpg", 
 		date: new Date('2018', '06', '20'),
-		lang: "eng"
+		lang: "en"
   	},
 	{ 
 		address: "../../images/promo/eng/promoEng7.jpg", 
 		date: new Date('2018', '06', '21'),
-		lang: "eng"
+		lang: "en"
   	},
 	{ 
 		address: "../../images/promo/rus/promoRus5.jpg", 
 		date: new Date('2018', '06', '19'),
-		lang: "rus"
+		lang: "ru"
   	},
 	{ 
 		address: "../../images/promo/rus/promoRus6.jpg", 
 		date: new Date('2018', '06', '20'),
-		lang: "rus"
+		lang: "ru"
   	},
 	{ 
 		address: "../../images/promo/rus/promoRus7.jpg", 
 		date: new Date('2018', '06', '21'),
-		lang: "rus"
+		lang: "ru"
   	}
   ];
   $scope.books = [
@@ -245,9 +245,3 @@ app.controller('myCtrl', ['$scope', function($scope) {
 	}
   ];
 }]);
-
-app.filter('lang', function() {
-	return function(input, language){
-		
-	}
-});
