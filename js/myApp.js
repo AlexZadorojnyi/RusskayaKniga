@@ -47,10 +47,10 @@ app.controller('myCtrl', ['$scope', function($scope) {
 					$("." + thisClass + ".book:first").animate({right: "-=" + $("." + thisClass + ".book").outerWidth(true) + "px"}, scrollSpeed, function(){
 						blockScroll = false;
 						if(reachedStart(thisClass)){
-							toggleButton(thisClass, "left", "off");
+							toggleButton(thisClass, "left", "0");
 							console.log(thisClass + " reached start of list");
 						}
-						if(!reachedEnd(thisClass)) toggleButton(thisClass, "right", "on");
+						if(!reachedEnd(thisClass)) toggleButton(thisClass, "right", "1");
 						//console.log(Math.round($("." + thisClass + ".book:first").position().left - 1));
 					});
 					//Animate for the rest of the books in the slider
@@ -69,10 +69,10 @@ app.controller('myCtrl', ['$scope', function($scope) {
 					$("." + thisClass + ".book:first").animate({right: "+=" + $("." + thisClass + ".book").outerWidth(true) + "px"}, scrollSpeed, function(){
 						blockScroll = false;
 						if(reachedEnd(thisClass)){
-							toggleButton(thisClass, "right", "off");
+							toggleButton(thisClass, "right", "0");
 							console.log(thisClass + " reached end of list");
 						}
-						if(!reachedStart(thisClass)) toggleButton(thisClass, "left", "on");
+						if(!reachedStart(thisClass)) toggleButton(thisClass, "left", "1");
 						//console.log(Math.round($("." + thisClass + ".book:first").position().left - 1));
 					});
 					//Animate for the rest of the books in the slider
@@ -151,37 +151,25 @@ app.controller('myCtrl', ['$scope', function($scope) {
 		//Fades book slider buttons in and out
 		$(".bookContainer").mouseenter(function(e){
 			var thisClass = this.classList[1];
-			if(!reachedEnd(thisClass))   toggleButton(thisClass, "right", "on");
-			if(!reachedStart(thisClass)) toggleButton(thisClass, "left", "on");
+			if(!reachedEnd(thisClass))   toggleButton(thisClass, "right", "1");
+			if(!reachedStart(thisClass)) toggleButton(thisClass, "left", "1");
 		}).mouseleave(function(e) {
 			if(e.relatedTarget == null || e.relatedTarget.classList[1] != this.classList[1]) {
-				toggleButton(this.classList[1], "right", "off");
-				toggleButton(this.classList[1], "left", "off");
+				toggleButton(this.classList[1], "right", "0");
+				toggleButton(this.classList[1], "left", "0");
 			}
 		});
 		
 		//Toggles specified slider button on/off
-		function toggleButton(thisClass, button, toggle){
+		function toggleButton(thisClass, button, opacity){
 			if(button == "right"){
-				if(toggle == "on"){
-					$(".scrollRight." + thisClass).animate({opacity: "1"}, "fast");
-					$(".scrollRight." + thisClass).css("cursor", "pointer");
-					//console.log(thisClass + " " + button + " " + toggle);
-				} else if(toggle == "off"){
-					$(".scrollRight." + thisClass).animate({opacity: "0"}, "fast");
-					$(".scrollRight." + thisClass).css("cursor", "default");
-					//console.log(thisClass + " " + button + " " + toggle);
-				}
+				$(".scrollRight." + thisClass).animate({opacity: opacity}, "fast");
+				$(".scrollRight." + thisClass).css("cursor", "default");
+				//console.log(thisClass + " " + button + " " + toggle);
 			} else if (button == "left") {
-				if(toggle == "on"){
-					$(".scrollLeft." + thisClass).animate({opacity: "1"}, "fast");
-					$(".scrollLeft." + thisClass).css("cursor", "pointer");
-					//console.log(thisClass + " " + button + " " + toggle);
-				} else if(toggle == "off"){
-					$(".scrollLeft." + thisClass).animate({opacity: "0"}, "fast");
-					$(".scrollLeft." + thisClass).css("cursor", "default");
-					//console.log(thisClass + " " + button + " " + toggle);
-				}
+				$(".scrollLeft." + thisClass).animate({opacity: opacity}, "fast");
+				$(".scrollLeft." + thisClass).css("cursor", "pointer");
+				//console.log(thisClass + " " + button + " " + toggle);
 			}
 		}
 	});

@@ -50,6 +50,7 @@
 #openTimes {
 	font-size: 14px;
 	margin: 10px;
+	color: black;
 }
 
 .openDays {
@@ -104,8 +105,8 @@
 #slidesButtons {
 	width: 100%;
 	position: relative;
-	bottom: 50px;
-	font-size: 30px;
+	bottom: 70px;
+	font-size: 50px;
 	color: white;
 	text-shadow: 2px 2px 4px #000000;
 }
@@ -136,7 +137,7 @@
 
 #slidesButtonNums {
 	text-align: center;
-	font-size: 36px;
+	font-size: 50px;
 	
 	-moz-user-select: -moz-none;
 	-khtml-user-select: none;
@@ -209,13 +210,13 @@
 	width: 100%;
 	color: white;
 	text-shadow: 2px 2px 4px #000000;
-	bottom: 110px;
+	bottom: 115px;
 }
 
 .scrollLeft {
 	float: left;
 	cursor: pointer;
-	font-size: 30px;
+	font-size: 40px;
 	padding-left: 10px;
 	opacity: 0;
 	position: relative;
@@ -230,7 +231,7 @@
 .scrollRight {
 	float: right;
 	cursor: pointer;
-	font-size: 30px;
+	font-size: 40px;
 	padding-right: 10px;
 	opacity: 0;
 	position: relative; 
