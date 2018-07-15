@@ -1,3 +1,7 @@
+body {
+	bacground-color: red;
+}
+
 #center {
 	width: 100%;
 	margin: 0 auto;
@@ -25,15 +29,20 @@
 	right: 0px;
 	cursor: pointer;
 	color: gray;
+	background-color:white;
+	padding-left: 5px;
 }
 
 #info {
 	background-color: gold;
 	padding: 0px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	margin-top: 10px;
 }
 
 #info p {
-	margin: 10px;
+	
 }
 
 #info a {
@@ -41,16 +50,16 @@
 	text-decoration: none;
 }
 
-#infoText {
-	padding-top: 5px;
-	padding-bottom: 5px;
+.infoText {
 	color: black;
+	font-size: 18px;
 }
 
 #openTimes {
-	font-size: 14px;
-	margin: 10px;
+	font-size: 18px;
 	color: black;
+	margin-left: auto;
+    margin-right: auto;
 }
 
 .openDays {
@@ -65,11 +74,11 @@
 }
 
 #map {
+	height: 190px;
 	width: auto;
-	height: auto;
-	max-height: 340px;
-	padding: 10px;
-	float: left;
+	display:block;
+    margin-left: auto;
+    margin-right: auto;
 	
 	-moz-user-select: -moz-none;
 	-khtml-user-select: none;
@@ -91,10 +100,7 @@
 .slide {
 	width: 100%;
 	height: auto;
-	
-	-webkit-transition: display 2s; /* For Safari 3.1 to 6.0 */
-    transition: display 2s;
-	
+
 	-moz-user-select: -moz-none;
 	-khtml-user-select: none;
 	-webkit-user-select: none;
@@ -104,8 +110,8 @@
 
 #slidesButtons {
 	width: 100%;
-	position: relative;
-	bottom: 70px;
+	position: absolute;
+	bottom: 0px;
 	font-size: 50px;
 	color: white;
 	text-shadow: 2px 2px 4px #000000;
@@ -158,18 +164,14 @@
 	white-space: nowrap;
 }
 
-.bookContainer * {
-	pointer-events: none;
-}
-
 .bookContainerTitle {
 	border-bottom: 1px solid black;
 	text-align: center;
 	width: 100% - 10px; 
 	height: 15px;
 	margin-bottom: 15px;
-	margin-left: 5px;
-	margin-right: 5px;
+	/*margin-left: 5px;
+	margin-right: 5px;*/
 	color: black;
 }
 
@@ -181,14 +183,14 @@
 }
 
 .book {
-	width: 128px;
-	height: 150px;
+	width: 130px;
+	height: 175px;
 	display: inline-block;
 	background-color: white;
 	border: 1px solid gray;
 	border-radius: 5px;
-	margin-top: 10px;
-	margin-bottom: 10px;
+	/*margin-top: 10px;
+	margin-bottom: 10px;*/
 	position: relative;
 }
 
@@ -205,21 +207,16 @@
 	user-select: none;
 }
 
-.bookContainerButtons {
-	position: relative;
-	width: 100%;
-	color: white;
-	text-shadow: 2px 2px 4px #000000;
-	bottom: 115px;
-}
-
 .scrollLeft {
-	float: left;
 	cursor: pointer;
 	font-size: 40px;
 	padding-left: 10px;
 	opacity: 0;
-	position: relative;
+	position: absolute;
+	color: white;
+	text-shadow: 2px 2px 4px #000000;
+	bottom: 61px;
+	left: 0px;
 	
 	-moz-user-select: -moz-none;
 	-khtml-user-select: none;
@@ -229,12 +226,14 @@
 }
 
 .scrollRight {
-	float: right;
 	cursor: pointer;
 	font-size: 40px;
 	padding-right: 10px;
-	opacity: 0;
-	position: relative; 
+	position: absolute; 
+	color: white;
+	text-shadow: 2px 2px 4px #000000;
+	bottom: 61px;
+	right: 0px;
 	
 	-moz-user-select: -moz-none;
 	-khtml-user-select: none;
@@ -243,15 +242,58 @@
 	user-select: none;
 }
 
+.bookInfo {
+	border: 1px solid gray;
+	border-radius: 5px;
+	background-color: lightgray;
+	color: black;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding: 10px;
+}
+
+.bookInfo .coverImg {
+	display: inline-block;
+	vertical-align:top;
+	width: 30%;
+}
+
+.coverImg img {
+	width: 100%;
+	height: auto;
+}
+
+.bookInfo .text {
+	display: inline-block;
+	width: calc(70% - 20px);
+	margin-left: 10px;
+}
+
+.text .title {
+	font-size: 30px;
+}
+
+.text .price {
+	font-size: 20px;
+	line-height: 200%;
+}
+
+.text .salePrice {
+	font-size: 20px;
+	line-height: 200%;
+	color: forestgreen;
+}
+
+.text .regPrice {
+	font-size: 20px;
+	line-height: 200%;
+	color: grey;
+	text-decoration: line-through;
+}
+
 /* Screen is 992px or wider */
 @media (min-width:992px) {
 	#center {
 		width: 992px;
-	}
-	
-	#map {
-		width: 100%;
-		height: auto;
-		display: block;
 	}
 }

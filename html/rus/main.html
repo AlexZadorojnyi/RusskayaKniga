@@ -21,35 +21,52 @@
 	<div id="center">
 		<!-- BANNER -->
 		<div class="col-md-12" id="banner">
-			<img src="../../images/banner.jpg" alt="Banner">
+			<img src="../../images/banner.png" alt="Banner">
 			<span id="langButton" onclick="changeLang()">English</span>
 		</div>
 		<!-- MAIN -->
-		<div class="col-md-10 col-md-push-2" id="main">
+		<div class="col-md-12" id="main">
 			<!-- PROMO SLIDES -->
 			<div id="slidesContainer" ng-view>
 				<img class="slide" style="display: none;" ng-repeat="promo in promos | filter:{lang:'ru'} | promoFilter | orderBy:'-importance'" ng-src="{{ promo.address }}" cycle-Slides>
 				<!-- BUTTONS -->
-				<div id="slidesButtons">
-					<div id="slidesButtonPrev" onclick="prevSlide()">&#10094;</div>
-					<div id="slidesButtonNext" onclick="nextSlide()">&#10095;</div>
-					<div id="slidesButtonNums"></div>
+				<div style="position: relative; height: 0">
+					<div id="slidesButtons">
+						<div id="slidesButtonPrev" onclick="prevSlide()">&#10094;</div>
+						<div id="slidesButtonNext" onclick="nextSlide()">&#10095;</div>
+						<div id="slidesButtonNums"></div>
+					</div>
 				</div>
 			</div>
-			<div style="position: relative; bottom: 45px;">
+			<div>
 				<!-- TOP SELLERS TITLE -->
 				<div class="bookContainerTitle topSellers">
 					<span><strong>ЛИДЕРЫ ПРОДАЖ</strong></span>
 				</div>
 				<!-- TOP SELLERS CONTAINER -->
 				<div class="bookContainer topSellers">
-					<!-- "filter:{category:'Top Sellers'} | orderBy:random" works but prints errors in console -->
-					<div class="book topSellers" style="right: 0px" ng-repeat="book in books | filter:{category:'Top Sellers'}"><img ng-src="{{ book.address }}" alt="{{ book.title }}"></div>
+					<!-- Adding "orderBy:random" works but prints errors in console -->
+					<div class="book topSellers" style="right: 0px" ng-repeat="book in books | filter:{category:'Top Sellers'}" ng-click="displayBookInfo($event.currentTarget.classList[1], book, 'ru')">
+						<img ng-src="{{ book.address }}" alt="{{ book.title }}">
+					</div>
 				</div>
 				<!-- TOP SELLERS BUTTONS -->
-				<div class="bookContainerButtons topSellers">
+				<div style="position: relative; height: 0">
 					<div class="scrollRight topSellers">&#10095;</div>
 					<div class="scrollLeft  topSellers">&#10094;</div>
+				</div
+				<!-- TOP SELLERS BOOK INFO -->
+				<div class="bookInfo topSellers">
+					<div class="coverImg"><img src="../../images/books/09.jpg"></div>
+					<div class="text">
+						<span class="title"><strong>iPhuck 10</strong></span><br>
+						<span class="author"><strong>Пелевин В.О.</strong></span> | 
+						<span class="cover">Твердая обложка</span> | 
+						<span class="pages">416 стр.</span><br>
+						<span class="salePrice">$15.00 </span>
+						<span class="regPrice">$29.99</span>
+						<p class="desc">Порфирий Петрович – литературно-полицейский алгоритм. Он расследует преступления и одновременно пишет об этом детективные романы, зарабатывая средства для Полицейского Управления. Маруха Чо – искусствовед с большими деньгами и баба с яйцами по официальному гендеру. Ее специальность – так называемый «гипс», искусство первой четверти XXI века. Ей нужен помощник для анализа рынка. Им становится взятый в аренду Порфирий. «iPhuck 10» – самый дорогой любовный гаджет на рынке и одновременно самый знаменитый из 244 детективов Порфирия Петровича. Это настоящий шедевр алгоритмической полицейской прозы конца века – энциклопедический роман о будущем любви, искусства и всего остального.</p><br>
+					</div>
 				</div>
 				<!-- NEW ARRIVALS TITLE -->
 				<div class="bookContainerTitle newArrivals">
@@ -57,62 +74,79 @@
 				</div>
 				<!-- NEW ARRIVALS CONTAINER -->
 				<div class="bookContainer newArrivals">
-					<div class="book newArrivals" style="right: 0px" ng-repeat="book in books"><img ng-src="{{ book.address }}" alt="{{ book.title }}"></div>
+					<div class="book newArrivals" style="right: 0px" ng-repeat="book in books | filter:{category:'New Arrivals'}" ng-click="displayBookInfo($event.currentTarget.classList[1], book, 'ru')">
+						<img ng-src="{{ book.address }}" alt="{{ book.title }}">
+					</div>
 				</div>
 				<!-- NEW ARRIVALS BUTTONS -->
-				<div class="bookContainerButtons newArrivals">
+				<div style="position: relative; height: 0">
 					<div class="scrollRight newArrivals">&#10095;</div>
 					<div class="scrollLeft  newArrivals">&#10094;</div>
 				</div>
-			</div>
-		</div>
-		<!-- CONTACTS -->
-		<div class="col-md-2 col-md-pull-10"  id="info">
-		<!-- <div class="col-md-3 col-md-pull-9"  id="info"> -->
-			<!-- MAP -->
-			<a href="https://goo.gl/maps/P9gdSUCahW22" target="_blank"><img id="map" src="../../images/map.png" alt="Map"></a>
-			<div id="infoText">
-				<p><strong>ИНФОРМАЦИЯ</strong></p>
-				<!-- ADDRESS -->
-				<p><a href="https://goo.gl/maps/P9gdSUCahW22" target="_blank">9631 Yonge St, Richmond Hill,<br>ON L4C 0M5</a></p>
-				<!-- PHONE -->
-				<p>(905) 780-8376</p>
-				<!-- EMAIL -->
-				<p><a href="mailto:ruskniga@hotmail.com">ruskniga@hotmail.com</a></p>
-				<!-- OPEN HOURS -->
-				<p><strong>ЧАСЫ РОБОТЫ</strong></p>
-				<table id="openTimes">
-					<tr>
-						<td class="openDays">Пнд</td>
-						<td class="openHours">11am-8pm</td>
-					</tr>
-					<tr>
-						<td class="openDays">Втр</td>
-						<td class="openHours">11am-8pm</td>
-					</tr>
-					<tr>
-						<td class="openDays">Срд</td>
-						<td class="openHours">11am-8pm</td>
-					</tr>
-					<tr>
-						<td class="openDays">Чтв</td>
-						<td class="openHours">11am-8pm</td>
-					</tr>
-					<tr>
-						<td class="openDays">Птн</td>
-						<td class="openHours">11am-8pm</td>
-					</tr>
-					<tr>
-						<td class="openDays">Сбт</td>
-						<td class="openHours">11am-6pm</td>
-					</tr>
-					<tr>
-						<td class="openDays">Вск</td>
-						<td class="openHours">11am-6pm</td>
-					</tr>
-				</table>
+				<!-- NEW ARRIVALS BOOK INFO -->
+				<div class="bookInfo newArrivals">
+					<div class="coverImg"><img src="../../images/books/01.jpg"></div>
+					<div class="text">
+						<span class="title"><strong>История Российского государства. Царь Петр Алексеевич. Азиатская европеизация</strong></span><br>
+						<span class="author"><strong>Акунин Борис</strong></span> | 
+						<span class="year">2017</span> | 
+						<span class="cover">Твердая обложка</span> | 
+						<span class="pages">384 стр.</span><br>
+						<span class="price">$60.54</span>
+						<p class="desc">Продолжение самого масштабного и амбициозного проекта десятилетия от Бориса Акунина! История Отечества в фактах и человеческих судьбах! Уникальный формат: мегатекст состоит из параллельных текстов: история России в восьми томах + исторические авантюрные повести. Суммарный тираж изданных за четыре года книг проекта - более 1 500 000 экземпляров! Тома серии богаты иллюстрациями: цветные в исторических томах, стильная графика - в художественных! Велик ли был Петр Великий? Есть лишь четыре крупных исторических деятеля, отношение к которым окрашено сильными эмоциями: Иван Грозный, Ленин, Сталин - и Петр I. Доблести Петра восхвалялись и при монархии, и в СССР, и в постсоветской России. "Государственникам" этот правитель импонирует как создатель мощной военной державы, "либералам" - как западник, повернувший страну лицом к Европе. Тридцатилетие, в течение которого царь Петр Алексеевич проводил свои преобразования, повлияло на ход всей мировой истории. Обстоятельства его личной жизни, умственное устройство, пристрастия и фобии стали частью национальной матрицы и сегодня воспринимаются миром как нечто исконно российское. И если русская литература "вышла из гоголевской шинели", то Российское государство до сих пор донашивает петровские ботфорты. Эта книга про то, как русские учились не следовать за историей, а творить ее, как что-то у них получилось, а что-то нет. И почему. "Проект будет моей основной работой в течение десяти лет. Речь идет о чрезвычайно нахальной затее, потому что у нас в стране есть только один пример беллетриста, написавшего историю Отечества, - Карамзин. Пока только ему удалось заинтересовать историей обыкновенных людей".Борис АкунинОб авторе: Борис Акунин (настоящее имя Григорий Шалвович Чхартишвили) - русский писатель, ученый-японист, литературовед, переводчик, общественный деятель. Также публиковался под литературными псевдонимами Анна Борисова и Анатолий Брусникин. Борис Акунин является автором нескольких десятков романов, повестей, литературных статей и переводов японской, американской и английской литературы. Художественные произведения Акунина переведены, как утверждает сам писатель, более чем на 30-ть языков мира. По версии российского издания журнала Forbes Акунин, заключивший контракты с крупнейшими издательствами Европы и США, входит в десятку российских деятелей культуры, получивших признание за рубежом. "Комсомольская правда" по итогам первого десятилетия XXI века признала Акунина самым популярным писателем России. Согласно докладу Роспечати "Книжный рынок России" за 2010 год, его книги входят в десятку самых издаваемых. О серии: Первый том "История Российского Государства. От истоков до монгольского нашествия" вышел в ноябре 2013 года. Вторая историческая книга серии появилась через год. Исторические тома проекта "История Российского Государства" выходят каждый год, поздней осенью, став таким образом определенной традицией. Третий том "От Ивана III до Бориса Годунова. Между Азией и Европой" был издан в декабре 2015 года.</p><br>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
+	<!-- FOOTER --
+	<div class="col-md-12" id="info">
+		<!-- MAP --
+		<div class="col-md-3">
+			<a href="https://goo.gl/maps/P9gdSUCahW22" target="_blank"><img id="map" src="../../images/map_wider.png" alt="Map"></a>
+		</div>
+		<!-- OPEN HOURS --
+		<div class="col-md-3 infoText" style="border-right: 1px solid black; border-left: 1px solid black; ">
+			<table id="openTimes">
+				<tr>
+					<td class="openDays">Mon</td>
+					<td class="openHours">11am-8pm</td>
+				</tr>
+				<tr>
+					<td class="openDays">Tue</td>
+					<td class="openHours">11am-8pm</td>
+				</tr>
+				<tr>
+					<td class="openDays">Wed</td>
+					<td class="openHours">11am-8pm</td>
+				</tr>
+				<tr>
+					<td class="openDays">Thur</td>
+					<td class="openHours">11am-8pm</td>
+				</tr>
+				<tr>
+					<td class="openDays">Fri</td>
+					<td class="openHours">11am-8pm</td>
+				</tr>
+				<tr>
+					<td class="openDays">Sat</td>
+					<td class="openHours">11am-6pm</td>
+				</tr>
+				<tr>
+					<td class="openDays">Sun</td>
+					<td class="openHours">11am-6pm</td>
+				</tr>
+			</table>
+		</div>
+		<!-- CONTACT INFO --
+		<div class="col-md-6 infoText">
+			<!-- ADDRESS --
+			<p><a href="https://goo.gl/maps/P9gdSUCahW22" target="_blank">9631 Yonge St, Richmond Hill, ON L4C 0M5</a></p>
+			<!-- PHONE --
+			<p>(905) 780-8376<br></p>
+			<!-- EMAIL --
+			<p><a href="mailto:ruskniga@hotmail.com">ruskniga@hotmail.com</a><br></p>
+		</div>
+	</div> -->
 </body>
 </html>
