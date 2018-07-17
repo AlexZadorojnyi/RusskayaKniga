@@ -33,12 +33,17 @@ body {
 	padding-left: 5px;
 }
 
+#footer {
+	background-color: gold;
+	margin-top: 10px;
+	padding: 0px;
+}
+
 #info {
 	background-color: gold;
-	padding: 0px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	margin-top: 10px;
+	margin-right: auto; 
+	margin-left: auto;
+	width: 100%;
 }
 
 #info p {
@@ -53,32 +58,42 @@ body {
 .infoText {
 	color: black;
 	font-size: 18px;
+	line-height: 2;
+}
+
+#left {
+	width: 100%;
+	display: inline-block;
+	vertical-align: top;
+	padding: 10px;
+}
+
+#right {
+	width: 100%;
+	display: inline-block;
+	vertical-align: top;
+	padding: 10px;
 }
 
 #openTimes {
 	font-size: 18px;
 	color: black;
-	margin-left: auto;
-    margin-right: auto;
+	line-height: 2;
 }
 
 .openDays {
 	text-align: left;
-	padding-bottom: 3px;
-	padding-right: 10px;
+	padding-right: 20px;
 }
 
 .openHours {
 	text-align: right;
-	padding-bottom: 3px;
 }
 
 #map {
-	height: 190px;
-	width: auto;
-	display:block;
-    margin-left: auto;
-    margin-right: auto;
+	width: 100%;
+	height: auto;
+	display: block;
 	
 	-moz-user-select: -moz-none;
 	-khtml-user-select: none;
@@ -121,6 +136,7 @@ body {
 	float: left;
 	cursor: pointer;
 	padding-left: 10px;
+	font-size: 50px;
 	
 	-moz-user-select: -moz-none;
 	-khtml-user-select: none;
@@ -133,6 +149,7 @@ body {
 	float: right;
 	cursor: pointer;
 	padding-right: 10px;
+	font-size: 50px;
 	
 	-moz-user-select: -moz-none;
 	-khtml-user-select: none;
@@ -143,7 +160,8 @@ body {
 
 #slidesButtonNums {
 	text-align: center;
-	font-size: 50px;
+	font-size: 40px;
+	display: none;
 	
 	-moz-user-select: -moz-none;
 	-khtml-user-select: none;
@@ -158,7 +176,7 @@ body {
 
 .bookContainer {
 	width: 100%;
-	height: 175px;
+	height: 125px;
 	overflow-x: hidden;
 	overflow-y: hidden;
 	white-space: nowrap;
@@ -168,23 +186,23 @@ body {
 	border-bottom: 1px solid black;
 	text-align: center;
 	width: 100% - 10px; 
-	height: 15px;
-	margin-bottom: 15px;
+	height: 20px;
+	margin-bottom: 25px;
 	/*margin-left: 5px;
 	margin-right: 5px;*/
 	color: black;
 }
 
 .bookContainerTitle span {
-	font-size: 20px;
+	font-size: 30px;
 	background-color: white;
 	padding-left: 5px;
 	padding-right: 5px;
 }
 
 .book {
-	width: 130px;
-	height: 175px;
+	width: 100px;
+	height: 125px;
 	display: inline-block;
 	background-color: white;
 	border: 1px solid gray;
@@ -192,6 +210,7 @@ body {
 	/*margin-top: 10px;
 	margin-bottom: 10px;*/
 	position: relative;
+	cursor: pointer;
 }
 
 .book img {
@@ -207,6 +226,11 @@ body {
 	user-select: none;
 }
 
+.highlight {
+	border-width: 3px;
+	background-color: rgb(230, 230, 230);
+}
+
 .scrollLeft {
 	cursor: pointer;
 	font-size: 40px;
@@ -215,7 +239,7 @@ body {
 	position: absolute;
 	color: white;
 	text-shadow: 2px 2px 4px #000000;
-	bottom: 61px;
+	bottom: 35px;
 	left: 0px;
 	
 	-moz-user-select: -moz-none;
@@ -232,7 +256,7 @@ body {
 	position: absolute; 
 	color: white;
 	text-shadow: 2px 2px 4px #000000;
-	bottom: 61px;
+	bottom: 35px;
 	right: 0px;
 	
 	-moz-user-select: -moz-none;
@@ -245,16 +269,15 @@ body {
 .bookInfo {
 	border: 1px solid gray;
 	border-radius: 5px;
-	background-color: lightgray;
+	background-color: rgb(230, 230, 230);
 	color: black;
 	margin-top: 10px;
-	margin-bottom: 10px;
 	padding: 10px;
 }
 
 .bookInfo .coverImg {
-	display: inline-block;
-	vertical-align:top;
+	display: none;
+	vertical-align: top;
 	width: 30%;
 }
 
@@ -265,8 +288,7 @@ body {
 
 .bookInfo .text {
 	display: inline-block;
-	width: calc(70% - 20px);
-	margin-left: 10px;
+	width: 100%;
 }
 
 .text .title {
@@ -291,9 +313,70 @@ body {
 	text-decoration: line-through;
 }
 
-/* Screen is 992px or wider */
+.text .desc {
+	margin-bottom: 0px;
+	text-align: justify;
+    text-justify: inter-word;
+}
+
+/* Big width */
 @media (min-width:992px) {
+	/* 992px - scrollbar width = 975px */
 	#center {
-		width: 992px;
+		width: 975px;
+	}
+	
+	#left {
+		padding-left: 0px;
+	}
+	
+	#right {
+		padding-right: 0px;
+	}
+	
+	#info {
+		width: 975px;
+	}
+}
+
+/* Medium width */
+@media (min-width:600px) {
+	#slidesButtonNums {
+		display: block;
+	}
+	
+	.bookContainer {
+		height: 175px;
+	}
+	
+	.book {
+		width: 130px;
+		height: 175px;
+	}
+	
+	.scrollRight {
+		bottom: 61px;
+	}
+	
+	.scrollLeft {
+		bottom: 61px;
+	}
+	
+	.bookInfo .coverImg {
+		display: inline-block;
+	}
+	
+	.bookInfo .text {
+		display: inline-block;
+		width: calc(70% - 20px);
+		margin-left: 10px;
+	}
+	
+	#left {
+		width: 55%;
+	}
+	
+	#right {
+		width: 45%;
 	}
 }
