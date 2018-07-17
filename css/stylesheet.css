@@ -31,75 +31,7 @@ body {
 	color: gray;
 	background-color:white;
 	padding-left: 5px;
-}
-
-#footer {
-	background-color: gold;
-	margin-top: 10px;
-	padding: 0px;
-}
-
-#info {
-	background-color: gold;
-	margin-right: auto; 
-	margin-left: auto;
-	width: 100%;
-}
-
-#info p {
-	
-}
-
-#info a {
-	color: inherit;
-	text-decoration: none;
-}
-
-.infoText {
-	color: black;
-	font-size: 18px;
-	line-height: 2;
-}
-
-#left {
-	width: 100%;
-	display: inline-block;
-	vertical-align: top;
-	padding: 10px;
-}
-
-#right {
-	width: 100%;
-	display: inline-block;
-	vertical-align: top;
-	padding: 10px;
-}
-
-#openTimes {
-	font-size: 18px;
-	color: black;
-	line-height: 2;
-}
-
-.openDays {
-	text-align: left;
-	padding-right: 20px;
-}
-
-.openHours {
-	text-align: right;
-}
-
-#map {
-	width: 100%;
-	height: auto;
-	display: block;
-	
-	-moz-user-select: -moz-none;
-	-khtml-user-select: none;
-	-webkit-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
+	font-size: 14px;
 }
 
 #main {
@@ -129,7 +61,7 @@ body {
 	bottom: 0px;
 	font-size: 50px;
 	color: white;
-	text-shadow: 2px 2px 4px #000000;
+	text-shadow: 0px 0px 5px #000000;
 }
 
 #slidesButtonPrev {
@@ -174,43 +106,50 @@ body {
 	cursor: pointer;
 }
 
-.bookContainer {
-	width: 100%;
-	height: 125px;
-	overflow-x: hidden;
-	overflow-y: hidden;
-	white-space: nowrap;
-}
-
 .bookContainerTitle {
 	border-bottom: 1px solid black;
 	text-align: center;
 	width: 100% - 10px; 
-	height: 20px;
-	margin-bottom: 25px;
+	height: 15px;
+	margin-bottom: 15px;
 	/*margin-left: 5px;
 	margin-right: 5px;*/
 	color: black;
 }
 
 .bookContainerTitle span {
-	font-size: 30px;
+	font-size: 20px;
 	background-color: white;
 	padding-left: 5px;
 	padding-right: 5px;
 }
 
+.bookContainer {
+	width: 100%;
+	height: 145px;
+	overflow-x: hidden;
+	overflow-y: hidden;
+	white-space: nowrap;
+}
+
 .book {
 	width: 100px;
 	height: 125px;
+	margin-top: 2.5px;
 	display: inline-block;
+	vertical-align: middle;
 	background-color: white;
 	border: 1px solid gray;
 	border-radius: 5px;
-	/*margin-top: 10px;
-	margin-bottom: 10px;*/
 	position: relative;
 	cursor: pointer;
+	
+	transition: box-shadow 0.2s;
+}
+
+.highlight {
+	height: 130px;
+	box-shadow: 0px 0px 5px black;
 }
 
 .book img {
@@ -226,11 +165,6 @@ body {
 	user-select: none;
 }
 
-.highlight {
-	border-width: 3px;
-	background-color: rgb(230, 230, 230);
-}
-
 .scrollLeft {
 	cursor: pointer;
 	font-size: 40px;
@@ -238,7 +172,7 @@ body {
 	opacity: 0;
 	position: absolute;
 	color: white;
-	text-shadow: 2px 2px 4px #000000;
+	text-shadow: 0px 0px 5px #000000;
 	bottom: 35px;
 	left: 0px;
 	
@@ -255,7 +189,7 @@ body {
 	padding-right: 10px;
 	position: absolute; 
 	color: white;
-	text-shadow: 2px 2px 4px #000000;
+	text-shadow: 0px 0px 5px #000000;
 	bottom: 35px;
 	right: 0px;
 	
@@ -273,6 +207,8 @@ body {
 	color: black;
 	margin-top: 10px;
 	padding: 10px;
+	max-height: 868px;
+	overflow-y: hidden;
 }
 
 .bookInfo .coverImg {
@@ -292,7 +228,7 @@ body {
 }
 
 .text .title {
-	font-size: 30px;
+	font-size: 20px;
 }
 
 .text .price {
@@ -319,19 +255,76 @@ body {
     text-justify: inter-word;
 }
 
+#footer {
+	background-color: gold;
+	margin-top: 10px;
+	padding: 0px;
+}
+
+#info {
+	background-color: gold;
+	margin-right: auto; 
+	margin-left: auto;
+	width: 100%;
+}
+
+#info a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.infoText {
+	color: black;
+	font-size: 14px;
+	line-height: 1.6;
+}
+
+#left {
+	width: 50%;
+	display: inline-block;
+	vertical-align: top;
+	padding: 10px;
+}
+
+#right {
+	width: 50%;
+	display: inline-block;
+	vertical-align: top;
+	padding: 10px;
+}
+
+#openTimes {
+	color: black;
+	font-size: 14px;
+	line-height: 1.6;
+}
+
+.openDays {
+	text-align: left;
+	padding-right: 20px;
+}
+
+.openHours {
+	text-align: right;
+}
+
+#map {
+	width: 100%;
+	height: auto;
+	display: block;
+	
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
 /* Big width */
 @media (min-width:992px) {
 	/* 992px - scrollbar width = 975px */
 	#center {
 		width: 975px;
-	}
-	
-	#left {
-		padding-left: 0px;
-	}
-	
-	#right {
-		padding-right: 0px;
 	}
 	
 	#info {
@@ -340,18 +333,31 @@ body {
 }
 
 /* Medium width */
-@media (min-width:600px) {
+@media (min-width:715px) {
 	#slidesButtonNums {
 		display: block;
 	}
 	
+	.bookContainerTitle {
+		height: 20px;
+		margin-bottom: 25px;
+	}
+	
+	.bookContainerTitle span {
+		font-size: 30px;
+	}
+	
 	.bookContainer {
-		height: 175px;
+		height: 192px;
 	}
 	
 	.book {
 		width: 130px;
 		height: 175px;
+	}
+	
+	.highlight {
+		height: 182px;
 	}
 	
 	.scrollRight {
@@ -372,11 +378,30 @@ body {
 		margin-left: 10px;
 	}
 	
+	.text .title {
+		font-size: 30px;
+	}
+	
+	.infoText {
+		font-size: 18px;
+		line-height: 2;
+	}
+	
+	#openTimes {
+		font-size: 18px;
+		line-height: 2;
+	}
+	
 	#left {
-		width: 55%;
+		width: calc(100% - 439px);
 	}
 	
 	#right {
-		width: 45%;
+		width: 439px;
+	}
+	
+	#map {
+		width: 100%;
+		height: auto;
 	}
 }

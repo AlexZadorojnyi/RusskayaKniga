@@ -59,7 +59,7 @@ app.controller('myCtrl', ['$scope', function($scope) {
 		var scrollSpeed = 400;
 		
 		// Width of one book element without padding
-		var bookInnerWidth = $(".book").outerWidth();
+		var bookInnerWidth = $(".book:last").outerWidth();
 		
 		// Sets margin width based on container parameters
 		setMargins();
@@ -126,7 +126,7 @@ app.controller('myCtrl', ['$scope', function($scope) {
 				
 				do {
 					i++;
-					r = containerWidth - (bookInnerWidth * i);
+					r = containerWidth - (bookInnerWidth * i);					
 				} while (r > bookInnerWidth && i < bookNum);
 				
 				$(this).children(".book").css("margin-left",  (r / i / 2) + "px");
@@ -207,7 +207,7 @@ app.controller('myCtrl', ['$scope', function($scope) {
 			}
 		}
 		
-		$(".book").click(function(){
+		$(".book").on('click touchstart', function(){
 			var $this = $(this);
 			$this.addClass("highlight").siblings().removeClass("highlight");
 		});
@@ -225,7 +225,7 @@ app.controller('myCtrl', ['$scope', function($scope) {
 		} else {
 			var pages = " стр.";
 			var hardCover = "Твердая обложка";
-			var softCover = "Мягкий обложка";
+			var softCover = "Мягкая обложка";
 		}
 		
 		// Title
@@ -509,7 +509,7 @@ app.controller('myCtrl', ['$scope', function($scope) {
 	},
 	{
 		title: "Русская фантастика-2017. Том первый",
-		author: "Головачёв Василий Васильевич; Бессонов Алексей Игоревич; Дашков Андрей Георгиевич; Минаков Игорь Вал",
+		author: "Головачёв Василий Васильевич, Бессонов Алексей Игоревич, Дашков Андрей Георгиевич, Минаков Игорь Вал",
 		price: 19.54,
 		year: 2017,
 		publisher: "",
