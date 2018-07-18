@@ -56,10 +56,7 @@ app.controller('myCtrl', ['$scope', function($scope) {
 		
         // Scroll variables
 		var blockScroll = false;
-		var scrollSpeed = 400;
-		
-		// Width of one book element without padding
-		var bookInnerWidth = $(".book:last").outerWidth();
+		var scrollSpeedBase = 500;
 		
 		// Sets margin width based on container parameters
 		setMargins();
@@ -68,21 +65,26 @@ app.controller('myCtrl', ['$scope', function($scope) {
 		// Scroll books >>LEFT>>
 		$(".scrollLeft").click(function(){
 			var thisClass = this.classList[1];
-			if(!reachedStart(thisClass)){
+			if(!reachedStart(thisClass, 0)){
 				if(!blockScroll){
+					// Disables scrolling while animation plays
 					blockScroll = true;
-					// Animate for first book in the slider, buttons toggle when animation completes
-					$("." + thisClass + ".book:first").animate({right: "-=" + $("." + thisClass + ".book").outerWidth(true) + "px"}, scrollSpeed, function(){
+					var bookOuterWidth = $("." + thisClass + ".book").outerWidth(true);
+					var containerWidth = $("." + thisClass + ".bookContainer").innerWidth();
+					var n = containerWidth / bookOuterWidth;
+					while(reachedStart(thisClass, n - 1)) n--;
+					var scrollSpeed = scrollSpeedBase + n * 100;
+					// Animate for first book in the slider
+					$("." + thisClass + ".book:first").animate({right: "-=" + $("." + thisClass + ".book").outerWidth(true)*n + "px"}, scrollSpeed, function(){
+						// Enables scrolling
 						blockScroll = false;
-						if(reachedStart(thisClass)){
-							toggleButton(thisClass, "left", "off");
-							console.log(thisClass + " reached start of list");
-						}
-						if(!reachedEnd(thisClass)) toggleButton(thisClass, "right", "on");
-						//console.log(Math.round($("." + thisClass + ".book:first").position().left - 1));
+						// Toggles buttons
+						if(reachedStart(thisClass, 0)) toggleButton(thisClass, ".scrollLeft", 0);
 					});
 					// Animate for the rest of the books in the slider
-					$("." + thisClass + ".book:not(:first)").animate({right: "-=" + $("." + thisClass + ".book").outerWidth(true) + "px"}, scrollSpeed);
+					$("." + thisClass + ".book:not(:first)").animate({right: "-=" + $("." + thisClass + ".book").outerWidth(true)*n + "px"}, scrollSpeed, function(){
+						if(!reachedEnd(thisClass, 0)) toggleButton(thisClass, ".scrollRight", 1);
+					});
 				}
 			}
 		});
@@ -90,21 +92,26 @@ app.controller('myCtrl', ['$scope', function($scope) {
 		// Scroll books <<RIGHT<<
 		$(".scrollRight").click(function(){
 			var thisClass = this.classList[1];
-			if(!reachedEnd(thisClass)){
+			if(!reachedEnd(thisClass, 0)){
 				if(!blockScroll){
+					// Disables scrolling while animation plays
 					blockScroll = true;
-					// Animate for first book in the slider, buttons toggle when animation completes
-					$("." + thisClass + ".book:first").animate({right: "+=" + $("." + thisClass + ".book").outerWidth(true) + "px"}, scrollSpeed, function(){
+					var bookOuterWidth = $("." + thisClass + ".book").outerWidth(true);
+					var containerWidth = $("." + thisClass + ".bookContainer").innerWidth();
+					var n = containerWidth / bookOuterWidth;
+					while(reachedEnd(thisClass, n - 1)) n--;
+					var scrollSpeed = scrollSpeedBase + n * 100;
+					// Animate for first book in the slider
+					$("." + thisClass + ".book:first").animate({right: "+=" + $("." + thisClass + ".book").outerWidth(true)*n + "px"}, scrollSpeed, function(){
+						// Enables scrolling
 						blockScroll = false;
-						if(reachedEnd(thisClass)){
-							toggleButton(thisClass, "right", "off");
-							console.log(thisClass + " reached end of list");
-						}
-						if(!reachedStart(thisClass)) toggleButton(thisClass, "left", "on");
-						//console.log(Math.round($("." + thisClass + ".book:first").position().left - 1));
+						// Toggles buttons
+						if(!reachedStart(thisClass, 0)) toggleButton(thisClass, ".scrollLeft", 1);
 					});
 					// Animate for the rest of the books in the slider
-					$("." + thisClass + ".book:not(:first)").animate({right: "+=" + $("." + thisClass + ".book").outerWidth(true) + "px"}, scrollSpeed);
+					$("." + thisClass + ".book:not(:first)").animate({right: "+=" + $("." + thisClass + ".book").outerWidth(true)*n + "px"}, scrollSpeed, function(){
+						if(reachedEnd(thisClass, 0)) toggleButton(thisClass, ".scrollRight", 0);
+					});
 				}
 			}
 		});
@@ -112,101 +119,85 @@ app.controller('myCtrl', ['$scope', function($scope) {
 		// Sets margin width based on container parameters
 		function setMargins() {
 			$(".bookContainer").each(function(){
-				//console.log($("." + this.classList[1] + ".book:first").position().left - 1);
-				
-				var bookIndex = Math.round(($("." + this.classList[1] + ".book:first").position().left - 1) / $(this).children(".book").outerWidth(true));
-				
-				// Number of book elements
+				// Width of one book element without padding
+				var bookInnerWidth = $(".book:not(.highlight)").outerWidth();
+				// Keeps track of the slider offset in terms of books
+				var bookIndex = - Math.round(($("." + this.classList[1] + ".book:first").position().left - 1) / $(this).children(".book").outerWidth(true));
+				// Number of book elements in current class
 				var bookNum = $(this).children(".book").length;
 				// Width of the book container element
 				var containerWidth = $(this).innerWidth();
 				
-				var i = 0;
-				var r = 0;
+				var margins = calculateMargins(bookNum, bookInnerWidth, containerWidth);
 				
-				do {
-					i++;
-					r = containerWidth - (bookInnerWidth * i);					
-				} while (r > bookInnerWidth && i < bookNum);
-				
-				$(this).children(".book").css("margin-left",  (r / i / 2) + "px");
-				$(this).children(".book").css("margin-right", (r / i / 2) + "px");
+				// Sets book margins based on max num of books in container and remaining space
+				$(this).children(".book").css("margin-left", margins);
+				$(this).children(".book").css("margin-right", margins);
 				
 				// Width of one book element with padding
 				var bookOuterWidth = $(this).children(".book").outerWidth(true);
-				// Total width of all book elements with padding
-				var totalWidth = bookOuterWidth * bookNum;
 				
-				//console.log(this.classList[1] + " container\nContainer width: " + containerWidth + "px\nBook width: " + bookInnerWidth + "px\nFits: " + i + "/" + bookNum + " books at once\nRemainder: " + r + "px\nMargins: " + r + "/" + i + "=" + (r / i / 2) + "px");
+				// Keeps the same book offset on container resize
+				if(Math.round((bookNum - bookIndex) * bookOuterWidth) < containerWidth) bookIndex--;
+				$(this).children(".book").css("right", Math.abs(bookIndex * bookOuterWidth));
 				
+				// Toggles right button if end is reached
+				if(reachedEnd(this.classList[1], 0)) toggleButton(this.classList[1], ".scrollRight", 0);
+				else toggleButton(this.classList[1], ".scrollRight", 1);
 				
-				//if(bookOuterWidth * bookNum - containerWidth - Math.abs(bookIndex * bookOuterWidth) < 0) {
-					$(this).children(".book").css("right", Math.abs(bookIndex * bookOuterWidth));
-				//}
-				
-				if(reachedEnd(this.classList[1])) toggleButton(this.classList[1], "right", "off");
+				// Toggles left button if start is reached
+				if(reachedStart(this.classList[1], 0)) toggleButton(this.classList[1], ".scrollLeft", 0);
+				else toggleButton(this.classList[1], ".scrollLeft", 1);
 			})
 		}
 		
-		// Replaces long if statement
-		//Math.round(($("." + thisClass + ".book").outerWidth(true) * $("." + thisClass + ".book").length - $("." + thisClass + ".bookContainer").innerWidth()) + $("." + thisClass + ".book:first").position().left - 1 - $("." + thisClass + ".book").outerWidth(true)) >= 0
-		function reachedEnd(thisClass) {
-			var bookOuterWidth = $("." + thisClass + ".book").outerWidth(true);
-			var bookNum = $("." + thisClass + ".book").length;
-			var containerWidth = $("." + thisClass + ".bookContainer").innerWidth();
-			var bookPos = $("." + thisClass + ".book:first").position().left;
+		// Calculates book margins based on number of books, book width, and container width
+		function calculateMargins(bn, bw, cw) {
+			// Number of books
+			var i = 0;
+			// Remaining space in container
+			var r = 0;
+			// Finds maximum number of books that can fit in container at once
+			do {
+				i++;
+				r = cw - (bw * i);					
+			} while (r > bw && i < bn);
 			
-			if(Math.round(bookOuterWidth * bookNum - containerWidth + bookPos - bookOuterWidth) >= 0){
-				return false;
-			} else {
+			return (r / i / 2) + "px";
+		}
+
+		function reachedEnd(thisClass, offset) {
+			var bookOuterWidth = $("." + thisClass + ".book").outerWidth(true);
+			var bookPos = $("." + thisClass + ".book:last").position().left;
+			var containerWidth = $("." + thisClass + ".bookContainer").innerWidth();
+			
+			if(Math.round(bookPos + bookOuterWidth * (1 - offset) - containerWidth) <= 0){
 				return true;
+			} else {
+				return false;
 			}
 		}
 		
-		// Replaces long if statement
-		//Math.round($("." + thisClass + ".book:first").position().left - 1 + $("." + thisClass + ".book").outerWidth(true)) <= 0
-		function reachedStart(thisClass) {
+		function reachedStart(thisClass, offset) {
 			var bookOuterWidth = $("." + thisClass + ".book").outerWidth(true);
 			var bookPos = $("." + thisClass + ".book:first").position().left - 1;
 			
-			if(Math.round(bookPos + bookOuterWidth) <= 0){
-				return false;
-			} else {
+			if(Math.round(bookPos + bookOuterWidth * (offset + 1)) > 0){
 				return true;
+			} else {
+				return false;
 			}
 		}
 		
 		// Toggles specified slider button on/off
 		function toggleButton(thisClass, button, opacity){
-			if(button == "right"){
-				if(opacity == "on"){
-					$(".scrollRight." + thisClass).animate({opacity: 1}, "fast");
-					$(".scrollRight." + thisClass).css("cursor", "pointer");
-					//console.log(thisClass + " " + button + " " + toggle);
-				} else if(opacity == "off"){
-					$(".scrollRight." + thisClass).animate({opacity: 0}, "fast");
-					$(".scrollRight." + thisClass).css("cursor", "default");
-					//console.log(thisClass + " " + button + " " + toggle);
-				} else if(opacity == "dim"){
-					$(".scrollRight." + thisClass).animate({opacity: 0.5}, "fast");
-					//console.log(thisClass + " " + button + " " + toggle);
-				}
-			} else if (button == "left") {
-				if(opacity == "on"){
-					$(".scrollLeft." + thisClass).animate({opacity: 1}, "fast");
-					$(".scrollLeft." + thisClass).css("cursor", "pointer");
-					//console.log(thisClass + " " + button + " " + toggle);
-				} else if(opacity == "off"){
-					$(".scrollLeft." + thisClass).animate({opacity: 0}, "fast");
-					$(".scrollLeft." + thisClass).css("cursor", "default");
-					//console.log(thisClass + " " + button + " " + toggle);
-				} else if(opacity == "dim"){
-					$(".scrollLeft." + thisClass).animate({opacity: 0.5}, "fast");
-					//console.log(thisClass + " " + button + " " + toggle);
-				}
-			}
+			$(button + "." + thisClass).animate({opacity: opacity}, {queue: false}, "fast", function(){
+				if(opacity == 1) $(button + "." + thisClass).css("cursor", "pointer");
+				else if(opacity == 0) $(button + "." + thisClass).css("cursor", "default");
+			});
 		}
 		
+		// Adds highlight effect to book on click
 		$(".book").on('click touchstart', function(){
 			var $this = $(this);
 			$this.addClass("highlight").siblings().removeClass("highlight");
@@ -286,10 +277,20 @@ app.controller('myCtrl', ['$scope', function($scope) {
 			newHTML = newHTML + "<p class='desc'>" + book.desc  + "</p>";
 		}
 		
+		var div = $(".bookInfo." + thisClass);
+		var currentHeight = div.height();
+		
 		// Sets image
 		$(".bookInfo." + thisClass + " > .coverImg").html("<img src='" + book.address + "'>");
 		// Sets text
 		$(".bookInfo." + thisClass + " > .text").html(newHTML);
+		
+		if(div.css("max-height") != "1000px"){
+			var autoHeight = div.css('height', 'auto').height() + 20;
+			div.height(currentHeight).animate({height: autoHeight + 2}, 1000, function(){ div.height('auto'); });
+		}
+		
+		$(".bookInfo." + thisClass).css('max-height', '2000px');
 	};
 	$scope.random = function(){
 		return 0.5 - Math.random();
