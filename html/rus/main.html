@@ -28,7 +28,7 @@
 		<div class="col-md-12" id="main">
 			<!-- PROMO SLIDES -->
 			<div id="slidesContainer" ng-view>
-				<img class="slide" style="display: none;" ng-repeat="promo in promos | filter:{lang:'ru'} | promoFilter | orderBy:'-importance'" ng-src="{{ promo.address }}" cycle-Slides>
+				<img class="slide" style="display: none;" ng-repeat="promo in promos | filter:{lang:'ru'} | promoFilter | orderBy:'-importance'" ng-src="../../images/promo/{{ promo.lang }}/{{ promo.title }}.jpg" cycle-Slides>
 				<!-- BUTTONS -->
 				<div style="position: relative; height: 0">
 					<div id="slidesButtons">
@@ -40,14 +40,13 @@
 			</div>
 			<div>
 				<!-- TOP SELLERS TITLE -->
-				<div class="bookContainerTitle topSellers">
+				<div class="itemContainerTitle topSellers">
 					<span><strong>ЛИДЕРЫ ПРОДАЖ</strong></span>
 				</div>
 				<!-- TOP SELLERS CONTAINER -->
-				<div class="bookContainer topSellers">
-					<!-- Adding "orderBy:random" works but prints errors in console -->
-					<div class="book topSellers" style="right: 0px" ng-repeat="book in books | filter:{category:'Top Sellers'}" ng-click="displayBookInfo($event.currentTarget.classList[1], book, 'ru')">
-						<img ng-src="{{ book.address }}" alt="{{ book.title }}">
+				<div class="itemContainer topSellers">
+					<div class="item topSellers" style="right: 0px" ng-repeat="item in items | filter:{category:'Top Sellers'}" ng-click="displayitemInfo($event.currentTarget.classList[1], item, 'ru')">
+						<img ng-src="{{ item.address }}" alt="{{ item.title }}">
 					</div>
 				</div>
 				<!-- TOP SELLERS BUTTONS -->
@@ -55,19 +54,19 @@
 					<div class="scrollRight topSellers">&#10095;</div>
 					<div class="scrollLeft  topSellers">&#10094;</div>
 				</div
-				<!-- TOP SELLERS BOOK INFO -->
-				<div class="bookInfo topSellers">
+				<!-- TOP SELLERS item INFO -->
+				<div class="itemInfo topSellers">
 					<div class="coverImg"></div>
 					<div class="text"></div>
 				</div>
 				<!-- NEW ARRIVALS TITLE -->
-				<div class="bookContainerTitle newArrivals">
+				<div class="itemContainerTitle newArrivals">
 					<span><strong>НОВИНКИ</strong></span>
 				</div>
 				<!-- NEW ARRIVALS CONTAINER -->
-				<div class="bookContainer newArrivals">
-					<div class="book newArrivals" style="right: 0px" ng-repeat="book in books | filter:{category:'New Arrivals'}" ng-click="displayBookInfo($event.currentTarget.classList[1], book, 'ru')">
-						<img ng-src="{{ book.address }}" alt="{{ book.title }}">
+				<div class="itemContainer newArrivals">
+					<div class="item newArrivals" style="right: 0px" ng-repeat="item in items | filter:{category:'New Arrivals'}" ng-click="displayitemInfo($event.currentTarget.classList[1], item, 'ru')">
+						<img ng-src="{{ item.address }}" alt="{{ item.title }}">
 					</div>
 				</div>
 				<!-- NEW ARRIVALS BUTTONS -->
@@ -75,8 +74,8 @@
 					<div class="scrollRight newArrivals">&#10095;</div>
 					<div class="scrollLeft  newArrivals">&#10094;</div>
 				</div>
-				<!-- NEW ARRIVALS BOOK INFO -->
-				<div class="bookInfo newArrivals">
+				<!-- NEW ARRIVALS item INFO -->
+				<div class="itemInfo newArrivals">
 					<div class="coverImg"></div>
 					<div class="text"></div>
 				</div>

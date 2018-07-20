@@ -106,7 +106,7 @@ body {
 	cursor: pointer;
 }
 
-.bookContainerTitle {
+.itemContainerTitle {
 	border-bottom: 1px solid black;
 	text-align: center;
 	width: 100% - 10px; 
@@ -117,14 +117,14 @@ body {
 	color: black;
 }
 
-.bookContainerTitle span {
+.itemContainerTitle span {
 	font-size: 20px;
 	background-color: white;
 	padding-left: 5px;
 	padding-right: 5px;
 }
 
-.bookContainer {
+.itemContainer {
 	width: 100%;
 	height: 145px;
 	overflow-x: hidden;
@@ -132,7 +132,7 @@ body {
 	white-space: nowrap;
 }
 
-.book {
+.item {
 	width: 100px;
 	height: 125px;
 	margin-top: 2.5px;
@@ -143,8 +143,9 @@ body {
 	border-radius: 5px;
 	position: relative;
 	cursor: pointer;
-	
 	transition: box-shadow 0.2s;
+	
+	text-align: center;
 }
 
 .highlight {
@@ -152,11 +153,19 @@ body {
 	box-shadow: 0px 0px 5px black;
 }
 
-.book img {
-	display: block;
+.helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.item img {
+	
 	margin: auto;
-	height: 100%;
-	width: auto;
+	max-width: 100%;
+	max-height: 100%;
+	
+	vertical-align: middle;
 	
 	-moz-user-select: -moz-none;
 	-khtml-user-select: none;
@@ -199,7 +208,7 @@ body {
 	user-select: none;
 }
 
-.bookInfo {
+.itemInfo {
 	border: 1px solid gray;
 	border-radius: 5px;
 	background-color: rgb(230, 230, 230);
@@ -209,7 +218,7 @@ body {
 	max-height: 1000px;
 }
 
-.bookInfo .coverImg {
+.itemInfo .coverImg {
 	display: none;
 	vertical-align: top;
 	width: 30%;
@@ -221,7 +230,7 @@ body {
 	height: auto;
 }
 
-.bookInfo .text {
+.itemInfo .text {
 	display: inline-block;
 	width: 100%;
 }
@@ -337,22 +346,29 @@ body {
 		display: block;
 	}
 	
-	.bookContainerTitle {
+	.itemContainerTitle {
 		height: 20px;
 		margin-bottom: 25px;
 	}
 	
-	.bookContainerTitle span {
+	.itemContainerTitle span {
 		font-size: 30px;
 	}
 	
-	.bookContainer {
+	.itemContainer {
 		height: 192px;
 	}
 	
-	.book {
+	.item {
 		width: 130px;
 		height: 175px;
+		
+		line-height: 125px;
+	}
+	
+	.item img {
+		max-width: 100%;
+		max-height: 100%;
 	}
 	
 	.highlight {
@@ -367,11 +383,11 @@ body {
 		bottom: 61px;
 	}
 	
-	.bookInfo .coverImg {
+	.itemInfo .coverImg {
 		display: inline-block;
 	}
 	
-	.bookInfo .text {
+	.itemInfo .text {
 		display: inline-block;
 		width: calc(70% - 20px);
 		margin-left: 10px;

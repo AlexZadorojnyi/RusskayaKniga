@@ -1,5 +1,5 @@
-var eng = "\/eng\/";
-var rus = "\/rus\/";
+var eng = '\/eng\/';
+var rus = '\/rus\/';
 
 function changeLang() {
 	var url = window.location.href;
@@ -15,7 +15,7 @@ function changeLang() {
 	}
 }
 
-var slides = document.getElementsByClassName("slide");
+var slides = document.getElementsByClassName('slide');
 var slideIndex = 0;
 var slideDuration = 5000;
 var myVar;
@@ -27,17 +27,17 @@ function cycleSlides() {
 		slideIndex = slides.length - 1;
 	}
 	
-	document.getElementById("slidesButtonNums").innerHTML = "";
+	document.getElementById('slidesButtonNums').innerHTML = '';
 	
 	for (var i = 0; i < slides.length; i++){
 		if (i == slideIndex) {
-			slides[i].style.display = "block";
-			document.getElementById("slidesButtonNums").innerHTML += "\<span onclick=\"goToSlide("  + (i+1) +" )\"> &#9679; </span>";
-			//document.getElementById("slidesButtonNums").innerHTML += "\<span onclick=\"goToSlide("  + (i+1) +" )\"> &#9899; </span>";
+			slides[i].style.display = 'block';
+			document.getElementById('slidesButtonNums').innerHTML += '<span onclick="goToSlide('  + (i+1) + ')"> &#9679; </span>';
+			//document.getElementById('slidesButtonNums').innerHTML += '<span onclick="goToSlide('  + (i+1) + ')"> &#9899; </span>';
 		} else {
-			slides[i].style.display = "none";
-			document.getElementById("slidesButtonNums").innerHTML += "\<span onclick=\"goToSlide("  + (i+1) +" )\"> &#9900; </span>";
-			//document.getElementById("slidesButtonNums").innerHTML += "\<span onclick=\"goToSlide("  + (i+1) +" )\"> &#9898; </span>";
+			slides[i].style.display = 'none';
+			document.getElementById('slidesButtonNums').innerHTML += '<span onclick="goToSlide('  + (i+1) + ')"> &#9900; </span>';
+			//document.getElementById('slidesButtonNums').innerHTML += '<span onclick="goToSlide('  + (i+1) + ')"> &#9898; </span>';
 		}
 	}
 	
