@@ -1,6 +1,6 @@
-<html lang="ru">
+<html lang="en">
 <head>
-	<title>Русская Книга</title>
+	<title>Russkaya Kniga</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" href="../../images/icon.ico">
@@ -22,38 +22,39 @@
 		<!-- BANNER -->
 		<div class="col-md-12" id="banner">
 			<img src="../../images/banner.png" alt="Banner">
-			<span id="langButton" onclick="changeLang()">English</span>
+			<span id="langButton" onclick="changeLang()">Русский</span>
 		</div>
 		<!-- MAIN -->
 		<div class="col-md-12" id="main">
 			<!-- PROMO SLIDES -->
 			<div id="slidesContainer" ng-view>
-				<img class="slide" style="display: none;" ng-repeat="promo in promos | filter:{lang:'ru'} | promoFilter | orderBy:'-importance'" ng-src="../../images/promo/{{ promo.lang }}/{{ promo.title }}.jpg" cycle-Slides>
+				<img class="slide" style="display: none;" ng-repeat="promo in promos | filter:{lang:'en'} | promoFilter | orderBy:'-importance'" ng-src="../../images/promo/{{ promo.lang }}/{{ promo.title }}.jpg" cycle-Slides>
 				<!-- BUTTONS -->
 				<div style="position: relative; height: 0">
 					<div id="slidesButtons">
-						<div id="slidesButtonPrev" onclick="prevSlide()">&#10094;</div>
-						<div id="slidesButtonNext" onclick="nextSlide()">&#10095;</div>
-						<div id="slidesButtonNums"></div>
+						<div id="prev" onclick="prevSlide()">&#10094;</div>
+						<div id="next" onclick="nextSlide()">&#10095;</div>
+						<div id="nums"></div>
 					</div>
 				</div>
 			</div>
 			<div>
 				<!-- TOP SELLERS TITLE -->
 				<div class="itemContainerTitle topSellers">
-					<span><strong>ЛИДЕРЫ ПРОДАЖ</strong></span>
+					<span><strong>TOP SELLERS</strong></span>
 				</div>
 				<!-- TOP SELLERS CONTAINER -->
 				<div class="itemContainer topSellers">
-					<div class="item topSellers" style="right: 0px" ng-repeat="item in items | filter:{category:'Top Sellers'}" ng-click="displayitemInfo($event.currentTarget.classList[1], item, 'ru')">
-						<img ng-src="{{ item.address }}" alt="{{ item.title }}">
+					<div class="item topSellers" style="right: 0px" ng-repeat="item in items | filter:{category:'Top Sellers'}" ng-click="displayitemInfo($event.currentTarget.classList[1], item, 'en')">
+						<span class="helper"></span
+						><img ng-src="../../images/items/{{ item.ISBN }}.jpg" alt="{{ item.title }}">
 					</div>
 				</div>
 				<!-- TOP SELLERS BUTTONS -->
 				<div style="position: relative; height: 0">
 					<div class="scrollRight topSellers">&#10095;</div>
 					<div class="scrollLeft  topSellers">&#10094;</div>
-				</div
+				</div>
 				<!-- TOP SELLERS item INFO -->
 				<div class="itemInfo topSellers">
 					<div class="coverImg"></div>
@@ -61,12 +62,13 @@
 				</div>
 				<!-- NEW ARRIVALS TITLE -->
 				<div class="itemContainerTitle newArrivals">
-					<span><strong>НОВИНКИ</strong></span>
+					<span><strong>NEW ARRIVALS</strong></span>
 				</div>
 				<!-- NEW ARRIVALS CONTAINER -->
 				<div class="itemContainer newArrivals">
-					<div class="item newArrivals" style="right: 0px" ng-repeat="item in items | filter:{category:'New Arrivals'}" ng-click="displayitemInfo($event.currentTarget.classList[1], item, 'ru')">
-						<img ng-src="{{ item.address }}" alt="{{ item.title }}">
+					<div class="item newArrivals" style="right: 0px" ng-repeat="item in items | filter:{category:'New Arrivals'}" ng-click="displayitemInfo($event.currentTarget.classList[1], item, 'en')">
+						<span class="helper"></span
+						><img ng-src="../../images/items/{{ item.ISBN }}.jpg" alt="{{ item.title }}">
 					</div>
 				</div>
 				<!-- NEW ARRIVALS BUTTONS -->
@@ -79,6 +81,27 @@
 					<div class="coverImg"></div>
 					<div class="text"></div>
 				</div>
+				<!-- SOUVENIRS TITLE -->
+				<div class="itemContainerTitle souvenirs">
+					<span><strong>SOUVENIRS</strong></span>
+				</div>
+				<!-- SOUVENIRS CONTAINER -->
+				<div class="itemContainer souvenirs">
+					<div class="item souvenirs" style="right: 0px" ng-repeat="item in items | filter:{category:'Souvenirs'}" ng-click="displayitemInfo($event.currentTarget.classList[1], item, 'en')">
+						<span class="helper"></span
+						><img ng-src="../../images/items/{{ item.ISBN }}.jpg" alt="{{ item.title }}">
+					</div>
+				</div>
+				<!-- SOUVENIRS BUTTONS -->
+				<div style="position: relative; height: 0">
+					<div class="scrollRight souvenirs">&#10095;</div>
+					<div class="scrollLeft  souvenirs">&#10094;</div>
+				</div>
+				<!-- SOUVENIRS item INFO -->
+				<div class="itemInfo souvenirs">
+					<div class="coverImg"></div>
+					<div class="text"></div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -87,18 +110,18 @@
 		<div id="info">
 			<div class="infoText" id="left">
 				<!-- OPEN HOURS -->
-				<span style="text-align: center; color: rgb(51, 51, 43)"><strong>ЧАСЫ РАБОТЫ</strong></span><br>
+				<span style="text-align: center; color: rgb(51, 51, 43)"><strong>OPEN</strong></span><br>
 				<table id="openTimes">
 					<tr>
-						<td class="openDays">Будни дни</td>
+						<td class="openDays">Weekdays</td>
 						<td class="openHours">11am - 8pm</td>
 					</tr>
 					<tr>
-						<td class="openDays">Выходные дни</td>
+						<td class="openDays">Weekends</td>
 						<td class="openHours">11am - 6pm</td>
 					</tr>
 				</table><br>
-				<span style="text-align: center; color: rgb(51, 51, 43)"><strong>О НАС</strong></span><br>
+				<span style="text-align: center; color: rgb(51, 51, 43)"><strong>ABOUT</strong></span><br>
 				<!-- ADDRESS -->
 				<span><a href="https://goo.gl/maps/P9gdSUCahW22" target="_blank">9631 Yonge St Unit 8, Richmond Hill, ON, L4C 0M5</a></span><br>
 				<!-- PHONE -->
@@ -107,8 +130,8 @@
 				<span><a href="mailto:ruskniga@hotmail.com">ruskniga@hotmail.com</a></span>
 			</div
 			><div class="infoText" id="right">
-			<!-- MAP -->
-				<a href="https://goo.gl/maps/P9gdSUCahW22" target="_blank"><img id="map" src="../../images/map_wider_darker.png" alt="Map"></a>
+				<!-- MAP -->
+				<a href="https://goo.gl/maps/P9gdSUCahW22" target="_blank"><img id="map" src="../../images/map.png" alt="Map"></a>
 			</div>
 		</div>
 	</div>

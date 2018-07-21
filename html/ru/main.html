@@ -1,6 +1,6 @@
-<html lang="en">
+<html lang="ru">
 <head>
-	<title>Russkaya Kniga</title>
+	<title>Русская Книга</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" href="../../images/icon.ico">
@@ -22,30 +22,30 @@
 		<!-- BANNER -->
 		<div class="col-md-12" id="banner">
 			<img src="../../images/banner.png" alt="Banner">
-			<span id="langButton" onclick="changeLang()">Русский</span>
+			<span id="langButton" onclick="changeLang()">English</span>
 		</div>
 		<!-- MAIN -->
 		<div class="col-md-12" id="main">
 			<!-- PROMO SLIDES -->
 			<div id="slidesContainer" ng-view>
-				<img class="slide" style="display: none;" ng-repeat="promo in promos | filter:{lang:'en'} | promoFilter | orderBy:'-importance'" ng-src="../../images/promo/{{ promo.lang }}/{{ promo.title }}.jpg" cycle-Slides>
+				<img class="slide" style="display: none;" ng-repeat="promo in promos | filter:{lang:'ru'} | promoFilter | orderBy:'-importance'" ng-src="../../images/promo/{{ promo.lang }}/{{ promo.title }}.jpg" cycle-Slides>
 				<!-- BUTTONS -->
 				<div style="position: relative; height: 0">
 					<div id="slidesButtons">
-						<div id="slidesButtonPrev" onclick="prevSlide()">&#10094;</div>
-						<div id="slidesButtonNext" onclick="nextSlide()">&#10095;</div>
-						<div id="slidesButtonNums"></div>
+						<div id="prev" onclick="prevSlide()">&#10094;</div>
+						<div id="next" onclick="nextSlide()">&#10095;</div>
+						<div id="nums"></div>
 					</div>
 				</div>
 			</div>
 			<div>
 				<!-- TOP SELLERS TITLE -->
 				<div class="itemContainerTitle topSellers">
-					<span><strong>TOP SELLERS</strong></span>
+					<span><strong>ЛИДЕРЫ ПРОДАЖ</strong></span>
 				</div>
 				<!-- TOP SELLERS CONTAINER -->
 				<div class="itemContainer topSellers">
-					<div class="item topSellers" style="right: 0px" ng-repeat="item in items | filter:{category:'Top Sellers'}" ng-click="displayitemInfo($event.currentTarget.classList[1], item, 'en')">
+					<div class="item topSellers" style="right: 0px" ng-repeat="item in items | filter:{category:'Top Sellers'}" ng-click="displayitemInfo($event.currentTarget.classList[1], item, 'ru')">
 						<span class="helper"></span
 						><img ng-src="../../images/items/{{ item.ISBN }}.jpg" alt="{{ item.title }}">
 					</div>
@@ -62,11 +62,11 @@
 				</div>
 				<!-- NEW ARRIVALS TITLE -->
 				<div class="itemContainerTitle newArrivals">
-					<span><strong>NEW ARRIVALS</strong></span>
+					<span><strong>НОВИНКИ</strong></span>
 				</div>
 				<!-- NEW ARRIVALS CONTAINER -->
 				<div class="itemContainer newArrivals">
-					<div class="item newArrivals" style="right: 0px" ng-repeat="item in items | filter:{category:'New Arrivals'}" ng-click="displayitemInfo($event.currentTarget.classList[1], item, 'en')">
+					<div class="item newArrivals" style="right: 0px" ng-repeat="item in items | filter:{category:'New Arrivals'}" ng-click="displayitemInfo($event.currentTarget.classList[1], item, 'ru')">
 						<span class="helper"></span
 						><img ng-src="../../images/items/{{ item.ISBN }}.jpg" alt="{{ item.title }}">
 					</div>
@@ -83,7 +83,7 @@
 				</div>
 				<!-- SOUVENIRS TITLE -->
 				<div class="itemContainerTitle souvenirs">
-					<span><strong>SOUVENIRS</strong></span>
+					<span><strong>СУВЕНИРЫ</strong></span>
 				</div>
 				<!-- SOUVENIRS CONTAINER -->
 				<div class="itemContainer souvenirs">
@@ -110,18 +110,18 @@
 		<div id="info">
 			<div class="infoText" id="left">
 				<!-- OPEN HOURS -->
-				<span style="text-align: center; color: rgb(51, 51, 43)"><strong>OPEN</strong></span><br>
+				<span style="text-align: center; color: rgb(51, 51, 43)"><strong>ЧАСЫ РАБОТЫ</strong></span><br>
 				<table id="openTimes">
 					<tr>
-						<td class="openDays">Weekdays</td>
+						<td class="openDays">Будни дни</td>
 						<td class="openHours">11am - 8pm</td>
 					</tr>
 					<tr>
-						<td class="openDays">Weekends</td>
+						<td class="openDays">Выходные дни</td>
 						<td class="openHours">11am - 6pm</td>
 					</tr>
 				</table><br>
-				<span style="text-align: center; color: rgb(51, 51, 43)"><strong>ABOUT</strong></span><br>
+				<span style="text-align: center; color: rgb(51, 51, 43)"><strong>О НАС</strong></span><br>
 				<!-- ADDRESS -->
 				<span><a href="https://goo.gl/maps/P9gdSUCahW22" target="_blank">9631 Yonge St Unit 8, Richmond Hill, ON, L4C 0M5</a></span><br>
 				<!-- PHONE -->
@@ -130,8 +130,8 @@
 				<span><a href="mailto:ruskniga@hotmail.com">ruskniga@hotmail.com</a></span>
 			</div
 			><div class="infoText" id="right">
-			<!-- MAP -->
-				<a href="https://goo.gl/maps/P9gdSUCahW22" target="_blank"><img id="map" src="../../images/map_wider_darker.png" alt="Map"></a>
+				<!-- MAP -->
+				<a href="https://goo.gl/maps/P9gdSUCahW22" target="_blank"><img id="map" src="../../images/map.png" alt="Map"></a>
 			</div>
 		</div>
 	</div>

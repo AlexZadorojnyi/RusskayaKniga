@@ -1,17 +1,13 @@
-body {
-	bacground-color: red;
-}
-
 #center {
 	width: 100%;
 	margin: 0 auto;
 }
 
 #banner {
-	padding: 0px;
-	psotion: relative;
 	width: 100%;
+	padding: 0px;
 	
+	/* Disables highlighting */
 	-moz-user-select: -moz-none;
 	-khtml-user-select: none;
 	-webkit-user-select: none;
@@ -25,17 +21,16 @@ body {
 
 #langButton {
 	position: absolute;
-	top: 0px;
 	right: 0px;
-	cursor: pointer;
+	top: 0px;
 	color: gray;
 	background-color:white;
 	padding-left: 5px;
 	font-size: 14px;
+	cursor: pointer;
 }
 
 #main {
-	border-color: gray;
 	padding: 0px;
 }
 
@@ -48,6 +43,7 @@ body {
 	width: 100%;
 	height: auto;
 
+	/* Disables highlighting */
 	-moz-user-select: -moz-none;
 	-khtml-user-select: none;
 	-webkit-user-select: none;
@@ -59,69 +55,56 @@ body {
 	width: 100%;
 	position: absolute;
 	bottom: 0px;
-	font-size: 50px;
 	color: white;
+	font-size: 50px;
 	text-shadow: 0px 0px 5px #000000;
+	
+	/* Disables highlighting */
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
-#slidesButtonPrev {
+#slidesButtons #prev {
 	float: left;
-	cursor: pointer;
 	padding-left: 10px;
 	font-size: 50px;
-	
-	-moz-user-select: -moz-none;
-	-khtml-user-select: none;
-	-webkit-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
+	cursor: pointer;
 }
 
-#slidesButtonNext {
+#slidesButtons #next {
 	float: right;
-	cursor: pointer;
 	padding-right: 10px;
 	font-size: 50px;
-	
-	-moz-user-select: -moz-none;
-	-khtml-user-select: none;
-	-webkit-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
+	cursor: pointer;
 }
 
-#slidesButtonNums {
-	text-align: center;
+#slidesButtons #nums {
+	
 	font-size: 40px;
-	display: none;
-	
-	-moz-user-select: -moz-none;
-	-khtml-user-select: none;
-	-webkit-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
+	text-align: center;
 }
 
-#slidesButtonNums span {
+#slidesButtons #nums span {
 	cursor: pointer;
 }
 
 .itemContainerTitle {
-	border-bottom: 1px solid black;
-	text-align: center;
 	width: 100% - 10px; 
 	height: 15px;
-	margin-bottom: 15px;
-	/*margin-left: 5px;
-	margin-right: 5px;*/
 	color: black;
+	margin-bottom: 15px;
+	border-bottom: 1px solid black;
+	text-align: center;
 }
 
 .itemContainerTitle span {
-	font-size: 20px;
 	background-color: white;
 	padding-left: 5px;
 	padding-right: 5px;
+	font-size: 20px;	
 }
 
 .itemContainer {
@@ -135,17 +118,16 @@ body {
 .item {
 	width: 100px;
 	height: 125px;
-	margin-top: 2.5px;
+	position: relative;
 	display: inline-block;
-	vertical-align: middle;
 	background-color: white;
 	border: 1px solid gray;
 	border-radius: 5px;
-	position: relative;
+	margin-top: 2.5px;
+	vertical-align: middle;
+	text-align: center;
 	cursor: pointer;
 	transition: box-shadow 0.2s;
-	
-	text-align: center;
 }
 
 .highlight {
@@ -160,13 +142,12 @@ body {
 }
 
 .item img {
-	
-	margin: auto;
 	max-width: 100%;
 	max-height: 100%;
-	
+	margin: auto;
 	vertical-align: middle;
 	
+	/* Disables highlighting */
 	-moz-user-select: -moz-none;
 	-khtml-user-select: none;
 	-webkit-user-select: none;
@@ -175,15 +156,16 @@ body {
 }
 
 .scrollLeft {
-	cursor: pointer;
-	font-size: 40px;
-	padding-left: 10px;
 	position: absolute;
-	color: white;
-	text-shadow: 0px 0px 5px #000000;
-	bottom: 35px;
 	left: 0px;
+	bottom: 35px;
+	color: white;
+	padding-left: 10px;
+	font-size: 40px;
+	text-shadow: 0px 0px 5px #000000;
+	cursor: pointer;
 	
+	/* Disables highlighting */
 	-moz-user-select: -moz-none;
 	-khtml-user-select: none;
 	-webkit-user-select: none;
@@ -192,15 +174,16 @@ body {
 }
 
 .scrollRight {
-	cursor: pointer;
-	font-size: 40px;
-	padding-right: 10px;
 	position: absolute; 
-	color: white;
-	text-shadow: 0px 0px 5px #000000;
-	bottom: 35px;
 	right: 0px;
-	
+	bottom: 35px;
+	color: white;
+	padding-right: 10px;
+	font-size: 40px;
+	text-shadow: 0px 0px 5px #000000;	
+	cursor: pointer;
+
+	/* Disables highlighting */
 	-moz-user-select: -moz-none;
 	-khtml-user-select: none;
 	-webkit-user-select: none;
@@ -209,20 +192,20 @@ body {
 }
 
 .itemInfo {
+	max-height: 1000px;
+	color: black;
+	background-color: rgb(230, 230, 230);
 	border: 1px solid gray;
 	border-radius: 5px;
-	background-color: rgb(230, 230, 230);
-	color: black;
 	margin-top: 10px;
-	padding: 10px;
-	max-height: 1000px;
+	padding: 10px;	
 }
 
 .itemInfo .coverImg {
 	display: none;
-	vertical-align: top;
 	width: 30%;
 	height: auto;
+	vertical-align: top;
 }
 
 .coverImg img {
@@ -231,8 +214,8 @@ body {
 }
 
 .itemInfo .text {
-	display: inline-block;
 	width: 100%;
+	display: inline-block;
 }
 
 .text .title {
@@ -245,15 +228,15 @@ body {
 }
 
 .text .salePrice {
+	color: forestgreen;
 	font-size: 20px;
 	line-height: 200%;
-	color: forestgreen;
 }
 
 .text .regPrice {
+	color: grey;
 	font-size: 20px;
 	line-height: 200%;
-	color: grey;
 	text-decoration: line-through;
 }
 
@@ -270,10 +253,10 @@ body {
 }
 
 #info {
+	width: 100%;
 	background-color: gold;
 	margin-right: auto; 
 	margin-left: auto;
-	width: 100%;
 }
 
 #info a {
@@ -290,15 +273,15 @@ body {
 #left {
 	width: 50%;
 	display: inline-block;
-	vertical-align: top;
 	padding: 10px;
+	vertical-align: top;
 }
 
 #right {
 	width: 50%;
 	display: inline-block;
-	vertical-align: top;
 	padding: 10px;
+	vertical-align: top;
 }
 
 #openTimes {
@@ -308,8 +291,8 @@ body {
 }
 
 .openDays {
-	text-align: left;
 	padding-right: 20px;
+	text-align: left;
 }
 
 .openHours {
@@ -321,6 +304,7 @@ body {
 	height: auto;
 	display: block;
 	
+	/* Disables highlighting */
 	-moz-user-select: -moz-none;
 	-khtml-user-select: none;
 	-webkit-user-select: none;
@@ -362,7 +346,6 @@ body {
 	.item {
 		width: 130px;
 		height: 175px;
-		
 		line-height: 125px;
 	}
 	
@@ -388,8 +371,8 @@ body {
 	}
 	
 	.itemInfo .text {
-		display: inline-block;
 		width: calc(70% - 20px);
+		display: inline-block;
 		margin-left: 10px;
 	}
 	

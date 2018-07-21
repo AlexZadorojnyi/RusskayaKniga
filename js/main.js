@@ -1,15 +1,16 @@
-var eng = '\/eng\/';
-var rus = '\/rus\/';
+var eng = '\/en\/';
+var rus = '\/ru\/';
 
 function changeLang() {
+	
 	var url = window.location.href;
 	
-	if(url.match(/\/rus\//g)){
+	if(url.match(/\/ru\//g)){
 		var newUrl = url.replace(rus, eng);
 		window.location = newUrl;
 	}
 	
-	if(url.match(/\/eng\//g)){
+	if(url.match(/\/en\//g)){
 		var newUrl = url.replace(eng, rus);
 		window.location = newUrl;
 	}
@@ -27,17 +28,15 @@ function cycleSlides() {
 		slideIndex = slides.length - 1;
 	}
 	
-	document.getElementById('slidesButtonNums').innerHTML = '';
+	document.getElementById('nums').innerHTML = '';
 	
 	for (var i = 0; i < slides.length; i++){
 		if (i == slideIndex) {
 			slides[i].style.display = 'block';
-			document.getElementById('slidesButtonNums').innerHTML += '<span onclick="goToSlide('  + (i+1) + ')"> &#9679; </span>';
-			//document.getElementById('slidesButtonNums').innerHTML += '<span onclick="goToSlide('  + (i+1) + ')"> &#9899; </span>';
+			document.getElementById('nums').innerHTML += '<span onclick="goToSlide('  + (i+1) + ')"> &#9679; </span>';
 		} else {
 			slides[i].style.display = 'none';
-			document.getElementById('slidesButtonNums').innerHTML += '<span onclick="goToSlide('  + (i+1) + ')"> &#9900; </span>';
-			//document.getElementById('slidesButtonNums').innerHTML += '<span onclick="goToSlide('  + (i+1) + ')"> &#9898; </span>';
+			document.getElementById('nums').innerHTML += '<span onclick="goToSlide('  + (i+1) + ')"> &#9900; </span>';
 		}
 	}
 	
