@@ -39,68 +39,77 @@
 				</div>
 			</div>
 			<div>
-				<!-- TOP SELLERS TITLE -->
-				<div class="itemContainerTitle topSellers">
-					<span><strong>TOP SELLERS</strong></span>
-				</div>
-				<!-- TOP SELLERS CONTAINER -->
-				<div class="itemContainer topSellers">
-					<div class="item topSellers" style="right: 0px" ng-repeat="item in items | filter:{category:'Top Sellers'}" ng-click="displayitemInfo($event.currentTarget.classList[1], item, 'en')">
-						<span class="helper"></span
-						><img ng-src="../../images/items/{{ item.ISBN }}.jpg" alt="{{ item.title }}">
+				<!-- TOP SELLERS -->
+				<div class="topSellers">
+					<!-- TITLE -->
+					<div class="itemContainerTitle">
+						<span><strong>TOP SELLERS</strong></span>
+					</div>
+					<!-- CONTAINER -->
+					<div class="itemContainer">
+						<div class="item" style="right: 0px" ng-repeat="item in items | filter:{category:'Top Sellers'}" ng-click="displayitemInfo($event.currentTarget.parentNode.parentNode.className, item, 'en')">
+							<span class="helper"></span
+							><img ng-src="../../images/items/{{ item.ISBN }}.jpg" alt="{{ item.title }}">
+						</div>
+					</div>
+					<!-- BUTTONS -->
+					<div style="position: relative; height: 0">
+						<div class="scrollRight">&#10095;</div>
+						<div class="scrollLeft">&#10094;</div>
+					</div>
+					<!-- ITEM INFO -->
+					<div class="itemInfo">
+						<div class="coverImg"></div>
+						<div class="text"></div>
 					</div>
 				</div>
-				<!-- TOP SELLERS BUTTONS -->
-				<div style="position: relative; height: 0">
-					<div class="scrollRight topSellers">&#10095;</div>
-					<div class="scrollLeft  topSellers">&#10094;</div>
-				</div>
-				<!-- TOP SELLERS item INFO -->
-				<div class="itemInfo topSellers">
-					<div class="coverImg"></div>
-					<div class="text"></div>
-				</div>
-				<!-- NEW ARRIVALS TITLE -->
-				<div class="itemContainerTitle newArrivals">
-					<span><strong>NEW ARRIVALS</strong></span>
-				</div>
-				<!-- NEW ARRIVALS CONTAINER -->
-				<div class="itemContainer newArrivals">
-					<div class="item newArrivals" style="right: 0px" ng-repeat="item in items | filter:{category:'New Arrivals'}" ng-click="displayitemInfo($event.currentTarget.classList[1], item, 'en')">
-						<span class="helper"></span
-						><img ng-src="../../images/items/{{ item.ISBN }}.jpg" alt="{{ item.title }}">
+				<!-- NEW ARRIVALS -->
+				<div class="newArrivals">
+					<!-- TITLE -->
+					<div class="itemContainerTitle">
+						<span><strong>NEW ARRIVALS</strong></span>
+					</div>
+					<!-- CONTAINER -->
+					<div class="itemContainer">
+						<div class="item" style="right: 0px" ng-repeat="item in items | filter:{category:'New Arrivals'}" ng-click="displayitemInfo($event.currentTarget.parentNode.parentNode.className, item, 'en')">
+							<span class="helper"></span
+							><img ng-src="../../images/items/{{ item.ISBN }}.jpg" alt="{{ item.title }}">
+						</div>
+					</div>
+					<!-- BUTTONS -->
+					<div style="position: relative; height: 0">
+						<div class="scrollRight">&#10095;</div>
+						<div class="scrollLeft ">&#10094;</div>
+					</div>
+					<!-- ITEM INFO -->
+					<div class="itemInfo">
+						<div class="coverImg"></div>
+						<div class="text"></div>
 					</div>
 				</div>
-				<!-- NEW ARRIVALS BUTTONS -->
-				<div style="position: relative; height: 0">
-					<div class="scrollRight newArrivals">&#10095;</div>
-					<div class="scrollLeft  newArrivals">&#10094;</div>
-				</div>
-				<!-- NEW ARRIVALS item INFO -->
-				<div class="itemInfo newArrivals">
-					<div class="coverImg"></div>
-					<div class="text"></div>
-				</div>
-				<!-- SOUVENIRS TITLE -->
-				<div class="itemContainerTitle souvenirs">
-					<span><strong>SOUVENIRS</strong></span>
-				</div>
-				<!-- SOUVENIRS CONTAINER -->
-				<div class="itemContainer souvenirs">
-					<div class="item souvenirs" style="right: 0px" ng-repeat="item in items | filter:{category:'Souvenirs'}" ng-click="displayitemInfo($event.currentTarget.classList[1], item, 'en')">
-						<span class="helper"></span
-						><img ng-src="../../images/items/{{ item.ISBN }}.jpg" alt="{{ item.title }}">
+				<!-- SOUVENIRS -->
+				<div class="souvenirs">
+					<!-- TITLE -->
+					<div class="itemContainerTitle">
+						<span><strong>SOUVENIRS</strong></span>
 					</div>
-				</div>
-				<!-- SOUVENIRS BUTTONS -->
-				<div style="position: relative; height: 0">
-					<div class="scrollRight souvenirs">&#10095;</div>
-					<div class="scrollLeft  souvenirs">&#10094;</div>
-				</div>
-				<!-- SOUVENIRS item INFO -->
-				<div class="itemInfo souvenirs">
-					<div class="coverImg"></div>
-					<div class="text"></div>
+					<!-- CONTAINER -->
+					<div class="itemContainer">
+						<div class="item" style="right: 0px" ng-repeat="item in items | filter:{category:'Souvenirs'}" ng-click="displayitemInfo($event.currentTarget.parentNode.parentNode.className, item, 'en')">
+							<span class="helper"></span
+							><img ng-src="../../images/items/{{ item.ISBN }}.jpg" alt="{{ item.title }}">
+						</div>
+					</div>
+					<!-- BUTTONS -->
+					<div style="position: relative; height: 0">
+						<div class="scrollRight">&#10095;</div>
+						<div class="scrollLeft">&#10094;</div>
+					</div>
+					<!-- ITEM INFO -->
+					<div class="itemInfo">
+						<div class="coverImg"></div>
+						<div class="text"></div>
+					</div>
 				</div>
 			</div>
 		</div>

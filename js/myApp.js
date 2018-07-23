@@ -59,9 +59,9 @@ app.controller('myCtrl', ['$scope', function($scope, $http) {
 	
 	angular.element(document).ready(function () {
 		// Highlights the first two items in each slider
-		$('.item.topSellers:first').addClass('highlight');
-		$('.item.newArrivals:first').addClass('highlight');
-		$('.item.souvenirs:first').addClass('highlight');
+		$('.topSellers .item:first').addClass('highlight');
+		$('.newArrivals .item:first').addClass('highlight');
+		$('.souvenirs .item:first').addClass('highlight');
 		
         // Scroll variables
 		var blockScroll = false;
@@ -73,25 +73,25 @@ app.controller('myCtrl', ['$scope', function($scope, $http) {
 		
 		// Scroll items >>LEFT>>
 		$('.scrollLeft').click(function(){
-			var thisClass = this.classList[1];
+			var thisClass = $(this).parent().parent().attr('class');
 			if(!reachedStart(thisClass, 0)){
 				if(!blockScroll){
 					// Disables scrolling while animation plays
 					blockScroll = true;
-					var itemOuterWidth = $('.' + thisClass + '.item').outerWidth(true);
-					var containerWidth = $('.' + thisClass + '.itemContainer').innerWidth();
+					var itemOuterWidth = $('.' + thisClass + ' .item').outerWidth(true);
+					var containerWidth = $('.' + thisClass + ' .itemContainer').innerWidth();
 					var n = containerWidth / itemOuterWidth;
 					while(reachedStart(thisClass, n - 1)) n--;
 					var scrollSpeed = scrollSpeedBase + n * 100;
 					// Animate for first item in the slider
-					$('.' + thisClass + '.item:first').animate({right: '-=' + $('.' + thisClass + '.item').outerWidth(true)*n + 'px'}, scrollSpeed, function(){
+					$('.' + thisClass + ' .item:first').animate({right: '-=' + $('.' + thisClass + ' .item').outerWidth(true)*n + 'px'}, scrollSpeed, function(){
 						// Enables scrolling
 						blockScroll = false;
 						// Toggles buttons
 						if(reachedStart(thisClass, 0)) toggleButton(thisClass, '.scrollLeft', 0);
 					});
 					// Animate for the rest of the items in the slider
-					$('.' + thisClass + '.item:not(:first)').animate({right: '-=' + $('.' + thisClass + '.item').outerWidth(true)*n + 'px'}, scrollSpeed, function(){
+					$('.' + thisClass + ' .item:not(:first)').animate({right: '-=' + $('.' + thisClass + ' .item').outerWidth(true)*n + 'px'}, scrollSpeed, function(){
 						if(!reachedEnd(thisClass, 0)) toggleButton(thisClass, '.scrollRight', 1);
 					});
 				}
@@ -100,25 +100,25 @@ app.controller('myCtrl', ['$scope', function($scope, $http) {
 		
 		// Scroll items <<RIGHT<<
 		$('.scrollRight').click(function(){
-			var thisClass = this.classList[1];
+			var thisClass = $(this).parent().parent().attr('class');
 			if(!reachedEnd(thisClass, 0)){
 				if(!blockScroll){
 					// Disables scrolling while animation plays
 					blockScroll = true;
-					var itemOuterWidth = $('.' + thisClass + '.item').outerWidth(true);
-					var containerWidth = $('.' + thisClass + '.itemContainer').innerWidth();
+					var itemOuterWidth = $('.' + thisClass + ' .item').outerWidth(true);
+					var containerWidth = $('.' + thisClass + ' .itemContainer').innerWidth();
 					var n = containerWidth / itemOuterWidth;
 					while(reachedEnd(thisClass, n - 1)) n--;
 					var scrollSpeed = scrollSpeedBase + n * 100;
 					// Animate for first item in the slider
-					$('.' + thisClass + '.item:first').animate({right: '+=' + $('.' + thisClass + '.item').outerWidth(true)*n + 'px'}, scrollSpeed, function(){
+					$('.' + thisClass + ' .item:first').animate({right: '+=' + $('.' + thisClass + ' .item').outerWidth(true)*n + 'px'}, scrollSpeed, function(){
 						// Enables scrolling
 						blockScroll = false;
 						// Toggles buttons
 						if(!reachedStart(thisClass, 0)) toggleButton(thisClass, '.scrollLeft', 1);
 					});
 					// Animate for the rest of the items in the slider
-					$('.' + thisClass + '.item:not(:first)').animate({right: '+=' + $('.' + thisClass + '.item').outerWidth(true)*n + 'px'}, scrollSpeed, function(){
+					$('.' + thisClass + ' .item:not(:first)').animate({right: '+=' + $('.' + thisClass + ' .item').outerWidth(true)*n + 'px'}, scrollSpeed, function(){
 						if(reachedEnd(thisClass, 0)) toggleButton(thisClass, '.scrollRight', 0);
 					});
 				}
@@ -128,10 +128,11 @@ app.controller('myCtrl', ['$scope', function($scope, $http) {
 		// Sets margin width based on container parameters
 		function setMargins() {
 			$('.itemContainer').each(function(){
+				var thisClass = $(this).parent().attr('class');
 				// Width of one item element without padding
 				var itemInnerWidth = $('.item:not(.highlight)').outerWidth();
 				// Keeps track of the slider offset in terms of items
-				var itemIndex = - Math.round(($('.' + this.classList[1] + '.item:first').position().left - 1) / $(this).children('.item').outerWidth(true));
+				var itemIndex = - Math.round(($('.' + thisClass + ' .item:first').position().left - 1) / $(this).children('.item').outerWidth(true));
 				// Number of item elements in current class
 				var itemNum = $(this).children('.item').length;
 				// Width of the item container element
@@ -151,12 +152,12 @@ app.controller('myCtrl', ['$scope', function($scope, $http) {
 				$(this).children('.item').css('right', Math.abs(itemIndex * itemOuterWidth));
 				
 				// Toggles right button if end is reached
-				if(reachedEnd(this.classList[1], 0)) toggleButton(this.classList[1], '.scrollRight', 0);
-				else toggleButton(this.classList[1], '.scrollRight', 1);
+				if(reachedEnd(thisClass, 0)) toggleButton(thisClass, '.scrollRight', 0);
+				else toggleButton(thisClass, '.scrollRight', 1);
 				
 				// Toggles left button if start is reached
-				if(reachedStart(this.classList[1], 0)) toggleButton(this.classList[1], '.scrollLeft', 0);
-				else toggleButton(this.classList[1], '.scrollLeft', 1);
+				if(reachedStart(thisClass, 0)) toggleButton(thisClass, '.scrollLeft', 0);
+				else toggleButton(thisClass, '.scrollLeft', 1);
 			})
 		}
 		
@@ -176,9 +177,9 @@ app.controller('myCtrl', ['$scope', function($scope, $http) {
 		}
 
 		function reachedEnd(thisClass, offset) {
-			var itemOuterWidth = $('.' + thisClass + '.item').outerWidth(true);
-			var itemPos = $('.' + thisClass + '.item:last').position().left;
-			var containerWidth = $('.' + thisClass + '.itemContainer').innerWidth();
+			var itemOuterWidth = $('.' + thisClass + ' .item').outerWidth(true);
+			var itemPos = $('.' + thisClass + ' .item:last').position().left;
+			var containerWidth = $('.' + thisClass + ' .itemContainer').innerWidth();
 			
 			if(Math.round(itemPos + itemOuterWidth * (1 - offset) - containerWidth) <= 0){
 				return true;
@@ -188,8 +189,8 @@ app.controller('myCtrl', ['$scope', function($scope, $http) {
 		}
 		
 		function reachedStart(thisClass, offset) {
-			var itemOuterWidth = $('.' + thisClass + '.item').outerWidth(true);
-			var itemPos = $('.' + thisClass + '.item:first').position().left - 1;
+			var itemOuterWidth = $('.' + thisClass + ' .item').outerWidth(true);
+			var itemPos = $('.' + thisClass + ' .item:first').position().left - 1;
 			
 			if(Math.round(itemPos + itemOuterWidth * (offset + 1)) > 0){
 				return true;
@@ -200,9 +201,9 @@ app.controller('myCtrl', ['$scope', function($scope, $http) {
 		
 		// Toggles specified slider button on/off
 		function toggleButton(thisClass, button, opacity){
-			$(button + '.' + thisClass).animate({opacity: opacity}, {queue: false}, 'fast', function(){
-				if(opacity == 1) $(button + '.' + thisClass).css('cursor', 'pointer');
-				else if(opacity == 0) $(button + '.' + thisClass).css('cursor', 'default');
+			$('.' + thisClass + " " + button).animate({opacity: opacity}, {queue: false}, 'fast', function(){
+				if(opacity == 1) $('.' + thisClass + " " + button).css('cursor', 'pointer');
+				else if(opacity == 0) $('.' + thisClass + " " + button).css('cursor', 'default');
 			});
 		}
 		
@@ -293,20 +294,20 @@ app.controller('myCtrl', ['$scope', function($scope, $http) {
 			newHTML = newHTML + '<p class="desc">' + item.desc  + '</p>';
 		}
 		
-		var div = $('.itemInfo.' + thisClass);
+		var div = $('.' + thisClass + ' .itemInfo');
 		var currentHeight = div.height();
 		
 		// Sets image
-		$('.itemInfo.' + thisClass + ' > .coverImg').html('<img src="../../images/items/' + item.ISBN + '.jpg">');
+		$('.' + thisClass + ' .coverImg').html('<img src="../../images/items/' + item.ISBN + '.jpg">');
 		// Sets text
-		$('.itemInfo.' + thisClass + ' > .text').html(newHTML);
+		$('.' + thisClass + ' .text').html(newHTML);
 		
 		if(div.css('max-height') != '1000px'){
 			var autoHeight = div.css('height', 'auto').height() + 20;
 			div.height(currentHeight).animate({height: autoHeight + 2}, 1000, function(){ div.height('auto'); });
 		}
 		
-		$('.itemInfo.' + thisClass).css('max-height', '2000px');
+		$('.' + thisClass + ' .itemInfo').css('max-height', '2000px');
 	};
 	
 	$scope.promos = [
