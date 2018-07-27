@@ -1,11 +1,75 @@
-var app = angular.module('myApp', []);
+var app = angular.module('mainApp', []);
 
 // Initiates the slide cycle if the scope is loaded into the page
 app.directive('cycleSlides', function() {
 	return function(scope, element, attrs) {
-		if(scope.$last){
-			setTimeout(cycleSlides(), 5000);
+		// Carousel variables
+		var slides = $('.slide');
+		var slideIndex = 0;
+		var slideDuration = 5000;
+		var myVar;
+		
+		// Initializes carousel buttons
+		var newHTML = '';
+		for (var i = 0; i < slides.length; i++){
+			if (i == slideIndex) newHTML += '<span> &#9679; </span>';
+			else newHTML += '<span> &#9900; </span>';
 		}
+		$('#nums').html(newHTML);
+		
+		// Carousel variables
+		var slidesNumButtons = $('#nums span');
+		
+		// Starts carousel cycle once scope has been loaded
+		if(scope.$last){
+			setTimeout(cycleSlides(), slideDuration);
+		}
+		
+		// Cycles carousel
+		function cycleSlides() {
+			// Controls overflow
+			if (slideIndex > slides.length - 1) {
+				slideIndex = 0;
+			// Controls underflow
+			} else if (slideIndex < 0) {
+				slideIndex = slides.length - 1;
+			}
+			
+			// Updates carousel image and buttons
+			for (var i = 0; i < slides.length; i++){
+				if (i == slideIndex) {
+					slides[i].style.display = 'block';
+					$('#nums span').eq(i).html(' &#9679; ');
+				} else {
+					slides[i].style.display = 'none';
+					$('#nums span').eq(i).html(' &#9900; ');
+				}
+			}
+			
+			// Initiates next cycle with a delay
+			slideIndex++;
+			myVar = setTimeout(cycleSlides, slideDuration);
+		}
+		
+		// Next slide button
+		$('#next').click(function(){
+			clearTimeout(myVar);
+			cycleSlides();
+		});
+		
+		// Previous slide button
+		$('#prev').click(function(){
+			clearTimeout(myVar);
+			slideIndex -= 2;
+			cycleSlides();
+		});
+		
+		// Specific slide button
+		$('#nums span').click(function(){
+			clearTimeout(myVar);
+			slideIndex = $('#nums span').index(this);
+			cycleSlides();
+		});
 	};
 });
 
@@ -40,7 +104,7 @@ app.controller('myCtrl', ['$scope', function($scope, $http) {
 		setMargins();
 		window.onresize = setMargins;
 		
-		// Scroll items >>LEFT>>
+		// Scroll items >>LEFT to RIGHT>>
 		$('.scrollLeft').click(function(){
 			var thisClass = $(this).parent().parent().attr('class');
 			if(!reachedStart(thisClass, 0)){
@@ -67,7 +131,7 @@ app.controller('myCtrl', ['$scope', function($scope, $http) {
 			}
 		});
 		
-		// Scroll items <<RIGHT<<
+		// Scroll items <<RIGHT to LEFT<<
 		$('.scrollRight').click(function(){
 			var thisClass = $(this).parent().parent().attr('class');
 			if(!reachedEnd(thisClass, 0)){
@@ -141,7 +205,6 @@ app.controller('myCtrl', ['$scope', function($scope, $http) {
 				i++;
 				r = cw - (bw * i);					
 			} while (r > bw && i < bn);
-			
 			return (r / i / 2) + 'px';
 		}
 
@@ -183,6 +246,24 @@ app.controller('myCtrl', ['$scope', function($scope, $http) {
 			var $this = $(this);
 			$this.addClass('highlight').siblings().removeClass('highlight');
 		});
+		
+		$('#langButton').click(function(){
+			console.log("hello?");
+			var en = '\/en\/';
+			var ru = '\/ru\/';
+			
+			var url = window.location.href;
+			
+			if(url.match(/\/ru\//g)){
+				var newUrl = url.replace(ru, en);
+				window.location = newUrl;
+			}
+			
+			if(url.match(/\/en\//g)){
+				var newUrl = url.replace(en, ru);
+				window.location = newUrl;
+			}
+		});
 	});
 	
 	// Displays information of item in the itemInfo element
@@ -206,49 +287,64 @@ app.controller('myCtrl', ['$scope', function($scope, $http) {
 			newHTML = newHTML + '<span class="title"><strong>' + item.title + '</strong></span><br>';
 		}
 		
-		// Author
-		if(item.author){
-			newHTML = newHTML + '<span class="author"><strong>' + item.author + '</strong></span>';
-			separatorFlag = item.author && item.author.length > 0;
-		}
-		
-		// Release year
-		if(item.year) {
-			if(separatorFlag) newHTML = newHTML + ' | ';
-			newHTML = newHTML + '<span class="year">' + item.year + '</span>';
-			separatorFlag = separatorFlag || item.year;
-		}
-		
-		// Genre
-		if(item.genre) {
-			if(separatorFlag) newHTML = newHTML + ' | ';
-			newHTML = newHTML + '<span class="year">' + item.genre + '</span>';
-			separatorFlag = separatorFlag || item.genre;
-		}
-		
-		// Publisher
-		if(item.publisher){
-			if(separatorFlag) newHTML = newHTML + ' | ';
-			newHTML = newHTML + '<span class="cover">' + item.publisher + '</span>';
-			separatorFlag = separatorFlag || item.publisher;
-		}
-		
-		// Cover type
-		if(angular.isDefined(item.hardCover)){
-			if(separatorFlag) newHTML = newHTML + ' | ';
-			if(item.hardCover){
-				newHTML = newHTML + '<span class="cover">' + hardCover + '</span>';
-			} else {
-				newHTML = newHTML + '<span class="cover">' + softCover + '</span>';
+		if(item.type == "book"){
+			// Author
+			if(item.author){
+				newHTML = newHTML + '<span class="author"><strong>' + item.author + '</strong></span>';
+				separatorFlag = item.author && item.author.length > 0;
 			}
-			separatorFlag = separatorFlag || angular.isDefined(item.year);
-		}
-		
-		//Pages
-		if(item.pages && item.pages > 0) {
-			if(separatorFlag) newHTML = newHTML + ' | ';
-			newHTML = newHTML + '<span class="pages">' + item.pages + pages + '</span>';
-			separatorFlag = separatorFlag || item.pages > 0;
+			
+			// Release year
+			if(item.year) {
+				if(separatorFlag) newHTML = newHTML + ' | ';
+				newHTML = newHTML + '<span class="year">' + item.year + '</span>';
+				separatorFlag = separatorFlag || item.year;
+			}
+			
+			// Genre
+			if(item.genre) {
+				if(separatorFlag) newHTML = newHTML + ' | ';
+				newHTML = newHTML + '<span class="year">' + item.genre + '</span>';
+				separatorFlag = separatorFlag || item.genre;
+			}
+			
+			// Publisher
+			if(item.publisher){
+				if(separatorFlag) newHTML = newHTML + ' | ';
+				newHTML = newHTML + '<span class="cover">' + item.publisher + '</span>';
+				separatorFlag = separatorFlag || item.publisher;
+			}
+			
+			// Cover type
+			if(angular.isDefined(item.hardCover)){
+				if(separatorFlag) newHTML = newHTML + ' | ';
+				if(item.hardCover){
+					newHTML = newHTML + '<span class="cover">' + hardCover + '</span>';
+				} else {
+					newHTML = newHTML + '<span class="cover">' + softCover + '</span>';
+				}
+				separatorFlag = separatorFlag || angular.isDefined(item.year);
+			}
+			
+			//Pages
+			if(item.pages && item.pages > 0) {
+				if(separatorFlag) newHTML = newHTML + ' | ';
+				newHTML = newHTML + '<span class="pages">' + item.pages + pages + '</span>';
+				separatorFlag = separatorFlag || item.pages > 0;
+			}
+		} else {
+			// Manufacturer
+			if(item.manufacturer) {
+				newHTML = newHTML + '<span class="manufacturer"><strong>' + item.manufacturer + '</strong></span>';
+				separatorFlag = item.manufacturer && item.manufacturer.length > 0;
+			}
+			
+			// Size
+			if(item.size) {
+				if(separatorFlag) newHTML = newHTML + ' | ';
+				newHTML = newHTML + '<span class="size">' + item.size + '</span>';
+				separatorFlag = separatorFlag || item.size;
+			}
 		}
 		
 		if(separatorFlag) newHTML = newHTML + '<br>';
@@ -299,6 +395,11 @@ app.controller('myCtrl', ['$scope', function($scope, $http) {
 		class_Name: 'souvenirs',
 		key: 'Souvenirs',
 		title: 'СУВЕНИРЫ'
+	},
+	{
+		class_Name: 'toys',
+		key: 'Toys',
+		title: 'ИГРУШКИ'
 	}];
 	
 	// Categories in order to display on English version
@@ -307,6 +408,11 @@ app.controller('myCtrl', ['$scope', function($scope, $http) {
 		class_Name: 'souvenirs',
 		key: 'Souvenirs',
 		title: 'SOUVENIRS'
+	},
+	{
+		class_Name: 'toys',
+		key: 'Toys',
+		title: 'TOYS'
 	},
 	{
 		class_Name: 'topSellers',
@@ -370,7 +476,7 @@ app.controller('myCtrl', ['$scope', function($scope, $http) {
 		ISBN: '9785170825721',
 		title: 'История Российского государства. Царь Петр Алексеевич. Азиатская европеизация',
 		author: 'Акунин Борис',
-		price: 39.00,
+		price: 39,
 		year: 2017,
 		publisher: 'АСТ',
 		genre: '',
@@ -384,7 +490,7 @@ app.controller('myCtrl', ['$scope', function($scope, $http) {
 		ISBN: '9785170825769',
 		title: 'Ореховый Будда',
 		author: 'Акунин Борис',
-		price: 24.00,
+		price: 24,
 		year: 2018,
 		publisher: 'АСТ',
 		genre: '',
@@ -398,7 +504,7 @@ app.controller('myCtrl', ['$scope', function($scope, $http) {
 		ISBN: '9785040916245',
 		title: 'Призрак Канта',
 		author: 'Устинова Татьяна',
-		price: 14.00,
+		price: 14,
 		year: 2018,
 		publisher: 'Эксмо',
 		genre: '',
@@ -412,7 +518,7 @@ app.controller('myCtrl', ['$scope', function($scope, $http) {
 		ISBN: '9785815914773',
 		title: 'Не прощаюсь',
 		author: 'Акунин Борис',
-		price: 24.00,
+		price: 24,
 		year: 2018,
 		publisher: 'Захаров',
 		genre: 'Исторический детектив',
@@ -664,7 +770,7 @@ app.controller('myCtrl', ['$scope', function($scope, $http) {
 	{
 		ISBN: '9785389145399',
 		title: 'Всё та же я. Цикл До встречи с тобой. Кн.3',
-		author: 'Мойес Дж.',
+		author: 'Джоджо Мойес',
 		price: 19,
 		year: 2018,
 		publisher: 'Азбука-Аттикус',
@@ -821,7 +927,7 @@ app.controller('myCtrl', ['$scope', function($scope, $http) {
 	{
 		ISBN: '1527397',
 		title: 'Фляжка "Герб СССР"',
-		price: 0,
+		price: 24,
 		desc: '240 мл, красная',
 		type: 'souvenir',
 		category: ['Souvenirs']
@@ -829,59 +935,60 @@ app.controller('myCtrl', ['$scope', function($scope, $http) {
 	{
 		ISBN: '1129752',
 		title: 'Фляжка с эмблемой "Двуглавый орёл"',
-		price: 0,
-		desc: '300 мл, чёрная',
+		price: 20,
+		desc: '240 мл, чёрная',
 		type: 'souvenir',
 		category: ['Souvenirs']
 	},
 	{
 		ISBN: '2058670',
 		title: 'Скатерть "Доляна"',
-		price: 0,
-		desc: 'Полевые цветы 180*144 см, 100% хлопок, рогожка, 164 г/м2',
+		price: 25,
+		desc: 'Полевые цветы 144x144 см, 100% хлопок, рогожка, 164 г/м2',
 		type: 'textile',
 		category: []
 	},
 	{
 		ISBN: '2369719',
 		title: 'Скатерть DomoVita',
-		price: 0,
-		desc: 'рис 4734-1, 150х150 см, п/лен 146 г/м',
+		price: 25,
+		desc: 'рис 4734-1, 110х150 см, п/лен 146 г/м',
 		type: 'textile',
 		category: []
 	},
 	{
 		ISBN: '2369717',
 		title: 'Скатерть DomoVita',
-		price: 0,
-		desc: 'рис 4734-3 150х150 см, п/лен 146 г/м',
+		price: 25,
+		desc: 'рис 4734-3 110х150 см, п/лен 146 г/м',
 		type: 'textile',
 		category: []
 	},
 	{
 		ISBN: '2369700',
 		title: 'Скатерть DomoVita',
-		price: 0,
-		desc: 'рис 10432 150х150 см, п/лен 146 г/м',
+		price: 25,
+		desc: 'рис 10432 110х150 см, п/лен 146 г/м',
 		type: 'textile',
 		category: []
 	},
 	{
 		ISBN: '2998082',
 		title: 'Палантин Этель "Нора"',
-		price: 0,
-		desc: '60 х 180 см, цвет зеленый, 100 % вискоза',
+		price: 15,
+		desc: '60х180 см, цвет зеленый, 100 % вискоза',
 		type: 'clothes',
 		category: []
 	},
 	{
 		ISBN: '2998084',
 		title: 'Палантин Этель "Нора"',
-		price: 0,
-		desc: '60 х 180 см, цвет коралловый, 100 % вискоза',
+		price: 15,
+		desc: '60х180 см, цвет коралловый, 100 % вискоза',
 		type: 'clothes',
 		category: []
 	},
+	//SOLD OUT
 	{
 		ISBN: '2582391',
 		title: 'Комбинезон детский "Мармелад"',
@@ -893,7 +1000,7 @@ app.controller('myCtrl', ['$scope', function($scope, $http) {
 	{
 		ISBN: '2582405',
 		title: 'Комбинезон детский "Карамелька"',
-		price: 0,
+		price: 34,
 		desc: 'рост 50-56 см, цвет голубой 11331 _М',
 		type: 'clothes',
 		category: []
@@ -901,23 +1008,25 @@ app.controller('myCtrl', ['$scope', function($scope, $http) {
 	{
 		ISBN: '2582526',
 		title: 'Комплект детский "Мишка в кармане"',
-		price: 0,
-		desc: 'ост 62-68 см,цвет голубой 10411 _М',
+		price: 39,
+		desc: 'рост 62-68 см,цвет голубой 10411 _М',
 		type: 'clothes',
 		category: []
 	},
+	// THERE IS A PINK ONE ALSO FOR 74-80cm
 	{
 		ISBN: '2582319',
 		title: 'Жакет детский "Совята"',
-		price: 0,
+		price: 29,
 		desc: 'рост 62-68 см, цвет голубой 02405 _М',
 		type: 'clothes',
 		category: []
 	},
 	{
 		ISBN: '603316',
-		title: 'Бочонок 160х120',
-		price: 0,
+		title: 'Бочонок',
+		price: 65,
+		size: '16х12cm',
 		desc: '',
 		type: 'souvenir',
 		category: ['Souvenirs']
@@ -925,39 +1034,43 @@ app.controller('myCtrl', ['$scope', function($scope, $http) {
 	{
 		ISBN: '603318',
 		title: 'Бочонок № 2 роспись',
-		price: 0,
+		price: 20,
 		desc: '',
 		type: 'souvenir',
 		category: ['Souvenirs']
 	},
 	{
 		ISBN: '603317',
-		title: 'Бочонок 90х80',
-		price: 0,
+		title: 'Бочонок',
+		price: 35,
+		size: '9х8cm',
 		desc: '',
 		type: 'souvenir',
 		category: ['Souvenirs']
 	},
 	{
 		ISBN: '2607800003545',
-		title: 'Ваза "Первоцветы" 100*60 мм',
-		price: 0,
+		title: 'Ваза "Первоцветы"',
+		price: 25,
+		size: '10x6cm',
 		desc: '',
 		type: 'souvenir',
 		category: ['Souvenirs']
 	},
 	{
 		ISBN: '603370',
-		title: 'Ваза "Фантазия" 120*70',
-		price: 0,
+		title: 'Ваза "Фантазия"',
+		price: 29,
+		size: '12x7cm',
 		desc: '',
 		type: 'souvenir',
 		category: ['Souvenirs']
 	},
 	{
 		ISBN: '2607800013124',
-		title: 'Солонка "Престольная" 95*150 мм',
-		price: 0,
+		title: 'Солонка "Престольная"',
+		price: 32,
+		size: '95x150cm',
 		desc: '',
 		type: 'souvenir',
 		category: ['Souvenirs']
@@ -965,119 +1078,136 @@ app.controller('myCtrl', ['$scope', function($scope, $http) {
 	{
 		ISBN: '4606088000374',
 		title: 'Русское Лото',
-		price: 0,
+		price: 28,
 		desc: '',
 		type: 'souvenir',
 		category: ['Souvenirs']
 	},
 	{
 		ISBN: '4607070166610',
-		title: 'Сахарница 110х120',
-		price: 0,
+		title: 'Сахарница',
+		price: 35,
+		size: '11х12cm',
 		desc: '',
 		type: 'souvenir',
 		category: ['Souvenirs']
 	},
 	{
-		ISBN: '631877',
-		title: 'Мягкая игрушка "Мульти-пульти" кот с сосисками ("Возвращение блудного попугая")',
-		price: 0,
-		desc: '',
+		ISBN: '4610007433013',
+		title: 'Мягкая игрушка мишка из м/ф "Маша и медведь"',
+		price: 45,
+		manufacturer: 'Мульти-пульти',
+		size: '',
+		desc: 'озвуч. русс. чип в',
 		type: 'toy',
 		category: ['Toys']
 	},
 	{
 		ISBN: '4690590010808',
-		title: 'Мягкая игрушка "Мульти-пульти" Маша пласт. лицо (м/ф Маша и медведь) 29см',
-		price: 0,
+		title: 'Мягкая игрушка Маша из м/ф "Маша и медведь"',
+		price: 39,
+		manufacturer: 'Мульти-пульти',
+		size: '29сm',
+		desc: 'пласт. лицо',
+		type: 'toy',
+		category: ['Toys']
+	},
+	{
+		ISBN: '631877',
+		title: 'Мягкая игрушка кот с сосисками из м/ф "Возвращение блудного попугая"',
+		price: 29,
+		manufacturer: 'Мульти-пульти',
+		size: '',
 		desc: '',
 		type: 'toy',
 		category: ['Toys']
 	},
 	{
 		ISBN: '4640001717505',
-		title: 'Мягкая игрушка "Мульти-пульти" Буратино, озвуч. русс. чип в пак. 30cm',
-		price: 0,
-		desc: '',
+		title: 'Мягкая игрушка Буратино',
+		price: 25,
+		manufacturer: 'Мульти-пульти',
+		size: '30cm',
+		desc: 'озвуч. русс. чип в пак. ',
 		type: 'toy',
 		category: ['Toys']
 	},
 	{
 		ISBN: '4620002038632',
-		title: 'Мягкая игрушка "Мульти-пульти" волк из м/ф "Ну, погоди!" озвуч. русс. чип в пак.',
-		price: 0,
-		desc: '',
+		title: 'Мягкая игрушка волк из м/ф "Ну, погоди!"',
+		price: 29,
+		manufacturer: 'Мульти-пульти',
+		size: '',
+		desc: 'озвуч. русс. чип в пак.',
 		type: 'toy',
 		category: ['Toys']
 	},
 	{
 		ISBN: '4640001711435',
-		title: 'Мягкая игрушка "Мульти-пульти" Чебурашка с пласт. мордочкой, озвуч. русс. чип в',
-		price: 0,
-		desc: '',
+		title: 'Мягкая игрушка Чебурашка',
+		price: 29,
+		manufacturer: 'Мульти-пульти',
+		size: '',
+		desc: 'пласт. мордочкой, озвуч. русс. чип в',
 		type: 'toy',
 		category: ['Toys']
 	},
 	{
 		ISBN: '4620005410138',
-		title: 'Музыкальная игрушка неваляшка. 6С- 013 120mm',
-		price: 0,
+		title: 'Музыкальная игрушка неваляшка',
+		price: 14,
+		size: '12cm',
 		desc: '',
 		type: 'toy',
 		category: ['Toys']
 	},
 	{
 		ISBN: '4620005410015',
-		title: 'Музыкальная игрушка Неваляшка. 6С- 005 120mm',
-		price: 0,
-		desc: '',
-		type: 'toy',
-		category: ['Toys']
-	},
-	{
-		ISBN: '4610007433013',
-		title: 'Мягкая игрушка "Мульти-пульти" мишка (м/ф Маша и медведь) озвуч. русс. чип в',
-		price: 0,
+		title: 'Музыкальная игрушка неваляшка',
+		price: 14,
+		size: '12cm',
 		desc: '',
 		type: 'toy',
 		category: ['Toys']
 	},
 	{
 		ISBN: '10000606',
-		title: 'Матрёшка Семеновская 5SR005',
-		price: 0,
-		desc: '',
+		title: 'Матрёшка Семеновская',
+		price: 23,
+		desc: '5 pieces',
 		type: 'souvenir',
 		category: ['Souvenirs']
 	},
 	{
 		ISBN: '10000607',
 		title: 'Матрёшка Семеновская',
-		price: 0,
-		desc: '',
+		price: 29,
+		desc: '6 pieces',
 		type: 'souvenir',
 		category: ['Souvenirs']
 	},
 	{
 		ISBN: '4603720129455',
 		title: 'Часы "Весна" Хохлома',
-		price: 0,
+		price: 120,
 		desc: '',
 		type: 'souvenir',
 		category: ['Souvenirs']
 	},
 	{
 		ISBN: '4607036495112',
-		title: 'Кружка 70х60',
-		price: 0,
+		title: 'Кружка',
+		price: 12,
+		size: '7х6cm',
 		desc: '',
 		type: 'souvenir',
 		category: ['Souvenirs']
 	},
 	{
 		ISBN: '4607036495150',
-		title: 'Кружка 90х75',
-		price: 0,
+		title: 'Кружка',
+		price: 15,
+		size: '9х7.5cm',
 		desc: '',
 		type: 'souvenir',
 		category: ['Souvenirs']

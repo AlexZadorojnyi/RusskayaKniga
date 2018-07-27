@@ -6,23 +6,21 @@
 	<link rel="shortcut icon" href="../../images/icon.ico">
 	<!-- CSS STYLESHEET -->
 	<link type="text/css" rel="stylesheet" href="../../css/stylesheet.css"/>
-	<!-- JS SCRIPT -->
-	<script src="../../js/main.js"></script>
 	<!-- BOOTSTRAP -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<!-- JQUERY -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<!-- ANGULAR JS -->
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-	<script src="../../js/myApp.js"></script>
+	<script src="../../js/mainApp.js"></script>
 </head>
 
-<body ng-app="myApp" ng-controller="myCtrl">
+<body ng-app="mainApp" ng-controller="myCtrl">
 	<div id="center">
 		<!-- BANNER -->
 		<div class="col-md-12" id="banner">
 			<img src="../../images/banner.png" alt="Banner">
-			<span id="langButton" onclick="changeLang()">Русский</span>
+			<span id="langButton">Русский</span>
 		</div>
 		<!-- MAIN -->
 		<div class="col-md-12" id="main">
@@ -32,70 +30,25 @@
 				<!-- BUTTONS -->
 				<div style="position: relative; height: 0">
 					<div id="slidesButtons">
-						<div id="prev" onclick="prevSlide()">&#10094;</div>
-						<div id="next" onclick="nextSlide()">&#10095;</div>
+						<div id="prev">&#10094;</div>
+						<div id="next">&#10095;</div>
 						<div id="nums"></div>
 					</div>
 				</div>
 			</div>
 			<div>
-				<!-- TOP SELLERS -->
-				<div class="topSellers">
+				<div ng-repeat="category in categoriesEn" class="{{ category.class_Name }}">
 					<!-- TITLE -->
 					<div class="itemContainerTitle">
-						<span><strong>TOP SELLERS</strong></span>
+						<span><strong>{{ category.title }}</strong></span>
 					</div>
 					<!-- CONTAINER -->
 					<div class="itemContainer">
-						<div class="item" style="right: 0px" ng-repeat="item in items | filter:{category:'Top Sellers'}" ng-click="displayitemInfo($event.currentTarget.parentNode.parentNode.className, item, 'en')">
+						<div class="item" style="right: 0px" ng-repeat="item in items | filter:{category:(category.key)}" ng-click="displayItemInfo($event.currentTarget.parentNode.parentNode.className, item, 'en')" ng-if="$first" ng-init="displayItemInfo(category.class_Name, item, 'en')">
 							<span class="helper"></span
 							><img ng-src="../../images/items/{{ item.ISBN }}.jpg" alt="{{ item.title }}">
-						</div>
-					</div>
-					<!-- BUTTONS -->
-					<div style="position: relative; height: 0">
-						<div class="scrollRight">&#10095;</div>
-						<div class="scrollLeft">&#10094;</div>
-					</div>
-					<!-- ITEM INFO -->
-					<div class="itemInfo">
-						<div class="coverImg"></div>
-						<div class="text"></div>
-					</div>
-				</div>
-				<!-- NEW ARRIVALS -->
-				<div class="newArrivals">
-					<!-- TITLE -->
-					<div class="itemContainerTitle">
-						<span><strong>NEW ARRIVALS</strong></span>
-					</div>
-					<!-- CONTAINER -->
-					<div class="itemContainer">
-						<div class="item" style="right: 0px" ng-repeat="item in items | filter:{category:'New Arrivals'}" ng-click="displayitemInfo($event.currentTarget.parentNode.parentNode.className, item, 'en')">
-							<span class="helper"></span
-							><img ng-src="../../images/items/{{ item.ISBN }}.jpg" alt="{{ item.title }}">
-						</div>
-					</div>
-					<!-- BUTTONS -->
-					<div style="position: relative; height: 0">
-						<div class="scrollRight">&#10095;</div>
-						<div class="scrollLeft ">&#10094;</div>
-					</div>
-					<!-- ITEM INFO -->
-					<div class="itemInfo">
-						<div class="coverImg"></div>
-						<div class="text"></div>
-					</div>
-				</div>
-				<!-- SOUVENIRS -->
-				<div class="souvenirs">
-					<!-- TITLE -->
-					<div class="itemContainerTitle">
-						<span><strong>SOUVENIRS</strong></span>
-					</div>
-					<!-- CONTAINER -->
-					<div class="itemContainer">
-						<div class="item" style="right: 0px" ng-repeat="item in items | filter:{category:'Souvenirs'}" ng-click="displayitemInfo($event.currentTarget.parentNode.parentNode.className, item, 'en')">
+						</div
+						><div class="item" style="right: 0px" ng-repeat="item in items | filter:{category:(category.key)}" ng-click="displayItemInfo($event.currentTarget.parentNode.parentNode.className, item, 'en')" ng-if="!$first">
 							<span class="helper"></span
 							><img ng-src="../../images/items/{{ item.ISBN }}.jpg" alt="{{ item.title }}">
 						</div>
@@ -134,7 +87,7 @@
 				<!-- ADDRESS -->
 				<span><a href="https://goo.gl/maps/P9gdSUCahW22" target="_blank">9631 Yonge St Unit 8, Richmond Hill, ON, L4C 0M5</a></span><br>
 				<!-- PHONE -->
-				<span>(905) 780-8376</span><br>
+				<span><a href="tel:905-780-8376">(905) 780-8376</a></span><br>
 				<!-- EMAIL -->
 				<span><a href="mailto:ruskniga@hotmail.com">ruskniga@hotmail.com</a></span>
 			</div
