@@ -1,10 +1,11 @@
-Русская Книга / Russkaya Kniga
+Русская Книга (Russkaya Kniga)
 ==============
-This is a single-page promotional website for a Russian bookstore in Richmond Hill, Ontario. The aim of this website is to provide information about the store, display promotional material, and showcase selected books and other items such as souvenirs and toys in various categories.
+This is a single-page promotional website for a Russian book store in Richmond Hill, Ontario. The aim of this website is to provide information about the business, display promotional material, and showcase selected books and other items to both Russian and English Speaking visitors.
 
 About
 --------------
-This website was build in such a way as to eliminate manual changing of the HTML markdown as much as possible. Thus all the non-permanent information on the website are stored in a database which is then injected into the HTML page. This makes the website easy to maintain and change as time goes on.
+This website was built to eliminate manually changing the HTML markdown as much as possible. All non-permanent information on the website is stored in a database and is then injected into the HTML file using AngularJS. This makes the website easy to maintain and change as time goes on.
+This website also uses responsive web design and will change depending on the medium it is viewed on.
 
 Built With
 --------------
@@ -14,9 +15,7 @@ Built With
 
 Structure
 --------------
-- index.html - Redirects from the base URL to the Russian specific HTML file. Done to simplify access to the website and to standardize storage paths.
-- main.html - Language specific version of the website stored in the appropriate directory.
-- stylesheet.css - CSS stylesheet.
-- mainApp.js - Controls the promo carousel and item slider functionality, and stores the databases of promotions and items to be displayed.
-
-**(This read me is a work in progress.)**
+- `index.html` - Redirects visitors from the base URL to the Russian language specific HTML file to simplify access to the website and to standardize internal directories.
+- `main.html` - HTML markdown comprising the website. Russian and English versions are stored in the appropriate directory.
+- `stylesheet.css` - CSS stylesheet supporting responsive web design.
+- `mainApp.js` - Defines the functionality of the promotional carousel and the item containers, stores the database of items and promotional material, and populates the page with database items.
