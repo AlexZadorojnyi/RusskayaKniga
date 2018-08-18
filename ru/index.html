@@ -1,0 +1,101 @@
+<html lang="ru">
+<head>
+	<title>Русская Книга</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="../images/icon.ico">
+	<!-- CSS STYLESHEET -->
+	<link type="text/css" rel="stylesheet" href="../css/stylesheet.css"/>
+	<!-- BOOTSTRAP -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<!-- JQUERY -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<!-- ANGULAR JS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	<script src="../js/mainApp.js"></script>
+</head>
+
+<body ng-app="mainApp" ng-controller="myCtrl">
+	<div id="center">
+		<!-- BANNER -->
+		<div class="col-md-12" id="banner">
+			<img src="../images/banner.png" alt="Banner">
+			<span id="langButton">English</span>
+		</div>
+		<!-- MAIN -->
+		<div class="col-md-12" id="main">
+			<!-- PROMO SLIDES -->
+			<div id="slidesContainer" ng-view>
+				<img class="slide" style="display: none;" ng-repeat="promo in promos | filter:{lang:'ru'} | promoFilter | orderBy:'-importance'" ng-src="../images/promo/{{ promo.lang }}/{{ promo.title }}.jpg" cycle-Slides>
+				<!-- BUTTONS -->
+				<div style="position: relative; height: 0">
+					<div id="slidesButtons">
+						<div id="prev">&#10094;</div>
+						<div id="next">&#10095;</div>
+						<div id="nums"></div>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div ng-repeat="category in categoriesRu" class="{{ category.class_Name }}">
+					<!-- TITLE -->
+					<div class="itemContainerTitle">
+						<span><strong>{{ category.title }}</strong></span>
+					</div>
+					<!-- CONTAINER -->
+					<div class="itemContainer">
+						<div class="item" style="right: 0px" ng-repeat="item in items | filter:{category:(category.key)}" ng-click="displayItemInfo($event.currentTarget.parentNode.parentNode.className, item, 'ru')" ng-if="$first" ng-init="displayItemInfo(category.class_Name, item, 'ru')">
+							<span class="helper"></span
+							><img ng-src="../images/items/{{ item.ISBN }}.jpg" alt="{{ item.title }}">
+						</div
+						><div class="item" style="right: 0px" ng-repeat="item in items | filter:{category:(category.key)}" ng-click="displayItemInfo($event.currentTarget.parentNode.parentNode.className, item, 'ru')" ng-if="!$first">
+							<span class="helper"></span
+							><img ng-src="../images/items/{{ item.ISBN }}.jpg" alt="{{ item.title }}">
+						</div>
+					</div>
+					<!-- BUTTONS -->
+					<div style="position: relative; height: 0">
+						<div class="scrollRight">&#10095;</div>
+						<div class="scrollLeft">&#10094;</div>
+					</div>
+					<!-- ITEM INFO -->
+					<div class="itemInfo">
+						<div class="coverImg"></div>
+						<div class="text"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- FOOTER -->
+	<div class="col-md-12" id="footer">
+		<div id="info">
+			<div class="infoText" id="left">
+				<!-- OPEN HOURS -->
+				<span style="text-align: center; color: rgb(51, 51, 43)"><strong>ЧАСЫ РАБОТЫ</strong></span><br>
+				<table id="openTimes">
+					<tr>
+						<td class="openDays">Будни дни</td>
+						<td class="openHours">11am - 8pm</td>
+					</tr>
+					<tr>
+						<td class="openDays">Выходные дни</td>
+						<td class="openHours">11am - 6pm</td>
+					</tr>
+				</table><br>
+				<span style="text-align: center; color: rgb(51, 51, 43)"><strong>О НАС</strong></span><br>
+				<!-- ADDRESS -->
+				<span><a href="https://goo.gl/maps/P9gdSUCahW22" target="_blank">9631 Yonge St Unit 8, Richmond Hill, ON, L4C 0M5</a></span><br>
+				<!-- PHONE -->
+				<span><a href="tel:905-780-8376">(905) 780-8376</a></span><br>
+				<!-- EMAIL -->
+				<span><a href="mailto:ruskniga@hotmail.com">ruskniga@hotmail.com</a></span>
+			</div
+			><div class="infoText" id="right">
+				<!-- MAP -->
+				<a href="https://goo.gl/maps/P9gdSUCahW22" target="_blank"><img id="map" src="../images/map.png" alt="Map"></a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

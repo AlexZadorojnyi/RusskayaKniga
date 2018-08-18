@@ -16,6 +16,6 @@ Built With
 Structure
 --------------
 - `index.html` - Redirects visitors from the base URL to the Russian language specific HTML file to simplify access to the website and to standardize internal directories.
-- `main.html` - HTML markdown comprising the website. Russian and English versions are stored in the appropriate directory.
+- `ru/index.html & en/index.html` - HTML markdown comprising the website. Russian and English versions are stored in the appropriate directories.
 - `stylesheet.css` - CSS stylesheet supporting responsive web design.
 - `mainApp.js` - Defines the functionality of the promotional carousel and the item containers, stores the database of items and promotional material, and populates the page with database items.

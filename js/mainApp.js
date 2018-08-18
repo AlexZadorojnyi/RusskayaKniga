@@ -11,9 +11,15 @@ app.directive('cycleSlides', function() {
 		
 		// Initializes carousel buttons
 		var newHTML = '';
-		for (var i = 0; i < slides.length; i++){
-			if (i == slideIndex) newHTML += '<span> &#9679; </span>';
-			else newHTML += '<span> &#9900; </span>';
+		console.log(slides.length);
+		if(slides.length > 1) {
+			for (var i = 0; i < slides.length; i++){
+				if (i == slideIndex) newHTML += '<span> &#9679; </span>';
+				else newHTML += '<span> &#9900; </span>';
+			}
+			$('#slidesButtons').css('display', 'block');
+		} else {
+			$('#slidesButtons').css('display', 'none');
 		}
 		$('#nums').html(newHTML);
 		
@@ -35,15 +41,16 @@ app.directive('cycleSlides', function() {
 				slideIndex = slides.length - 1;
 			}
 			
-			// Updates carousel image and buttons
+			// Updates buttons and hides all images
 			for (var i = 0; i < slides.length; i++){
-				if (i == slideIndex) {
-					slides[i].style.display = 'block';
-					$('#nums span').eq(i).html(' &#9679; ');
-				} else {
-					slides[i].style.display = 'none';
-					$('#nums span').eq(i).html(' &#9900; ');
-				}
+				slides[i].style.display = 'none';
+				if (i == slideIndex) $('#nums span').eq(i).html(' &#9679; ');
+				else $('#nums span').eq(i).html(' &#9900; ');
+			}
+
+			// Unhides the image to be displayed
+			for (var i = 0; i < slides.length; i++){
+				if (i == slideIndex) slides[i].style.display = 'block';
 			}
 			
 			// Initiates next cycle with a delay
@@ -367,7 +374,7 @@ app.controller('myCtrl', ['$scope', function($scope, $http) {
 		var currentHeight = div.height();
 		
 		// Sets image
-		$('.' + thisClass + ' .coverImg').html('<img src="../../images/items/' + item.ISBN + '.jpg">');
+		$('.' + thisClass + ' .coverImg').html('<img src="../images/items/' + item.ISBN + '.jpg">');
 		// Sets text
 		$('.' + thisClass + ' .text').html(newHTML);
 		
@@ -400,6 +407,11 @@ app.controller('myCtrl', ['$scope', function($scope, $http) {
 		class_Name: 'toys',
 		key: 'Toys',
 		title: 'ИГРУШКИ'
+	},
+	{
+		class_Name: 'englishBooks',
+		key: 'English Books',
+		title: 'КНИГИ НА АНГЛИЙСКОМ'
 	}];
 	
 	// Categories in order to display on English version
@@ -408,6 +420,11 @@ app.controller('myCtrl', ['$scope', function($scope, $http) {
 		class_Name: 'souvenirs',
 		key: 'Souvenirs',
 		title: 'SOUVENIRS'
+	},
+	{
+		class_Name: 'englishBooks',
+		key: 'English Books',
+		title: 'ENGLISH BOOKS'
 	},
 	{
 		class_Name: 'toys',
@@ -428,50 +445,43 @@ app.controller('myCtrl', ['$scope', function($scope, $http) {
 	// Promotional slides
 	$scope.promos = [
   	{ 
-		title: 'promoEng5', 
+		title: 'storePromo', 
 		startDate: new Date('2018-07-11'),
-		endDate: new Date('2018-09-12'),
+		endDate: new Date('2019-09-12'),
 		lang: 'en',
 		importance: 3
   	},
 	{ 
-		title: 'promoEng6', 
-		startDate: new Date('2018-06-20'),
-		endDate: new Date('2018-08-01'),
-		lang: 'en',
-		importance: 2
-  	},
-	{ 
-		title: 'promoEng7', 
-		startDate: new Date('2018-06-21'),
-		endDate: new Date('2018-08-01'),
-		lang: 'en',
-		importance: 1
-  	},
-	{ 
-		title: 'promoRus5', 
-		startDate: new Date('2018-06-19'),
-		endDate: new Date('2018-08-01'),
+		title: 'ryabinoviyKlin', 
+		startDate: new Date('2018-08-06'),
+		endDate: new Date('2018-08-31'),
 		lang: 'ru',
 		importance: 3
   	},
 	{ 
-		title: 'promoRus6', 
-		startDate: new Date('2018-06-20'),
-		endDate: new Date('2018-08-01'),
+		title: 'damaIzSugroba', 
+		startDate: new Date('2018-08-06'),
+		endDate: new Date('2018-08-31'),
 		lang: 'ru',
-		importance: 2
-  	},
-	{ 
-		title: 'promoRus7', 
-		startDate: new Date('2018-06-21'),
-		endDate: new Date('2018-08-01'),
-		lang: 'ru',
-		importance: 1
+		importance: 3
   	}];
 
 	// Items to be displayed in containers
 	$scope.items = [
+	{
+		ISBN: '9785171076443',
+		title: 'Дама из сугроба',
+		author: 'Вильмонт Екатерина',
+		price: 13,
+		year: 2018,
+		publisher: 'АСТ',
+		genre: '',
+		pages: 320,
+		hardCover: true,
+		desc: 'Роман Екатерины Вильмонт "Дама из сугроба" несет в себе частичку тепла, доброты и ностальгии. Автору удалось в полной мере передать зимнюю сказочную атмосферу, так что от этой книги поневоле ждешь каких-то чудес. Но чудеса эти должны быть не сверхъестественными, а самыми обычными, человеческими. Во время чтения возникает какое-то приподнятое, праздничное настроение. Рассчитано на широкий круг читателей.<br>Главный герой романа "Дама из сугроба", Тимур. Когда-то, много лет назад, он поругался с отцом после смерти матери и решил навсегда покинуть Россию. Эмигрировав в США, Тимур особо не вспоминает о своей предыдущей жизни, предаваясь всевозможным удовольствиям. Он становится профессиональным игроком. Однако с возрастом, герой осознает, что в жизни важны и другие вещи, а не только сиюминутные желания. Тимур открывает свой бизнес и ведет вполне степенное существование. Но все-таки чего-то ему все равно не хватает. Вещи, которые раньше были не важны, стали восприниматься совсем по-другому. Приехав в Париж на Рождество, Тимур еще отчетливее почувствовал свое одиночество. Неожиданно для себя, повинуясь мимолетному желанию, он звонит своему отцу, которого не видел уже восемнадцать лет, а затем едет в Москву. Что ожидает героя на родине? Обретет ли он наконец так давно ускользающее счастье? Имеет ли прошлое власть над настоящим?',
+		type: 'book',
+		category: ['New Arrivals']
+	},
 	{
 		ISBN: '9785170825721',
 		title: 'История Российского государства. Царь Петр Алексеевич. Азиатская европеизация',
@@ -1211,5 +1221,58 @@ app.controller('myCtrl', ['$scope', function($scope, $http) {
 		desc: '',
 		type: 'souvenir',
 		category: ['Souvenirs']
+	},
+	{
+		ISBN: '9785938939455',
+		title: 'Russian Cuisine',
+		price: 49,
+		year: 2015,
+		publisher: 'Медный всадник',
+		genre: '',
+		pages: 240,
+		hardCover: true,
+		desc: 'The illustrated art book "Russian Cuisine" features the most characteristic dishes created by the Russians throughout their history. The detailed recipes and full-colour illustrations will introduce you to a wide range of national accomplishments in the art of cookery. The book enables you to create culinary masterpieces with your own hands anywhere on our planet.',
+		type: 'book',
+		category: ['English Books']
+	},
+	{
+		ISBN: '9485938938670',
+		title: "Pushkin's Fairy Tales",
+		author: 'Alexander Pushkin',
+		price: 49,
+		year: 2016,
+		publisher: 'Медный всадник',
+		genre: '',
+		pages: 152,
+		hardCover: true,
+		desc: "Alexander Pushkin (1799-1837) is a great Russian poet and novelist, the creator of modern literary Russian. A genius of poetry, he embodied Russian national consciousness and became the pride of his country. An important part of Pushkin's literary heritage is his fairy tales, which are based on Russian folklore. Pushkin's tales have always been a favourite subject matter for the painting school of Palekh, a famous old centre of icon-painting and lacquer miniature.",
+		type: 'book',
+		category: ['English Books']
+	},
+	{
+		ISBN: '9785938933750',
+		title: 'The Golden Ring',
+		price: 45,
+		year: 2007,
+		genre: '',
+		pages: 135,
+		hardCover: true,
+		desc: 'The “Golden Ring” is a tourist route running through a series of cities and towns in central Russia, which are remarkable for their ancient history and abundance of historical and cultural monuments. The area they occupy became the centre of Russia in the twelfth century.<br><br>Natural environment was a major significance in the emergence and flowering of the present-day “Golden Ring” area, which strikes even the present-day traveller’s imagination by a variety of its landscapes. Since time immemorial it has attracted people by the abundance of waterways, vast fields devoid of forests and having a fertile soil, large resources of building timber and deposits of so-called “white stone” – the beautiful architectural material called the “marble of ancient Russia”.<br><br>The cities of the “Golden Ring” grew to become the capitals of the principalities where religious life and arts were thriving. They were also important points on the trade routes between the North and the South, Europe and Asia. Many churches and fortified structures, swelling houses and trade buildings have survived to this day in the area. Museum collections preserve true masterpieces of icon-painting and applied arts, and the interiors of churches are decorated with magnificent frescoes. A visit to these places will enable tourists to form a fairly good idea of the specific mode of life and culture of ancient and present-day Russia.',
+		type: 'book',
+		category: ['English Books']
+	},
+	{
+		ISBN: '9785938933033',
+		title: 'Russian Tsars: The Rurikids, The Romanovs',
+		author: 'Boris Antonov',
+		price: 49,
+		year: 2005,
+		publisher: 'Медный всадник',
+		genre: '',
+		pages: 176,
+		hardCover: true,
+		desc: 'We know the names of the leaders of popular revolts, kings and khans, but we often know very little about the personalities of the Russian tsars. These men and women were exceptional in many ways. Bedsides ruling one of the greatest empires that the world has ever known, many were fascinating personalities in their own right. Not all of them were ideal rulers. Like all human beings, they had their own faults, passions, feelings and habits. The only difference is that private individuals control only their own fats or those of their friends and relatives. The personal whims of a sovereign, however, can have enormous consequences of the history of the entire nation and the fates of his or her subjects and their descendants. This helps to explain our fascination with the people who, for many centuries, ruled over the Russian lands.',
+		type: 'book',
+		category: ['English Books']
 	}];
 }]);
